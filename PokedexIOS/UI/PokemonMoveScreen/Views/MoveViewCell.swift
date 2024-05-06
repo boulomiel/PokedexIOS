@@ -67,20 +67,12 @@ struct MoveViewCell: View {
     
     @ViewBuilder
     func moveTextAtLevel(width: CGFloat) -> some View {
-        var text = ""
-        if provider.isMachine {
-            text = provider.machineModel?.machineItem ?? "\(provider.moveVersionData.levelLearntAt)"
-        } else {
-            text = "\(provider.moveVersionData.levelLearntAt)"
-        }
-       return Text(text)
+        Text(provider.moveTextAtLevel)
             .frame(maxWidth: .infinity, alignment: .leading)
             .bold()
             .minimumScaleFactor(0.1)
             .opacity(provider.doesNotNeedThisInfo ? 0 : 1)
-            
     }
-
     
     var seeMoveButton: some View {
         Button(action: {
@@ -146,6 +138,14 @@ struct MoveViewCell: View {
             moveVersionData.learningMethod == .egg ||
             moveVersionData.learningMethod == .tutor ||
             moveVersionData.learningMethod == .formChange
+        }
+        
+        var moveTextAtLevel: String {
+            if isMachine {
+                machineModel?.machineItem ?? "\(moveVersionData.levelLearntAt)"
+            } else {
+                "\(moveVersionData.levelLearntAt)"
+            }
         }
         
         init(moveApi: PokemonMoveApi, generalApi: GeneralApi<Machine>, moveVersionData: MoveVersionMeta) {

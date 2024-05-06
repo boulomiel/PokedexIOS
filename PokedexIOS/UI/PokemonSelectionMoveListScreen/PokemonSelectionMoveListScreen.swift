@@ -238,7 +238,6 @@ extension Array {
         result.reserveCapacity((count+number-1)/number)
         var currentIndex = 0
         while currentIndex < count {
-            let maxIndex = Swift.min(currentIndex+number, count)
             result.append(Array(self[currentIndex..<endIndex]))
             currentIndex = endIndex
         }

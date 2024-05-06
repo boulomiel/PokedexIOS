@@ -137,7 +137,7 @@ enum LanguageName {
             fallthrough
         case .ja(let englishName, let name):
             fallthrough
-        case .zhHans(let englishName, let name):
+        case .zhHans(let englishName, _):
             fallthrough
         case .en(let englishName):
             return englishName.lowercased()
@@ -148,25 +148,25 @@ enum LanguageName {
         switch self {
         case .en(let englishName):
             return englishName
-        case .japHrkt(let englishName, let name):
+        case .japHrkt(_, let name):
             fallthrough
-        case .roomaji(let englishName, let name):
+        case .roomaji(_, let name):
             fallthrough
-        case .ko(let englishName, let name):
+        case .ko(_, let name):
             fallthrough
-        case .zhHant(let englishName, let name):
+        case .zhHant(_, let name):
             fallthrough
-        case .fr(let englishName, let name):
+        case .fr(_, let name):
             fallthrough
-        case .de(let englishName, let name):
+        case .de(_, let name):
             fallthrough
-        case .es(let englishName, let name):
+        case .es(_, let name):
             fallthrough
-        case .it(let englishName, let name):
+        case .it(_, let name):
             fallthrough
-        case .ja(let englishName, let name):
+        case .ja(_, let name):
             fallthrough
-        case .zhHans(let englishName, let name):
+        case .zhHans(_, let name):
             return name
         }
     }

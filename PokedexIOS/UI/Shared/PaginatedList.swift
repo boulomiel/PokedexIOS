@@ -89,7 +89,7 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
                 cleanSearchTask()
                 return
             }
-            let englishNames =  fetchApi is PokemonItemApi ? languageNameFetcher.fetchItemNames(for: name) : languageNameFetcher.fetchPokemonNames(for: name)
+            let englishNames = fetchApi is PokemonItemApi ? languageNameFetcher.fetchItemNames(for: name) : languageNameFetcher.fetchPokemonNames(for: name)
             if englishNames.isEmpty {
                 let result = await fetchApi.fetch(id: name.lowercased().replacingOccurrences(of: " ", with: "-"))
                 switch result {
@@ -125,16 +125,6 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
                     self.searched = searched
                 }
             }
-//            let result = await fetchApi.fetch(id : englishNames.first?.replacingOccurrences(of: " ", with: "-") ?? name.replacingOccurrences(of: " ", with: "-"))
-//            switch result {
-//            case .success(let result):
-//                await MainActor.run {
-//                    searched = result
-//                }
-//            case .failure(let error):
-//                searched = nil
-//                print(#file, #function, error)
-//            }
         }
         
         private func cleanSearchTask() {
@@ -149,13 +139,7 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
             var currentOffset: Int = 0
             
             var list: [EnumeratedSequence<[NamedAPIResource]>.Element] {
-//                if searchText == "" {
-//                    return Array(scrollFetch.enumerated())
-//                } else {
-//                    let filtered = scrollFetch.filter { $0.name.starts(with: searchText.lowercased()) }
-//                    return Array(filtered.enumerated())
-//                }
-                return Array(scrollFetch.enumerated())
+                Array(scrollFetch.enumerated())
             }
             
             var fetchCount: Int {
