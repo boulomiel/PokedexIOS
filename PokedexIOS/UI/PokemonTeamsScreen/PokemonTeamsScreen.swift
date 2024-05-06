@@ -37,7 +37,7 @@ struct PokemonTeamsScreen: View {
                         .networkedContentView()
                 })
                 .navigationDestination(for: AddTeamRoute.self) { route in
-                    PaginatedList(provider: .init(api: scrollFetchApi, fetchApi: fetchApi)) { provider in
+                    PaginatedList(provider: .init(api: scrollFetchApi, fetchApi: fetchApi, modelContainer: modelContext.container)) { provider in
                         PokemonSelectionGridScreen(scrollProvider: provider, provider: .init(selectedPokemons: route.selectedPokemons, modelContext: modelContext, teamID: route.teamID))
                     }
                     .environment(teamRouter)
@@ -60,9 +60,14 @@ struct PokemonTeamsScreen: View {
                         .networkedContentView()
                 }
                 .navigationDestination(for: AddItemRoute.self, destination: { route in
-                    PokemonItemSelectionScreen(provider: .init(categoryApi: categoryItemApi, generalApi: generalApi, pokemonItemApi: pokemonItemApi, modelContext: modelContext, pokemonID: route.pokemonID, current: route.item))
-                        .environment(teamRouter)
-                        .networkedContentView()
+//                    PokemonItemSelectionScreen(provider: .init(categoryApi: categoryItemApi, generalApi: generalApi, pokemonItemApi: pokemonItemApi, modelContainer: modelContext.container, pokemonID: route.pokemonID, current: route.item))
+//                        .environment(teamRouter)
+//                        .networkedContentView()
+                    PaginatedList(provider: .init(api: scrollFetchItemApi, fetchApi: pokemonItemApi, modelContainer: modelContext.container)) { provider in
+                        ItemScrolledContent(scrollProvider: provider, provider: .init(modelContainer: modelContext.container, pokemonID: route.pokemonID, current: route.item))
+                    }                 
+                    .environment(teamRouter)
+                    .networkedContentView()
                 })
                 .navigationDestination(for: PreviewRoute.self) { route in
                     if let pokemon = fetchPokemon(with: route.pokemonID) {
@@ -86,10 +91,8 @@ struct PokemonTeamsScreen: View {
                 .showMutableIcon()
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        if teamCount > 0 {
-                            NavigationLink(value: AddTeamRoute() ) {
-                                Image(systemName: "plus")
-                            }
+                        NavigationLink(value: AddTeamRoute() ) {
+                            Image(systemName: "plus")
                         }
                     }
                 }
@@ -142,7 +145,7 @@ class TeamRouter {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     let pokemons = JsonReader.readPokemons().map { SDPokemon(pokemonID: $0.id, data: try! JSONEncoder().encode($0)) }
     preview.addExamples(pokemons)

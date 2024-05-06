@@ -13,18 +13,18 @@ struct PokemonSpecies: Codable {
     var order: Int
     var gender_rate: Int
     var capture_rate: Int
-    var base_happiness: Int
-    var is_baby: Bool
-    var is_legendary: Bool
-    var is_mythical: Bool
-    var hatch_counter: Int
+    var base_happiness: Int?
+    var is_baby: Bool?
+    var is_legendary: Bool?
+    var is_mythical: Bool?
+    var hatch_counter: Int?
     var has_gender_differences: Bool
     var forms_switchable: Bool
     var growth_rate: NamedAPIResource
     var pokedex_numbers: [PokemonSpeciesDexEntry]
     var egg_groups: [NamedAPIResource]
     var color: NamedAPIResource
-    var shape: NamedAPIResource
+    var shape: NamedAPIResource?
     var evolves_from_species: NamedAPIResource?
     var evolution_chain: APIResource
     var habitat: NamedAPIResource?

@@ -35,7 +35,7 @@ struct PokemonSelectionGridCell: View {
     var body: some View {
         VStack {
             ScaleAsyncImage(url: provider.sprite, width: 100, height: 100)
-            Text(provider.pokemon.name.capitalized)
+            Text(provider.pokemonName.capitalized)
                 .frame(maxWidth: .infinity)
                 .minimumScaleFactor(0.1)
                 .bold()
@@ -172,8 +172,17 @@ struct PokemonSelectionGridCell: View {
         let speciesApi: PokemonSpeciesApi
         var pokemon: LocalPokemon
         let eventBound: GridCellPOkemonSelectionEventBound
-        
         var fetchedPokemon: Pokemon?
+        let languageName: LanguageName
+        
+        var pokemonName: String {
+            if case let .en(englishName) = languageName {
+                return englishName
+            } else {
+                return languageName.foreign
+            }
+        }
+        
         var sprite: URL? {
             fetchedPokemon?.sprites?.frontDefault
         }
@@ -190,8 +199,23 @@ struct PokemonSelectionGridCell: View {
             self.showVarietyButton = false
             self.speciesApi = speciesApi
             self.eventBound = eventBound
+            self.languageName = .en(englishName: pokemon.name)
             Task {
                 await fetch()
+            }
+        }
+        
+        init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, fetchedPokemon: Pokemon, languageName: LanguageName, eventBound: GridCellPOkemonSelectionEventBound) {
+            self.api = api
+            self.isSelected = false
+            self.showVarietyButton = false
+            self.speciesApi = speciesApi
+            self.eventBound = eventBound
+            self.fetchedPokemon = fetchedPokemon
+            self.languageName = languageName
+            self.pokemon = .init(index: fetchedPokemon.order, name: fetchedPokemon.name)
+            Task {
+                await getSpecies(for: fetchedPokemon)
             }
         }
         
@@ -204,7 +228,7 @@ struct PokemonSelectionGridCell: View {
                     fetchedPokemon = result
                 }
             case .failure(let error):
-                print(#function, error)
+                print(#file, #function, error)
             }
         }
         
@@ -216,14 +240,14 @@ struct PokemonSelectionGridCell: View {
                     self.showVarietyButton = result.varieties.count > 1
                 }
             case .failure(let error):
-                print(#function, error)
+                print(#file, #function, error)
             }
         }
     }
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return PokemonSelectionGridCell(
         selectedPokemon:

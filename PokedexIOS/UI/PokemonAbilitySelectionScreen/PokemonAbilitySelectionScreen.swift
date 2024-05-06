@@ -128,7 +128,7 @@ struct PokemonAbilitySelectionScreen: View {
             case .success(let success):
                 return success
             case .failure(let failure):
-                print(#function, failure)
+                print(#file, #function, failure)
                 return nil
             }
         }
@@ -167,7 +167,7 @@ struct PokemonAbilitySelectionScreen: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let preview =  Preview.allPreview
     let dragonite: Pokemon = JsonReader.read(for: .pikachu)
     let sdDragonite = SDPokemon(pokemonID: dragonite.id, data: try? JSONEncoder().encode(dragonite))

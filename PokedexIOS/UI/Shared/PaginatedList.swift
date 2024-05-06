@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import SwiftData
 
 struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiService: SearchApiProtocol> : View where ScrollService.Requested == ScrollFetchResult {
     
@@ -21,7 +22,7 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
             .searchable(text: $provider.config.searchText)
             .autocorrectionDisabled(true) 
             .onChange(of: provider.config.searchText, { oldValue, newValue in
-                provider.onSearch(newValue: newValue.replacingOccurrences(of: " ", with: "-"))
+                provider.onSearch(newValue: newValue)
             })
             .animation(.bouncy, value: provider.config.searchText)
     }
@@ -33,12 +34,16 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
         let fetchApi: Api
         var searchTask: Task<Void, Never>?
         var config: Config
-        var searched: Api.Requested?
+        var searched: [SearchedElement<Api.Requested>]?
+        var container: ModelContainer
+        var languageNameFetcher: LanguageNameFetcher
         
-        init(api: ScrollApi, fetchApi: Api, config: Config = .init()) {
+        init(api: ScrollApi, fetchApi: Api, modelContainer: ModelContainer, config: Config = .init()) {
             self.scrollFetchApi = api
             self.fetchApi = fetchApi
             self.config = config
+            self.container = modelContainer
+            self.languageNameFetcher = .init(container: modelContainer)
             Task {
                 await fetch()
             }
@@ -60,7 +65,7 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
                     try await Task.sleep(for: .seconds(0.3))
                     await fetch(for: newValue.lowercased())
                 } catch {
-                    //print(#function, error)
+                    //print(#file, #function, error)
                 }
             }
         }
@@ -84,16 +89,52 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
                 cleanSearchTask()
                 return
             }
-            let result = await fetchApi.fetch(id: name)
-            switch result {
-            case .success(let result):
-                await MainActor.run {
-                    searched = result
+            let englishNames =  fetchApi is PokemonItemApi ? languageNameFetcher.fetchItemNames(for: name) : languageNameFetcher.fetchPokemonNames(for: name)
+            if englishNames.isEmpty {
+                let result = await fetchApi.fetch(id: name.lowercased().replacingOccurrences(of: " ", with: "-"))
+                switch result {
+                case .success(let result):
+                    await MainActor.run {
+                        searched = [.init(element: result, language: .en(englishName: name))]
+                    }
+                case .failure(let error):
+                    searched = nil
+                    print(#file, #function, error, name)
                 }
-            case .failure(let error):
-                searched = nil
-                print(#function, error)
+            } else {
+               let searched = await withTaskGroup(of: SearchedElement?.self) { group in
+                    englishNames.forEach { name in
+                        group.addTask {
+                            let result = await self.fetchApi.fetch(id: name.english.lowercased().replacingOccurrences(of: " ", with: "-"))
+                            switch result {
+                            case .success(let result):
+                                return .init(element: result, language: name)
+                            case .failure(let error):
+                                print(#file, #function, error, name, name.english.lowercased())
+                                return nil
+                            }
+                        }
+                    }
+                    return await group.reduce(into: [SearchedElement]()) { partialResult, element in
+                        if let element {
+                            partialResult.append(element)
+                        }
+                    }
+                }
+                await MainActor.run {
+                    self.searched = searched
+                }
             }
+//            let result = await fetchApi.fetch(id : englishNames.first?.replacingOccurrences(of: " ", with: "-") ?? name.replacingOccurrences(of: " ", with: "-"))
+//            switch result {
+//            case .success(let result):
+//                await MainActor.run {
+//                    searched = result
+//                }
+//            case .failure(let error):
+//                searched = nil
+//                print(#file, #function, error)
+//            }
         }
         
         private func cleanSearchTask() {
@@ -104,22 +145,44 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
         
         struct Config {
             var searchText: String = ""
-            var scrollFetch: [ScrolledFetchedElement] = []
+            var scrollFetch: [NamedAPIResource] = []
             var currentOffset: Int = 0
             
-            var list: [EnumeratedSequence<[ScrolledFetchedElement]>.Element] {
-                if searchText == "" {
-                    return Array(scrollFetch.enumerated())
-                } else {
-                    let filtered = scrollFetch.filter { $0.name.starts(with: searchText.lowercased()) }
-                    return Array(filtered.enumerated())
-                }
+            var list: [EnumeratedSequence<[NamedAPIResource]>.Element] {
+//                if searchText == "" {
+//                    return Array(scrollFetch.enumerated())
+//                } else {
+//                    let filtered = scrollFetch.filter { $0.name.starts(with: searchText.lowercased()) }
+//                    return Array(filtered.enumerated())
+//                }
+                return Array(scrollFetch.enumerated())
             }
             
             var fetchCount: Int {
                 scrollFetch.count
             }
         }
+        
+        struct SearchedElement<Content: Decodable> {
+            let element: Content
+            let language: LanguageName
+        }
     }
+}
 
+protocol NameFetchingProtocol {
+    associatedtype ItemApi
+    func fetchNameForLanguage(for name: String) async -> String?
+}
+
+struct AnyNameFetchingProvider<ItemApi>: NameFetchingProtocol {
+    private let _fetchNameForLanguage: (String) async -> String?
+    
+    init<T: NameFetchingProtocol>(_ provider: T) where T.ItemApi == ItemApi {
+        _fetchNameForLanguage = provider.fetchNameForLanguage
+    }
+    
+    func fetchNameForLanguage(for name: String) async -> String? {
+        return await _fetchNameForLanguage(name)
+    }
 }

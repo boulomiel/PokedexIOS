@@ -89,7 +89,7 @@ struct PokemonDetailScreen: View {
 
 #Preview {
     let preview = Preview.allPreview
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return RootView()
         .inject(container: container)

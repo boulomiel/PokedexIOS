@@ -28,13 +28,9 @@ struct ItemCell: View {
         } label: {
             Label(
                 title: {
-                    if let itemName = provider.itemName {
-                        Text(itemName.capitalized )
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    } else {
-                        textPlaceholder
-                    }
+                    Text(provider.itemName)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 },
                 icon: {
                     Circle()
@@ -81,38 +77,55 @@ struct ItemCell: View {
         
         let id: UUID = .init()
         let api: PokemonItemApi
-        let scrolledFetchedItem: ScrolledFetchedElement
+        let scrolledFetchedItem: NamedAPIResource?
         var isSelectable: Bool
         var isSelected: Bool
         var item: Item?
         var onItemSet: ((Item, Provider) -> Void)?
         
+        private var languageName: LanguageName
+        
         var sprite: URL? {
             item?.sprites.defaultSprite
         }
         
-        var itemName: String? {
-            item?.name
+        var itemName: String {
+            if case let .en(englishName) = languageName {
+                return englishName.capitalized
+            } else {
+                return languageName.foreign.capitalized
+            }
         }
         
         var description: String? {
-            item?.effectEntries.first(where: { $0.language.name == "en" })?
-                .effect
+            item?.flavorTextEntries.first(where: { $0.language.name == languageName.language })?.text ?? item?.flavorTextEntries.first(where: { $0.language.name == "en" })?.text
                 .trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: " ")
         }
     
-        init(api: PokemonItemApi, scrolledFetchedItem: ScrolledFetchedElement, isSelectable: Bool = false, onItemSet: ((Item, Provider) -> Void)? = nil) {
+        init(api: PokemonItemApi, scrolledFetchedItem: NamedAPIResource, isSelectable: Bool = false, onItemSet: ((Item, Provider) -> Void)? = nil) {
             self.api = api
             self.scrolledFetchedItem = scrolledFetchedItem
             self.isSelectable = isSelectable
             self.isSelected = false
             self.onItemSet = onItemSet
+            self.languageName = .en(englishName: scrolledFetchedItem.name)
             Task {
                 await fetch()
             }
         }
         
+        init(api: PokemonItemApi, item: Item, languageName: LanguageName, isSelectable: Bool = false, onItemSet: ((Item, Provider) -> Void)? = nil) {
+            self.api = api
+            self.item = item
+            self.scrolledFetchedItem = nil
+            self.isSelectable = isSelectable
+            self.isSelected = false
+            self.onItemSet = onItemSet
+            self.languageName = languageName
+        }
+        
         func fetch() async {
+            guard let scrolledFetchedItem else { return }
             let result = await api.fetch(id: scrolledFetchedItem.name)
             switch result {
             case .success(let success):

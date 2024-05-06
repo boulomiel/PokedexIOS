@@ -16,7 +16,7 @@ struct PokemonScrollCell: View {
         NavigationLink(value: provider.pokemon) {
             GroupBox {
                 HStack {
-                    Text(provider.pokemon.name.capitalized)
+                    Text(provider.pokemonName)
                         .bold()
                         .font(.title2)
                     
@@ -40,30 +40,47 @@ struct PokemonScrollCell: View {
         let speciesApi: PokemonSpeciesApi
         var pokemon: LocalPokemon
         var sprite: URL?
+        var languageName: LanguageName
+        
         var names: [String: String]
+        
+        var pokemonName: String {
+            if case .en(let englishName) = languageName {
+                return englishName.capitalized
+            } else {
+                return languageName.foreign.capitalized
+            }
+        }
         
         init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, pokemon: LocalPokemon) {
             self.api = api
             self.speciesApi = speciesApi
             self.pokemon = pokemon
             self.names = [:]
+            self.languageName = .en(englishName: pokemon.name)
             Task {
                 await fetch()
             }
+        }
+        
+        init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, pokemon: LocalPokemon, sprite: URL?, languageName: LanguageName) {
+            self.api = api
+            self.speciesApi = speciesApi
+            self.pokemon = pokemon
+            self.names = [:]
+            self.sprite = sprite
+            self.languageName = languageName
         }
         
         private func fetch() async {
             let result = await api.fetch(query: .init(pokemonID: pokemon.name))
             switch result {
             case .success(let result):
-                Task {
-                    await fetchSpecies(result.name)
-                }
                 await MainActor.run {
                     sprite = result.sprites?.frontDefault
                 }
             case .failure(let error):
-                print(#function, error)
+                print(#file, #function, error)
             }
         }
         
@@ -78,10 +95,9 @@ struct PokemonScrollCell: View {
                     self.names = Dictionary.init(names) { first, second in
                         first
                     }
-                    print(#function, names)
                 }
             case .failure(let error):
-                print(#function, error)
+                print(#file, #function, error)
             }
         }
     }
@@ -94,7 +110,7 @@ struct PokemonScrollCell: View {
 
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return PokemonScrollCell(provider: .init(api: .init(), speciesApi: .init(), pokemon: .init(index: 25, name: "pikachu")))
         .inject(container: container)

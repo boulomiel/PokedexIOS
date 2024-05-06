@@ -34,11 +34,20 @@ struct PokemonListScrolledContent: View {
         }
     }
     
+    func searchedList(_ searched: [Provider.SearchedElement<Pokemon>]) -> some View {
+        ForEach(Array(searched.enumerated()), id:\.offset) { offset, pokemon in
+            PokemonScrollCell(provider: .init(api: provider.fetchApi, speciesApi: speciesApi, pokemon: .init(index: pokemon.element.order, name: pokemon.element.name),sprite: pokemon.element.sprites?.frontDefault, languageName: pokemon.language))
+                .onAppear {
+                    provider.update(from: offset)
+                }
+                .id(pokemon.language.english)
+        }
+    }
+    
     @ViewBuilder
     var listContent: some View {
         if let fetched = provider.searched {
-            PokemonScrollCell(provider: .init(api: provider.fetchApi, speciesApi: .init(), pokemon: .init(index: fetched.order, name: fetched.name)))
-                .id(fetched.name)
+            searchedList(fetched)
         } else {
             forEach
         }
@@ -46,7 +55,7 @@ struct PokemonListScrolledContent: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     return  NavigationStack {
         PokemonScrollScreen()
             .inject(container: container)

@@ -95,7 +95,6 @@ struct EvolutionListView: View {
                     evolvesTo = first.evolvesTo
                 }
                 count += 1
-
             }
             await buildProviders(chainBuilder)
         }
@@ -163,7 +162,7 @@ struct EvolutionModel {
 
 #Preview {
     @Environment(
-        \.container
+        \.diContainer
     ) var container
     
     return EvolutionListView(

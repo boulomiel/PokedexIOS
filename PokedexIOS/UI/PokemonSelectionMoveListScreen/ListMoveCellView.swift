@@ -43,6 +43,7 @@ struct ListMoveCellView: View {
             }
         }), including: .all)
         .onAppear(perform: {
+            print(move.type.url)
             isSelected = provider.isSelected(move: move)
         })
     }
@@ -71,22 +72,30 @@ struct ListMoveCellView: View {
                             .bold()
                     }
                     .frame(width: 100)
+                    
+                    Image(move.type.name)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .scaledToFit()
                 }
                 .transition(.opacity)
+                
             }
         }
     }
     
     var moveIconView: some View {
-        MoveDamageType(rawValue:move.damageClass.name)!
-            .image(width: 45, height: 25)
-            .padding(.leading, provider.selectionActive ? 40 : 12)
-            .onSelection(isSelected: $isSelected, isSelectable: provider.selectionActive && isSelectable, alignment: .leading, padding: .init(top: 0, leading: 12, bottom: 0, trailing: 0))
-            .onTapGesture {
-                guard provider.selectionActive else { return  }
-                let hasBeenSelected = provider.selectMove(move)
-                isSelected = hasBeenSelected
-            }
+        HStack {
+            MoveDamageType(rawValue:move.damageClass.name)!
+                .image(width: 45, height: 25)
+                .padding(.leading, provider.selectionActive ? 40 : 12)
+                .onSelection(isSelected: $isSelected, isSelectable: provider.selectionActive && isSelectable, alignment: .leading, padding: .init(top: 0, leading: 12, bottom: 0, trailing: 0))
+                .onTapGesture {
+                    guard provider.selectionActive else { return  }
+                    let hasBeenSelected = provider.selectMove(move)
+                    isSelected = hasBeenSelected
+                }
+        }
     }
     
     struct Anim {
@@ -96,7 +105,7 @@ struct ListMoveCellView: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let pikachu: Pokemon = JsonReader.read(for: .pikachu)
     let preview = Preview(SDPokemon.self, SDMove.self, SDItem.self, SDTeam.self)
     let sdPikachu = SDPokemon(pokemonID: pikachu.id, data: try? JSONEncoder().encode(pikachu))

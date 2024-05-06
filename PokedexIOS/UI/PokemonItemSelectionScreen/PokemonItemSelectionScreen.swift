@@ -66,10 +66,8 @@ struct PokemonItemSelectionScreen: View {
         let categoryApi: PokemonCategoryItemApi
         let pokemonItemApi: PokemonItemApi
         let generalApi: GeneralApi<ItemCategories>
-        let modelContext: ModelContext
+        let modelContainer: ModelContainer
         let pokemonID: PersistentIdentifier
-        var searchTask: Task<Void, Never>?
-        var searched: CellProvider?
         
         @ObservationIgnored
         private let current: Item?
@@ -87,11 +85,15 @@ struct PokemonItemSelectionScreen: View {
         var categories: [ItemCategoryType]
         private var pItems: [ItemDataModel]
         var searchText: String
+        var searchTask: Task<Void, Never>?
+        var searched: CellProvider?
+        
+        let languageNameFetcher: LanguageNameFetcher
         
         init(categoryApi: PokemonCategoryItemApi,
              generalApi: GeneralApi<ItemCategories>,
              pokemonItemApi: PokemonItemApi,
-             modelContext: ModelContext,
+             modelContainer: ModelContainer,
              pokemonID: PersistentIdentifier,
              current: Item?
         ) {
@@ -101,13 +103,14 @@ struct PokemonItemSelectionScreen: View {
             self.pItems = []
             self.categories = []
             self.searchText = current?.name ?? ""
-            self.modelContext = modelContext
+            self.modelContainer = modelContainer
             self.pokemonID = pokemonID
             self.current = current
             self.selectionActive = current != nil
             self.providers = []
             self.paginatedProviders = []
             self.displayedProviders = []
+            self.languageNameFetcher = .init(container: modelContainer)
             Task {
                 await fetch()
                 onSearch(newValue: current?.name ?? "")
@@ -115,7 +118,6 @@ struct PokemonItemSelectionScreen: View {
         }
         
         private func fetch() async {
-            print(#function, "parent")
             let url = URL(string: "https://pokeapi.co/api/v2/item-category/")!
             let result = await generalApi.fetch(query: .init(url: url))
             switch result {
@@ -216,10 +218,7 @@ struct PokemonItemSelectionScreen: View {
         func handleSelection(_ item: Item?) {
             guard let item else { return }
             for provider in providers {
-                provider.isSelected = item.name == (provider.itemName ?? "")
-                if provider.isSelected {
-                    print(#function)
-                }
+                provider.isSelected = item.name == provider.item?.name
             }
             selected = .init(item: item)
             Vibrator.selection()
@@ -262,8 +261,9 @@ struct PokemonItemSelectionScreen: View {
                 }
                 return
             }
-            let fetchableName = name.lowercased().replacingOccurrences(of: " ", with: "-")
-            let filtered = providers.filter { $0.scrolledFetchedItem.name.contains(fetchableName) }
+           /// _ =  languageNameFetcher.fetchItemNames(for: name)
+            //let fetchableName = (languageNamed.first ?? name).lowercased().replacingOccurrences(of: " ", with: "-")
+            let filtered = providers.filter { $0.scrolledFetchedItem?.name.contains(name) ?? false }
             if !filtered.isEmpty {
                 await MainActor.run {
                     handleSelection(current)
@@ -272,17 +272,17 @@ struct PokemonItemSelectionScreen: View {
                 }
                 return
             }
-            let result = await pokemonItemApi.fetch(id: fetchableName)
-            switch result {
-            case .success(let result):
-                await MainActor.run {
-                    searched = .init(api: pokemonItemApi, scrolledFetchedItem: .init(name: result.name, url: .cachesDirectory), isSelectable: selectionActive)
-                    searched?.isSelected = current?.name == result.name
-                }
-            case .failure(let error):
-                searched = nil
-                print(#function, error)
-            }
+//            let result = await pokemonItemApi.fetch(id: fetchableName)
+//            switch result {
+//            case .success(let result):
+//                await MainActor.run {
+//                    searched = .init(api: pokemonItemApi, scrolledFetchedItem: .init(name: result.name, url: .cachesDirectory), isSelectable: selectionActive)
+//                    searched?.isSelected = current?.name == result.name
+//                }
+//            case .failure(let error):
+//                searched = nil
+//                print(#function, error)
+//            }
         }
         
         private func cleanSearchTask() {
@@ -292,15 +292,19 @@ struct PokemonItemSelectionScreen: View {
         }
         
         func save() {
-            let pokemon = modelContext.fetchUniqueSync(SDPokemon.self, with: pokemonID)
             guard let current = selected?.item else {
                 return
             }
-            let item = SDItem(itemID: current.id, data: try? JSONEncoder().encode(current))
-            modelContext.insert(item)
-            pokemon?.item = item
-            try? modelContext.save()
-            Vibrator.notify(of: .success)
+            Task {
+                let backgroundHandler = BackgroundDataHander(with: modelContainer)
+                let pokemon = backgroundHandler.fetch(type: SDPokemon.self, fetchLimit: 1, predicate: #Predicate { $0.persistentModelID == pokemonID }).first
+                let item = SDItem(itemID: current.id, data: try? JSONEncoder().encode(current))
+                backgroundHandler.insert(item)
+                pokemon?.item = item
+                backgroundHandler.save()
+                Vibrator.notify(of: .success)
+
+            }
         }
     }
     
@@ -314,7 +318,7 @@ struct PokemonItemSelectionScreen: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     let preview =  Preview.allPreview
     let pokemon = JsonReader.readPokemons().randomElement()!
@@ -322,7 +326,7 @@ struct PokemonItemSelectionScreen: View {
     preview.addExamples([sdPokemon])
     
     return NavigationStack {
-        PokemonItemSelectionScreen(provider: .init(categoryApi: .init(), generalApi: .init(), pokemonItemApi: .init(), modelContext: preview.container.mainContext, pokemonID: sdPokemon.persistentModelID, current: nil))
+        PokemonItemSelectionScreen(provider: .init(categoryApi: .init(), generalApi: .init(), pokemonItemApi: .init(), modelContainer: preview.container, pokemonID: sdPokemon.persistentModelID, current: nil))
             .inject(container: container)
     }
     .modelContainer(preview.container)

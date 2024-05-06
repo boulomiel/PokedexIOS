@@ -35,7 +35,7 @@ struct PokemonListAbilityView: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let abilities: [PokemonAbilityDetails] = [
         testpokemonability,
         testpokemonability2,

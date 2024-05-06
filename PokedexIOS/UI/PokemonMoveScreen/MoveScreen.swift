@@ -93,7 +93,7 @@ struct MoveCellData: Hashable {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let meta1 = MoveVersionMeta(moveName: "thunder", version: .yellow, levelLearntAt: 15, learningMethod: .levelUp)
     let meta2 = MoveVersionMeta(moveName: "scratch", version: .blackAndWhite, levelLearntAt: 15, learningMethod: .levelUp)
     let meta3 = MoveVersionMeta(moveName: "petal-dance", version: .yellow, levelLearntAt: 15, learningMethod: .egg)

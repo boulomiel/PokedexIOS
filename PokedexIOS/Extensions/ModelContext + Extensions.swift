@@ -23,7 +23,7 @@ extension ModelContext {
                 return nil
             }
         } catch {
-            print(#function, error)
+            print(#file, #function, error)
             return nil
         }
     }
@@ -53,7 +53,7 @@ extension ModelContext {
                 return nil
             }
         } catch {
-            print(#function, error)
+            print(#file, #function, error)
             return nil
         }
     }

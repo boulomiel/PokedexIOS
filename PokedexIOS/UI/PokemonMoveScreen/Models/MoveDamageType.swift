@@ -24,18 +24,6 @@ enum MoveDamageType: String {
         }
     }
     
-//    @ViewBuilder
-//    var view: some View {
-//        switch self {
-//        case .physical:
-//            PhysicalMoveView()
-//        case .status:
-//            StatusMoveView()
-//        case .special:
-//            SpecialMoveView()
-//        }
-//    }
-    
     func image(width: CGFloat, height: CGFloat) -> some View {
         Image(self.rawValue)
             .resizable()

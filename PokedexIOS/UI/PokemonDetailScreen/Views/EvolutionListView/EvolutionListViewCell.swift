@@ -68,7 +68,7 @@ struct EvolutionListViewCell: View {
                     genModels = GenModel.generate(from: result)
                 }
             case .failure(let error):
-                print(#function, error)
+                print(#file, #function, error)
             }
         }
 
@@ -77,7 +77,7 @@ struct EvolutionListViewCell: View {
 
 #Preview {
     @Environment(
-        \.container
+        \.diContainer
     ) var container
     return EvolutionListViewCell(
         provider: .init(

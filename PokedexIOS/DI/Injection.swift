@@ -31,20 +31,26 @@ extension View {
 
 fileprivate extension Container {
     func inject() {
+        
+        let scrollFetchGeneralApi = GeneralApi<ScrollFetchResult>()
+        let fetchPokemonApi = FetchPokemonApi()
+        let pokemonSpeciesApi = PokemonSpeciesApi()
+        let pokemonItemApi = PokemonItemApi()
+        
         // APIs
         registration { container in
             container.register(ScrollFetchPokemonApi.self, object: .init())
-            container.register(FetchPokemonApi.self, object: .init())
+            container.register(FetchPokemonApi.self, object: fetchPokemonApi)
             container.register(PokemonAbilityApi.self, object: .init())
-            container.register(PokemonSpeciesApi.self, object: .init())
+            container.register(PokemonSpeciesApi.self, object:  pokemonSpeciesApi)
             container.register(PokemonEvolutionChainApi.self, object: .init())
             container.register(PokemonMoveApi.self, object: .init())
             container.register(PokemonMachineApi.self, object: .init())
             container.register(GeneralApi<Machine>.self, object: .init())
             container.register(GeneralApi<ItemCategories>.self, object: .init())
-            container.register(GeneralApi<NamedAPIResource>.self, object: .init())
+            container.register(GeneralApi<ScrollFetchResult>.self, object: scrollFetchGeneralApi)
             container.register(PokemonNatureApi.self, object: .init())
-            container.register(PokemonItemApi.self, object: .init())
+            container.register(PokemonItemApi.self, object: pokemonItemApi)
             container.register(ScrollFetchItemApi.self, object: .init())
             container.register(PokemonCategoryItemApi.self, object: .init())
         }
@@ -58,5 +64,15 @@ fileprivate extension Container {
         
         //Player
         register(CriePlayer.self, object: .init())
+        
+        //NamedDataLauncher
+        registration { container in
+            container.register(PokemonNameLauncherImpl.self, object: .init(apiEnv: PlistReader.read(list: .pokemonapi), api: scrollFetchGeneralApi, speciesApi: pokemonSpeciesApi))
+            container.register(ItemNameLauncherImpl.self, object: .init(apiEnv: PlistReader.read(list: .pokemonapi), api: scrollFetchGeneralApi, itemApi: pokemonItemApi))
+        }
+        
+        //Launcher
+        let nameLaunchers: [any NameLauncherProtocol] = [resolve(PokemonNameLauncherImpl.self), resolve(ItemNameLauncherImpl.self)]
+        register(AppLaunchWorker.self, object: .init(namedLauncherWorkers: nameLaunchers, container: modelContainer))
     }
 }

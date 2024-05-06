@@ -67,14 +67,14 @@ struct PokemonGridCell: View {
                     self.number = success.id
                 }
             case .failure(let failure):
-                print(#function, failure)
+                print(#file, #function, failure)
             }
         }
     }
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return PokemonGridCell(provider: .init(pokemon: "gengar", fechPokemonApi: .init()))
         .inject(container: container)

@@ -14,7 +14,7 @@ class SDItem: SDDataDecoder {
     @Attribute(.unique) let itemID: Int
     let data: Data?
     
-    var pokemon: SDPokemon?
+    var pokemon: [SDPokemon]?
     
     init(itemID: Int, data: Data?) {
         self.itemID = itemID

@@ -38,7 +38,7 @@ struct PokemonGridListView: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return PokemonGridListView(provider: .init(fetchApi: .init(), pokemons: ["gengar", "pikachu", "raichu", "mew", "lugia","charmander","gastly"]))
         .preferredColorScheme(.dark)

@@ -211,7 +211,7 @@ struct MoveViewCell: View {
 
 #Preview {
     
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return MoveViewCell(provider: .init(moveApi: .init(), generalApi: .init(), moveVersionData: .init(moveName: "double-edge", version: .yellow, levelLearntAt: 8, learningMethod: .levelUp)), width: UIScreen.main.nativeBounds.width)
         .preferredColorScheme(.dark)

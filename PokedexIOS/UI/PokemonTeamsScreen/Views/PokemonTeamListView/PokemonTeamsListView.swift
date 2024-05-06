@@ -63,7 +63,7 @@ struct PokemonTeamsListView: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let preview = Preview(SDTeam.self, SDMove.self)
     preview.addExamples(SDTeam.examples)
     

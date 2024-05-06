@@ -217,7 +217,7 @@ struct PokemonSelectionMoveListScreen: View {
 
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let pikachu: Pokemon = JsonReader.read(for: .pikachu)
     let preview = Preview(SDPokemon.self, SDMove.self, SDItem.self, SDTeam.self)
     let sdPikachu = SDPokemon(pokemonID: pikachu.id, data: try? JSONEncoder().encode(pikachu))

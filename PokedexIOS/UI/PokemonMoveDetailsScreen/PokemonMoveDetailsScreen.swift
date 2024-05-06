@@ -84,7 +84,7 @@ struct PokemonMoveDetailsScreen: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return NavigationStack {
         

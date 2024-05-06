@@ -154,7 +154,7 @@ struct PokemonAbilityView: View {
                     makeModel(from: success)
                 }
             case .failure(let failure):
-                print(#function, failure)
+                print(#file, #function, failure)
             }
         }
         

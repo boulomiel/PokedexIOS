@@ -89,22 +89,36 @@ struct PokemonSelectionGridScreen: View {
         })
     }
     
+    var baseList: some View {
+        LazyVGrid(columns: provider.grid,
+                  content: {
+            ForEach(scrollProvider.config.list, id:\.0) { (index, pokemon) in
+                GridCell(index: index, name: pokemon.name)
+                    .onAppear {
+                        scrollProvider.update(from: index)
+                    }
+            }
+        })
+    }
+    
+    func searchedList(_ pokemons: [ScrollProvider.SearchedElement<Pokemon>]) -> some View {
+        LazyVGrid(columns: provider.grid,
+                  content: {
+            ForEach(Array(pokemons.enumerated()), id:\.0) { (index, pokemon) in
+                GridCellLanguaged(searched: pokemon)
+                    .onAppear {
+                        scrollProvider.update(from: index)
+                    }
+            }
+        })
+    }
+    
     var listContent: some View {
         ScrollView {
             if let fetched = scrollProvider.searched {
-                GridCell(index: fetched.order, name: fetched.name)
-                    .id(fetched.name)
+                searchedList(fetched)
             } else {
-                LazyVGrid(columns: provider.grid,
-                          content: {
-                    ForEach(scrollProvider.config.list, id:\.0) { (index, pokemon) in
-                        GridCell(index: index, name: pokemon.name)
-                            .id(pokemon.name)
-                            .onAppear {
-                                scrollProvider.update(from: index)
-                            }
-                    }
-                })
+                baseList
             }
         }
     }
@@ -123,6 +137,20 @@ struct PokemonSelectionGridScreen: View {
             )
         )
         .id(name)
+    }
+    
+    @ViewBuilder
+    func GridCellLanguaged(searched: ScrollProvider.SearchedElement<Pokemon>) -> some View {
+        PokemonSelectionGridCell(
+            selectedPokemon: provider.selectedPokemons,
+            showSelection: showSelection,
+            provider: .init(api: scrollProvider.fetchApi,
+                            speciesApi: speciesApi,
+                            fetchedPokemon: searched.element,
+                            languageName: searched.language,
+                            eventBound: provider.eventBound)
+        )
+        .id(searched.language.english)
     }
         
     func SelectVarietieView(showVarietiesFor: LocalPokemon) -> some View {
@@ -295,10 +323,10 @@ struct TeamNameSheet: View {
 #Preview {
     
     let preview = Preview(SDTeam.self, SDPokemon.self, SDItem.self, SDMove.self)
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return NavigationStack(root: {
-        PokemonSelectionGridScreen(scrollProvider: .init(api: .init(), fetchApi: .init()), provider: .init(selectedPokemons: [], modelContext: preview.container.mainContext, teamID: nil))
+        PokemonSelectionGridScreen(scrollProvider: .init(api: .init(), fetchApi: .init(), modelContainer: preview.container), provider: .init(selectedPokemons: [], modelContext: preview.container.mainContext, teamID: nil))
     })
     .preferredColorScheme(.dark)
     .modelContainer(preview.container)

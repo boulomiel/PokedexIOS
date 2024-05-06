@@ -10,11 +10,11 @@ import Foundation
 struct ScrollFetchResult: Codable {
     var count: Int
     var next, previous: URL?
-    var results: [ScrolledFetchedElement]
+    var results: [NamedAPIResource]
 }
-
-// MARK: - Result
-struct ScrolledFetchedElement: Codable, Hashable {
-    var name: String
-    var url: URL
-}
+//
+//// MARK: - Result
+//struct ScrolledFetchedElement: Codable, Hashable {
+//    var name: String
+//    var url: URL
+//}

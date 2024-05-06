@@ -27,6 +27,16 @@ struct PokemonTeamCell: View {
                             .bold()
                             .foregroundStyle(.white)
                     }
+                    .overlay(alignment: .topTrailing, content: {
+                        if let item = pokemon.item?.decoded {
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .frame(width: 30)
+                                .overlay {
+                                    ScaleAsyncImage(url: item.sprites.defaultSprite, width: 30, height: 30)
+                                }
+                        }
+                    })
                     .onTapGesture {
                         teamRouter.root(as: PreviewRoute(pokemonID: pokemon.persistentModelID))
                     }
@@ -39,7 +49,7 @@ struct PokemonTeamCell: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let preview = Preview(SDMove.self, SDPokemon.self, SDItem.self, SDTeam.self)
     
     let pokemons = JsonReader.readPokemons().map { SDPokemon(pokemonID: $0.id, data: try! JSONEncoder().encode($0)) }

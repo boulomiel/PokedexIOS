@@ -41,7 +41,7 @@ struct PokeballImageAsync: View {
 }
 
 #Preview {
-    @Environment(\.container ) var container
+    @Environment(\.diContainer ) var container
     let spriteURL = JsonReader.readPokemons().randomElement()!.sprites?.frontDefault
     let width: CGFloat =  80
     let height: CGFloat = 80

@@ -14,17 +14,11 @@ class SDAbility: SDDataDecoder {
     @Attribute(.unique) let abilityID: Int
     let data: Data?
 
-    var pokemon: SDPokemon?
+    var pokemon: [SDPokemon]?
     
     init(abilityID: Int, data: Data?) {
         self.abilityID = abilityID
         self.data = data
-    }
-    
-    init(abilityID: Int, data: Data?, pokemon: SDPokemon?) {
-        self.abilityID = abilityID
-        self.data = data
-        self.pokemon = pokemon
     }
 }
 

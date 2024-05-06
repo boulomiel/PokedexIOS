@@ -104,6 +104,7 @@ struct PokemonTeamPreviewScreen: View {
     var natureContent: some View {
         if let nature = pokemon.nature?.decoded {
             Text(nature.name.capitalized)
+                .bold()
         } else {
             NavigationLink("Add Nature", value: getNatureRoute)
         }
@@ -118,6 +119,7 @@ struct PokemonTeamPreviewScreen: View {
         let ability = pokemon.ability?.decoded
         if let ability {
             Text(ability.name.capitalized)
+                .bold()
         } else {
             NavigationLink("Add Ability", value: getAbilityRoute)
         }
@@ -192,7 +194,7 @@ struct PokemonTeamPreviewScreen: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     
     let dragonite: Pokemon = JsonReader.read(for: .dragonite)

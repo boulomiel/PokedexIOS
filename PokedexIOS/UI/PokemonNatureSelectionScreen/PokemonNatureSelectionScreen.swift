@@ -154,7 +154,7 @@ struct PokemonNatureSelectionScreen: View {
             case .success(let success):
                 return success
             case .failure(let failure):
-                print(#function, failure)
+                print(#file, #function, failure)
                 return nil
             }
         }
@@ -190,7 +190,7 @@ struct NatureStatBridge {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     let pokemon = JsonReader.readPokemons().randomElement()!
     

@@ -11,7 +11,7 @@ import SwiftUI
 @propertyWrapper
 struct DIContainer<T>: DynamicProperty {
     
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     var wrappedValue: T {
         value

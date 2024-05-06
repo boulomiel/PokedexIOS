@@ -45,7 +45,7 @@ struct PokedexScreen: View {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return PokedexScreen()
         .inject(container: container)

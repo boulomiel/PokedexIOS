@@ -15,7 +15,7 @@ class SDMove: SDDataDecoder {
     let data: Data?
     
     //@Relationship(deleteRule: .nullify, inverse: \SDPokemon.moves)
-    var pokemon: SDPokemon?
+    var pokemon: [SDPokemon]?
     
     init(moveID: Int, data: Data?) {
         self.moveID = moveID

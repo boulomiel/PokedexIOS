@@ -7,19 +7,20 @@
 
 import SwiftUI
 
-struct PokemonItemScreen: View {
-    
-    @DIContainer var scrollFetchItemApi: ScrollFetchItemApi
-    @DIContainer var fetchItemApi: PokemonItemApi
-
-    var body: some View {
-        ItemScrolledContent(provider: .init(api: scrollFetchItemApi, fetchApi: fetchItemApi))
-    }
-}
-
-#Preview {
-    @Environment(\.container) var container
-    return PokemonItemScreen()
-        .inject(container: container)
-        .preferredColorScheme(.dark)
-}
+//struct PokemonItemScreen: View {
+//    
+//    @Environment(\.modelContext) var moc
+//    @DIContainer var scrollFetchItemApi: ScrollFetchItemApi
+//    @DIContainer var fetchItemApi: PokemonItemApi
+//
+//    var body: some View {
+//        ItemScrolledContent(provider: .init(api: scrollFetchItemApi, fetchApi: fetchItemApi, modelContainer: moc.container))
+//    }
+//}
+//
+//#Preview {
+//    @Environment(\.diContainer) var container
+//    return PokemonItemScreen()
+//        .inject(container: container)
+//        .preferredColorScheme(.dark)
+//}

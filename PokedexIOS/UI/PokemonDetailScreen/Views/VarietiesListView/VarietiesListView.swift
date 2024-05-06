@@ -96,7 +96,7 @@ struct VarietyKey: PreferenceKey {
 }
 
 #Preview {
-    @Environment(\.container) var container
+    @Environment(\.diContainer) var container
     
     return VarietiesListView(provider: .init(species: .init(id: "3"), fetchApi: .init(), speciesApi: .init(), isGrid: true)) { pokemon in
         EvolutionListViewCell(provider: .init(api: .init(), pokemon: pokemon))

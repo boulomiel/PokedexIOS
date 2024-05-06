@@ -44,8 +44,10 @@ struct MoveSectionContentCell: View {
         func titleRow(move: Move) -> some View {
             HStack {
                 Text(move.name.capitalized)
-                    .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .minimumScaleFactor(0.1)
+                    .bold()
+                    .lineLimit(1)
                     .padding(3)
                     .background(RoundedRectangle(cornerRadius: 2).fill(Color.gray.opacity(0.3)))
                 MoveDamageType(rawValue: move.damageClass.name)!
@@ -53,6 +55,11 @@ struct MoveSectionContentCell: View {
                 Text("\(move.pp) PP")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(3)
+                
+                Image(move.type.name)
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .scaledToFit()
             }
         }
         
@@ -67,4 +74,6 @@ struct MoveSectionContentCell: View {
     let moves = JsonReader.readMoves()
     return MoveSectionContentCell(moves: moves)
         .preferredColorScheme(.dark)
+        .padding(.horizontal, 40)
+
 }

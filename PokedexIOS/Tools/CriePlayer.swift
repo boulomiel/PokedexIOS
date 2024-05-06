@@ -41,7 +41,7 @@ class CriePlayer {
             player?.setVolume(0.2, fadeDuration: 0.5)
             player?.play()
         } catch let error as NSError {
-            print(#function, error)
+            print(#file, #function, error)
         }
     }
 }
