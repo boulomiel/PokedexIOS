@@ -75,11 +75,7 @@ struct MoveViewCell: View {
     }
     
     var seeMoveButton: some View {
-        Button(action: {
-            
-        }, label: {
-            Image(systemName: "chevron.right")
-        })
+        Image(systemName: "chevron.right")
     }
     
     struct CellKey: PreferenceKey {
@@ -117,8 +113,9 @@ struct MoveViewCell: View {
     }
     
     @Observable
-    class Provider {
+    class Provider: Identifiable {
         
+        let id: UUID = .init()
         let moveApi: PokemonMoveApi
         let generalApi: GeneralApi<Machine>
         let config: Config

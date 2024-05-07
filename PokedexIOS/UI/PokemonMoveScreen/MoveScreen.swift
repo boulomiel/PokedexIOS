@@ -33,20 +33,7 @@ struct MoveScreen: View {
     
     @ViewBuilder
     func moveListByMethod(_ method: MoveLearnMethodType, width: CGFloat) -> some View {
-        let data = provider.getByMethods(method)
-        if !data.isEmpty {
-            VStack {
-                Text(method.rawValue.capitalized)
-                    .bold()
-                    .frame(maxWidth: width, alignment: .leading)
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 4).fill(Color.gray.opacity(0.3)))
-                ForEach(provider.getByMethods(method), id: \.self) { data in
-                    MoveViewCell(provider: .init(moveApi: moveApi, generalApi: generalApi, moveVersionData: data), width: width)
-                }
-            }
-            .padding(.bottom)
-        }
+        MethodMoveList(width: width, provider: .init(method: method, moveApi: moveApi, generalApi: generalApi, methodMove: provider.getByMethods(method)))
     }
     
     @Observable
