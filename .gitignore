@@ -1,1 +1,7 @@
 PokedexIOS/GoogleService-Info.plist
+
+*.xcuserstate
+
+PokedexIOS.xcodeproj/project.xcworkspace/xcuserdata/rubenmimoun.xcuserdatad/UserInterfaceState.xcuserstate
+
+xcuserdata/
