@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct PokeBallBeltView: View {
+struct PokeBallBeltView<Content: View>: View {
     
     let selectedPokemons: [Pokemon]
     @State private var showPokemon: Pokemon?
     @Namespace var showPokemonId
     var onShowPokemon: (Pokemon?) -> Void
     var onRemovePokemon: ((Pokemon?) -> Void)
+    @ViewBuilder var buildTeamButton: Content
     
     var body: some View {
         VStack {
@@ -34,7 +35,6 @@ struct PokeBallBeltView: View {
                     }
                     .transition(.scale)
             } else {
-                Spacer()
                 ZStack {
                     if !selectedPokemons.isEmpty {
                         Color
@@ -51,7 +51,7 @@ struct PokeBallBeltView: View {
                                 onShowPokemon(pokemon)
 
                             }, label: {
-                                PokebalView(radius: 25)
+                                PokebalView(radius: 24)
                                     .contentShape(Circle())
                                     .contextMenu(ContextMenu(menuItems: {
                                         Button(role: .destructive){
@@ -63,6 +63,9 @@ struct PokeBallBeltView: View {
                             })
                             .matchedGeometryEffect(id: pokemon, in: showPokemonId)
                         }
+                        if selectedPokemons.count == 6 {
+                            buildTeamButton
+                        }
                     }
                 }
             }
@@ -70,10 +73,26 @@ struct PokeBallBeltView: View {
     }
 }
 
+extension View {
+    
+    @ViewBuilder
+    func wrappedInScroll(_ isWrapped: Bool, axis: Axis.Set) -> some View {
+        if isWrapped {
+            ScrollView(axis) {
+                self
+            }
+        } else {
+            self
+        }
+    }
+}
+
 #Preview {
     @Environment(\.diContainer) var container
     
-    return PokeBallBeltView(selectedPokemons: JsonReader.readPokemons(), onShowPokemon: { _ in }, onRemovePokemon: {_ in })
+    return PokeBallBeltView(selectedPokemons: JsonReader.readPokemons(), onShowPokemon: { _ in }, onRemovePokemon: {_ in }, buildTeamButton: {
+        Text("Build Team")
+    })
         .inject(container: container)
         .preferredColorScheme(.dark)
 }
