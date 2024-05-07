@@ -12,10 +12,14 @@ import SwiftData
 struct PokemonNatureSelectionScreen: View {
     
     @Environment(\.dismiss) var dimiss
+    @Environment(\.isLandscape) var isLandscape
+    @Environment(\.isIpad) var isIpad
+
     let provider: Provider
     
     var body: some View {
         VStack {
+            Spacer()
             if provider.natures.isEmpty {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(.ultraThinMaterial)
@@ -36,8 +40,9 @@ struct PokemonNatureSelectionScreen: View {
                     naturePickerView(selected, natures: Array(array[20...]))
                 }
             }
-            
+            Spacer()
             statView
+            Spacer()
         }
         .toolbar {
             Button(action: {
@@ -53,6 +58,7 @@ struct PokemonNatureSelectionScreen: View {
                 provider.updateStat(with: selected)
             }
         }
+        .wrappedInScroll(isLandscape, axis: .vertical)
     }
     
     func languagePickerView(_ selected: String) -> some View {
@@ -86,7 +92,8 @@ struct PokemonNatureSelectionScreen: View {
                 0.2
             ),
             dataColor: .blue,
-            strokeLine: .blue
+            strokeLine: .blue,
+            radius: isIpad ? 180 : 100
         )
         .padding(.vertical, 15)
     }

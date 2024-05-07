@@ -11,73 +11,81 @@ import Combine
 
 struct PokemonStatsView: View {
     
+    @Environment(\.isIphone) private var isIphone
+    @Environment(\.isLandscape) private var isLandscape
+    
     //Constructor
     let pokemonStats: [PokemonDisplayStat]
     let backgroundColor: Color
     let dataColor: Color
     let strokeLine: Color
+    let radius: CGFloat
     
-    @State var viewHeight: CGFloat
-    
-    init(pokemonStats: [PokemonDisplayStat], backgroundColor: Color, dataColor: Color, strokeLine: Color) {
+    init(pokemonStats: [PokemonDisplayStat], backgroundColor: Color, dataColor: Color, strokeLine: Color, radius: CGFloat = 100) {
         self.pokemonStats = pokemonStats
         self.backgroundColor = backgroundColor
         self.dataColor = dataColor
         self.strokeLine = strokeLine
-        self.viewHeight = 0
+        self.radius = radius
     }
     
-    
     var body: some View {
-        GeometryReader { geo in
-            let frame = geo.frame(in: .local)
-            let radius = (frame.width / 2) - 50
-            StatBackgroundShape(radius: radius)
-                .fill(backgroundColor)
-                .overlay(content: {
-                    StatBackgroundShape(radius: radius)
-                        .stroke()
-                        .foregroundStyle(strokeLine)
-                })
-                .overlay {
-                    StatShape(radius: radius, stats: .init(values: pokemonStats.map(\.value)))
-                        .fill(dataColor)
-                        .animation(.easeIn, value: pokemonStats)
-
-                }
-                .overlay {
-                    statsTitleLayers(frame: frame)
-                }
-                .onAppear(perform: {
-                    viewHeight = radius*2 + 50
-                })
-        }
-        .frame(height: viewHeight)
-        .transition(.scale)
-
+        StatBackgroundShape(radius: radius)
+            .fill(backgroundColor)
+            .coordinateSpace(.named("StatSpace"))
+            .overlay(content: {
+                StatBackgroundShape(radius: radius)
+                    .stroke()
+                    .foregroundStyle(strokeLine)
+            })
+            .overlay {
+                StatShape(radius: radius, stats: .init(values: pokemonStats.map(\.value)))
+                    .fill(dataColor)
+                    .animation(.easeIn, value: pokemonStats)
+                
+            }
+            .overlay {
+                statsTitleLayers(frame: .zero)
+            }
+            .frame(width: 3.5 * radius, height: 3.5 * radius)
+            .transition(.scale)
     }
     
     @ViewBuilder
     private func statsTitleLayers(frame: CGRect) -> some View {
-        let center = CGPoint(x: frame.midX, y: frame.height/2)
-        ForEach(0..<pokemonStats.count, id: \.self) { index in
-            let stat = pokemonStats[index]
-            let position = pos(for: (Double(index*2) * .pi / 6 - .pi / 2), with: (frame.width / 2), center: center)
-            Text(stat.displayName)
-                .bold()
-                .font(.caption)
-                .minimumScaleFactor(0.1)
-                .position(position)
+        GeometryReader { geo in
+            let frame = geo.frame(in: .named("StatSpace"))
+            let center =  CGPoint(x: frame.width/2, y: frame.height/2)
+            let width =  (frame.width / 2)
+            ForEach(0..<pokemonStats.count, id: \.self) { index in
+                let stat = pokemonStats[index]
+                let position = pos(for: (Double(index*2) * .pi / 6 - .pi / 2), with: width, center: center)
+                Text(stat.displayName)
+                    .bold()
+                    .font(.caption)
+                    .minimumScaleFactor(0.1)
+                    .position(position)
+            }
+            .onAppear {
+                print(frame, isLandscape)
+            }
         }
     }
     
     private func pos(for angle: Double,
                      with radius: Double,
                      center: CGPoint) -> CGPoint {
-        var x = (radius-25) * cos(angle)
-        var y = (radius-25) * sin(angle)
+        var x = (radius * 0.80) * cos(angle)
+        var y = (radius * 0.80) * sin(angle)
         x += center.x
         y += center.y
         return CGPoint(x: x, y: y)
     }
+}
+
+
+#Preview {
+    let dracolosse = JsonReader.readPokemons().randomElement()!
+    let displayStat = dracolosse.stats.map { PokemonDisplayStat(name: $0.stat.name, value: Double($0.baseStat)/200) }
+    return PokemonStatsView(pokemonStats: displayStat, backgroundColor: .black, dataColor: .blue, strokeLine: .white)
 }

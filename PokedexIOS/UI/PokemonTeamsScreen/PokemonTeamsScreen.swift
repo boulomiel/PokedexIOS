@@ -60,9 +60,6 @@ struct PokemonTeamsScreen: View {
                         .networkedContentView()
                 }
                 .navigationDestination(for: AddItemRoute.self, destination: { route in
-//                    PokemonItemSelectionScreen(provider: .init(categoryApi: categoryItemApi, generalApi: generalApi, pokemonItemApi: pokemonItemApi, modelContainer: modelContext.container, pokemonID: route.pokemonID, current: route.item))
-//                        .environment(teamRouter)
-//                        .networkedContentView()
                     PaginatedList(provider: .init(api: scrollFetchItemApi, fetchApi: pokemonItemApi, modelContainer: modelContext.container)) { provider in
                         ItemScrolledContent(scrollProvider: provider, provider: .init(modelContainer: modelContext.container, pokemonID: route.pokemonID, current: route.item))
                     }                 

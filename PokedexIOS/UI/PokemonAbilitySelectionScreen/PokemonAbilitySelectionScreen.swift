@@ -10,6 +10,8 @@ import SwiftData
 
 struct PokemonAbilitySelectionScreen: View {
     
+    @Environment(\.isIphone) var isIphone
+    @Environment(\.isLandscape) var isLandscape
     @Environment(\.dismiss) var dismiss
     @State var provider: Provider
     
@@ -49,16 +51,12 @@ struct PokemonAbilitySelectionScreen: View {
                 provider.saveAbility()
                 dismiss.callAsFunction()
             } label: {
-                GeometryReader { geo in
-                    let frame = geo.frame(in: .global)
-                    Label("Set ability: \(provider.selected.name.capitalized)", systemImage: "checkmark")
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 8).fill(Color.gray.opacity(0.2)))
-                        .position(x: frame.width / 2)
-                    
-                }
-                .frame(height: 60)
+                Label("Set ability: \(provider.selected.name.capitalized)", systemImage: "checkmark")
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 8).fill(Color.gray.opacity(0.2)))
+                    .frame(height: 60)
             }
+            .alignToRight(isIphone && isLandscape)
         }
         .onChange(of: provider.selected) { _, _ in
             Vibrator.selection()
@@ -162,6 +160,21 @@ struct PokemonAbilitySelectionScreen: View {
             pokemon?.ability = ability
             try? modelContext.save()
             Vibrator.notify(of: .success)
+        }
+    }
+}
+
+fileprivate extension View {
+    
+    @ViewBuilder
+    func alignToRight(_ condition: Bool) -> some View {
+        if condition {
+            HStack {
+                Spacer()
+                self
+            }
+        } else {
+            self
         }
     }
 }

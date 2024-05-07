@@ -12,7 +12,9 @@ struct ItemScrolledContent: View {
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchItemApi, PokemonItemApi>.Provider
     @Bindable var scrollProvider: ScrollProvider
     @State var provider: Provider
+    @Environment(\.isIphone) var isIphone
     @Environment(\.dismiss) var dismiss
+    @Environment(\.isSearching) var isSearching
     
     var body: some View {
         content
@@ -26,6 +28,18 @@ struct ItemScrolledContent: View {
                             provider.save()
                             dismiss.callAsFunction()
                         }
+                    }
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    if isIphone && isSearching && provider.selectionActive && provider.selected != nil {
+                        Button("Save") {
+                            provider.save()
+                            dismiss.callAsFunction()
+                        }
+                        .padding()
+                        .background(.ultraThickMaterial)
+                        .padding(.bottom, 40)
                     }
                 }
             }
