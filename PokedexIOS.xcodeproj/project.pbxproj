@@ -27,6 +27,7 @@
 		871ADCA52BE8E1A10017C9D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871ADCA42BE8E1A10017C9D3 /* GoogleService-Info.plist */; };
 		871ADCAE2BE8E2B30017C9D3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 871ADCAD2BE8E2B30017C9D3 /* FirebaseAnalytics */; };
 		871ADCB02BE8E2B30017C9D3 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 871ADCAF2BE8E2B30017C9D3 /* FirebaseCrashlytics */; };
+		871ADCB52BE9F9930017C9D3 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871ADCB42BE9F9930017C9D3 /* View + Extension.swift */; };
 		874FB3AF2BD4C09200B9F232 /* DescriptionByVersionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FB3AE2BD4C09200B9F232 /* DescriptionByVersionModel.swift */; };
 		874FB3B22BD4C12F00B9F232 /* DescriptionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FB3B12BD4C12F00B9F232 /* DescriptionScreen.swift */; };
 		874FB3B42BD4D3BA00B9F232 /* ScrollPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FB3B32BD4D3BA00B9F232 /* ScrollPickerView.swift */; };
@@ -255,6 +256,7 @@
 		871ADCA22BE7AFA30017C9D3 /* LanguageNameFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageNameFetcher.swift; sourceTree = "<group>"; };
 		871ADCA42BE8E1A10017C9D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		871ADCB32BE8E76C0017C9D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		871ADCB42BE9F9930017C9D3 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		874FB3AE2BD4C09200B9F232 /* DescriptionByVersionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionByVersionModel.swift; sourceTree = "<group>"; };
 		874FB3B12BD4C12F00B9F232 /* DescriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionScreen.swift; sourceTree = "<group>"; };
 		874FB3B32BD4D3BA00B9F232 /* ScrollPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollPickerView.swift; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 				876A7A092BD27DE800E8E210 /* URLRequest+Extension.swift */,
 				878D73932BD6567B00DAE405 /* String+Extension.swift */,
 				87DADEC02BDA2CDF00457062 /* ModelContext + Extensions.swift */,
+				871ADCB42BE9F9930017C9D3 /* View + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1514,6 +1517,7 @@
 				87DADEA52BD9596900457062 /* AddAttackRoute.swift in Sources */,
 				871ADCA32BE7AFA30017C9D3 /* LanguageNameFetcher.swift in Sources */,
 				876A79C92BCFFA9300E8E210 /* ScrollFetchResult.swift in Sources */,
+				871ADCB52BE9F9930017C9D3 /* View + Extension.swift in Sources */,
 				87DADE502BD6626400457062 /* VersionGroupApiResouces.swift in Sources */,
 				876A7A112BD2833000E8E210 /* PokemonAbilityApi.swift in Sources */,
 				876A799A2BCFEB3800E8E210 /* PokedexIOS.xcdatamodeld in Sources */,

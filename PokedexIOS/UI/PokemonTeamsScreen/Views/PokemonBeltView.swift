@@ -10,12 +10,16 @@ import SwiftUI
 struct PokeBallBeltView<Content: View>: View {
     
     let selectedPokemons: [Pokemon]
-    @State private var showPokemon: Pokemon?
-    @Namespace var showPokemonId
     var onShowPokemon: (Pokemon?) -> Void
     var onRemovePokemon: ((Pokemon?) -> Void)
     @ViewBuilder var buildTeamButton: Content
     
+    private var pokeballRadius: CGFloat {
+        selectedPokemons.count ==  6 ? 23 : 25
+    }
+    @State private var showPokemon: Pokemon?
+    @Namespace private var showPokemonId
+
     var body: some View {
         VStack {
             if showPokemon != nil {
@@ -51,7 +55,7 @@ struct PokeBallBeltView<Content: View>: View {
                                 onShowPokemon(pokemon)
 
                             }, label: {
-                                PokebalView(radius: 24)
+                                PokebalView(radius: pokeballRadius)
                                     .contentShape(Circle())
                                     .contextMenu(ContextMenu(menuItems: {
                                         Button(role: .destructive){
@@ -69,20 +73,6 @@ struct PokeBallBeltView<Content: View>: View {
                     }
                 }
             }
-        }
-    }
-}
-
-extension View {
-    
-    @ViewBuilder
-    func wrappedInScroll(_ isWrapped: Bool, axis: Axis.Set) -> some View {
-        if isWrapped {
-            ScrollView(axis) {
-                self
-            }
-        } else {
-            self
         }
     }
 }
