@@ -24,35 +24,39 @@ struct DescriptionScreen: View {
         ScrollView {
             VStack {
                 ScrollPickerView(options: languages, selected: $selectedLanguage)
-                LazyVGrid(columns: grid, spacing: 0,  content: {
-                    headerText("Versions")
-                    headerText("Description")
-                    
-                    ForEach(filtered, id: \.id) { description in
-                        Text(description.readableVersion)
-                            .bold()
-                            .minimumScaleFactor(0.1)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .overlay(alignment: .trailing) {
-                                sideLine
-                                    .padding(.trailing, 4)
-                            }
-                            .overlay(alignment: .bottom) {
-                                bottomLine
-                            }
-                        
-                        Text(description.readableDescription)
-                            .font(.callout)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 4)
-                            .padding(.horizontal, 4)
-                            .multilineTextAlignment(.leading)
-                            .overlay(alignment: .bottom) {
-                                bottomLine
-                            }
+                Grid {
+                    GridRow {
+                        headerText("Versions")
+                            .gridCellColumns(1)
+                        headerText("Description")
+                            .gridCellColumns(3)
                     }
-                })
+                    ForEach(filtered, id: \.id) { description in
+                        GridRow {
+                            Text(description.readableVersion)
+                                .bold()
+                                .minimumScaleFactor(0.1)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .overlay(alignment: .bottom) {
+                                    bottomLine
+                                }
+                                .gridCellColumns(1)
+
+                            
+                            Text(description.readableDescription)
+                                .font(.callout)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .multilineTextAlignment(.leading)
+                                .padding(.vertical, 4)
+                                .overlay(alignment: .bottom) {
+                                    bottomLine
+                                }
+                                .gridCellColumns(3)
+
+                        }
+                    }
+                }
             }
             Spacer()
         }
