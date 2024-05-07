@@ -12,6 +12,8 @@ struct PokemonSelectionGridScreen: View {
     
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchPokemonApi, FetchPokemonApi>.Provider
     
+    @Environment(\.isIphone) var isIphone
+    @Environment(\.isLandscape) var isLandscape
     @Environment(\.dismissSearch) var dismisSearch
     @Environment(\.isSearching) var isSearching
     @Environment(\.dismiss) var dismiss
@@ -72,17 +74,15 @@ struct PokemonSelectionGridScreen: View {
         })
         .animation(.easeInOut, body: { view in
             view
-                .blur(radius: provider.teamNameItem == nil ? 0 : 1)
-                .opacity(provider.teamNameItem == nil ? 1 : 0.5)
+                .blur(radius: provider.isShowingSheet ? 1 : 0)
+                .opacity(provider.isShowingSheet ? 0.5 : 1.0)
         })
-        .sheet(item: $provider.teamNameItem) { _ in
-            TeamNameSheet(provider: provider) {
-                dismiss.callAsFunction()
-            }
-            .presentationDetents([.height(100)])
-            .presentationDragIndicator(.hidden)
-            .presentationContentInteraction(.scrolls)
+        .sheet(item: $provider.teamNameItemIphone) { _ in
+            iphoneTeamCreationSheet
         }
+        .overlay(alignment: .bottom, content: {
+            ipadTeamChreationSheet
+        })
         .preferredColorScheme(.dark)
         .onReceive(provider.eventBound.event, perform: { event in
             switch event {
@@ -214,7 +214,7 @@ struct PokemonSelectionGridScreen: View {
     
     var createTeamButton : some View {
         Button {
-            provider.teamNameItem = .init()
+            hamdlePlatformSheet()
         } label: {
             Text(provider.isNewTeam ? "Build Team !" : "Update Team !")
         }
@@ -223,12 +223,54 @@ struct PokemonSelectionGridScreen: View {
     var buildTeamButton : some View {
         Button {
             dismisSearch()
-            provider.teamNameItem = .init()
+            hamdlePlatformSheet()
         } label: {
            Image(systemName: "hammer.circle.fill")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50)
+        }
+    }
+    
+    @ViewBuilder
+    var iphoneTeamCreationSheet: some View {
+        if isIphone {
+            TeamNameSheet(provider: provider) {
+                dismiss.callAsFunction()
+            }
+            .presentationDetents(isLandscape ? [.fraction(0.3)] :[.height(100)])
+            .presentationDragIndicator(.hidden)
+            .presentationContentInteraction(.scrolls)
+        }
+    }
+    
+    @ViewBuilder
+    var ipadTeamChreationSheet: some View {
+        if !isIphone && provider.teamNameItemIpad != nil {
+            VStack {
+                Color.black.opacity(0.001)
+                    .onTapGesture {
+                        withAnimation {
+                            provider.teamNameItemIpad = nil
+                        }
+                    }
+                TeamNameSheet(provider: provider) {
+                    dismiss.callAsFunction()
+                }
+                .frame(height: 200)
+                .background(RoundedRectangle(cornerRadius: 12).fill(.ultraThickMaterial))
+            }
+            .transition(.move(edge: .bottom))
+        }
+    }
+    
+    private func hamdlePlatformSheet() {
+        withAnimation {
+            if isIphone {
+                provider.teamNameItemIphone = .init()
+            } else {
+                provider.teamNameItemIpad = .init()
+            }
         }
     }
     
@@ -241,7 +283,13 @@ struct PokemonSelectionGridScreen: View {
         var eventBound: GridCellPOkemonSelectionEventBound
         
         var teamName: String
-        var teamNameItem: TeamNameSheet.TeamNameItem?
+        var teamNameItemIphone: TeamNameSheet.TeamNameItem?
+        var teamNameItemIpad: TeamNameSheet.TeamNameItem?
+        
+        var isShowingSheet: Bool {
+            teamNameItemIpad != nil || teamNameItemIphone != nil
+        }
+
         let grid: [GridItem]
         
         var isNewTeam: Bool {
@@ -281,7 +329,8 @@ struct PokemonSelectionGridScreen: View {
             team.pokemons = pokemons
             modelContext.insert(team)
             try? modelContext.save()
-            teamNameItem = nil
+            teamNameItemIphone = nil
+            teamNameItemIpad = nil
             Vibrator.notify(of: .success)
         }
         
@@ -302,7 +351,8 @@ struct PokemonSelectionGridScreen: View {
             } else {
                 saveTeam()
             }
-            teamNameItem = nil
+            teamNameItemIphone = nil
+            teamNameItemIpad = nil
         }
     }
 }
