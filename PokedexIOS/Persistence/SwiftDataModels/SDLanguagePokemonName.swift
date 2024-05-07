@@ -119,23 +119,23 @@ enum LanguageName {
     
     var english: String {
         switch self {
-        case .japHrkt(let englishName, let name):
+        case .japHrkt(let englishName, _):
             fallthrough
-        case .roomaji(let englishName, let name):
+        case .roomaji(let englishName, _):
             fallthrough
-        case .ko(let englishName, let name):
+        case .ko(let englishName, _):
             fallthrough
-        case .zhHant(let englishName, let name):
+        case .zhHant(let englishName, _):
             fallthrough
-        case .fr(let englishName, let name):
+        case .fr(let englishName, _):
             fallthrough
-        case .de(let englishName, let name):
+        case .de(let englishName, _):
             fallthrough
-        case .es(let englishName, let name):
+        case .es(let englishName, _):
             fallthrough
-        case .it(let englishName, let name):
+        case .it(let englishName, _):
             fallthrough
-        case .ja(let englishName, let name):
+        case .ja(let englishName, _):
             fallthrough
         case .zhHans(let englishName, _):
             fallthrough
