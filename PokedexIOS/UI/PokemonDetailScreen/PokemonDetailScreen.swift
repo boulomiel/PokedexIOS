@@ -49,7 +49,11 @@ struct PokemonDetailScreen: View {
             }
         
             Section("Statistics", isExpanded: $isStatsExpanded) {
-                statView
+                HStack {
+                    Spacer()
+                    statView
+                    Spacer()
+                }
             }
             NavigationLink("Moves", value: MoveRoute(moveData: provider.moveData))
             NavigationLink("Descriptions", value: DescriptionRoute(values: provider.descriptionsByVersions))
