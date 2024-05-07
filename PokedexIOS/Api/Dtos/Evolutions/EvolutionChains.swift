@@ -8,7 +8,7 @@
 import Foundation
 
 struct EvolutionChain: Codable {
-    var babyTriggerItem: Item?
+    var babyTriggerItem: NamedAPIResource?
     var chain: ChainLink
     var id: Int
 
