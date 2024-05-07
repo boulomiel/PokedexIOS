@@ -19,6 +19,7 @@ struct PokemonGridListView: View {
                 }
             })
         }
+        .padding()
     }
     
     @Observable
@@ -27,11 +28,25 @@ struct PokemonGridListView: View {
         let gridItems: [GridItem]
         var providers: [PokemonGridCell.Provider]
         
-        init(fetchApi: FetchPokemonApi, pokemons: [String], gridItems: [GridItem] = []) {
+        init(
+            fetchApi: FetchPokemonApi,
+            pokemons: [String],
+            gridItems: [GridItem] = .init(
+                repeating: .init(
+                    .adaptive(
+                        minimum: 120
+                    )
+                ),
+                count: 3
+            )
+        ) {
             self.pokemons = pokemons
-            self.gridItems = .init(repeating: .init(.fixed(120)), count: 3)
+            self.gridItems = gridItems
             self.providers = pokemons.map { name in
-                    .init(pokemon: name, fechPokemonApi: fetchApi)
+                    .init(
+                        pokemon: name,
+                        fechPokemonApi: fetchApi
+                    )
             }
         }
     }
@@ -40,7 +55,7 @@ struct PokemonGridListView: View {
 #Preview {
     @Environment(\.diContainer) var container
     
-    return PokemonGridListView(provider: .init(fetchApi: .init(), pokemons: ["gengar", "pikachu", "raichu", "mew", "lugia","charmander","gastly"]))
+    return PokemonGridListView(provider: .init(fetchApi: .init(), pokemons: ["gengar", "pikachu", "raichu", "mew", "lugia","charmander","gastly", "mewtwo", "venusaur", "charizard"]))
         .preferredColorScheme(.dark)
         .inject(container: container)
 }

@@ -14,9 +14,16 @@ struct PokeBallBeltView<Content: View>: View {
     var onRemovePokemon: ((Pokemon?) -> Void)
     @ViewBuilder var buildTeamButton: Content
     
+    @Environment(\.isIphone) private var isIphone
+    
     private var pokeballRadius: CGFloat {
-        selectedPokemons.count ==  6 ? 23 : 25
+        canShowBuildButton ? 20 : 25
     }
+    
+    private var canShowBuildButton: Bool {
+        isIphone && selectedPokemons.count == 6
+    }
+    
     @State private var showPokemon: Pokemon?
     @Namespace private var showPokemonId
 
@@ -67,12 +74,16 @@ struct PokeBallBeltView<Content: View>: View {
                             })
                             .matchedGeometryEffect(id: pokemon, in: showPokemonId)
                         }
-                        if selectedPokemons.count == 6 {
+                        
+                        if canShowBuildButton  {
                             buildTeamButton
                         }
                     }
                 }
             }
+        }
+        .onAppear {
+            print(Self.self, isIphone, UIDevice.current.userInterfaceIdiom)
         }
     }
 }

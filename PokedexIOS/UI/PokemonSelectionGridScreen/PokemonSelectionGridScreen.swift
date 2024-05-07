@@ -249,7 +249,7 @@ struct PokemonSelectionGridScreen: View {
         }
         
         init(selectedPokemons: [Pokemon], modelContext: ModelContext, teamID: PersistentIdentifier?, eventBound: GridCellPOkemonSelectionEventBound = .init()) {
-            self.grid = .init(repeating: .init(.fixed(120)), count: 3)
+            self.grid = .init(repeating: .init(.adaptive(minimum: 120)), count: 3)
             self.selectedPokemons = selectedPokemons
             self.teamID = teamID
             self.teamName = ""
