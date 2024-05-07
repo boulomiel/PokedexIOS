@@ -199,7 +199,6 @@ struct PokemonTeamPreviewScreen: View {
     
     let dragonite: Pokemon = JsonReader.read(for: .dragonite)
     let sdDragonite = SDPokemon(pokemonID: dragonite.order, data: try! JSONEncoder().encode(dragonite))
-    let id = UUID()
    // let team = SDTeam(teamID: id, name: "Test")
   //  preview.addExamples([team])
     preview.addExamples([sdDragonite])

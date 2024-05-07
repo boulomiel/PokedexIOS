@@ -7,14 +7,26 @@
 
 import SwiftUI
 
-struct PokeBallBeltView: View {
+struct PokeBallBeltView<Content: View>: View {
     
     let selectedPokemons: [Pokemon]
-    @State private var showPokemon: Pokemon?
-    @Namespace var showPokemonId
     var onShowPokemon: (Pokemon?) -> Void
     var onRemovePokemon: ((Pokemon?) -> Void)
+    @ViewBuilder var buildTeamButton: Content
     
+    @Environment(\.isIphone) private var isIphone
+    
+    private var pokeballRadius: CGFloat {
+        canShowBuildButton ? 20 : 25
+    }
+    
+    private var canShowBuildButton: Bool {
+        isIphone && selectedPokemons.count == 6
+    }
+    
+    @State private var showPokemon: Pokemon?
+    @Namespace private var showPokemonId
+
     var body: some View {
         VStack {
             if showPokemon != nil {
@@ -34,7 +46,6 @@ struct PokeBallBeltView: View {
                     }
                     .transition(.scale)
             } else {
-                Spacer()
                 ZStack {
                     if !selectedPokemons.isEmpty {
                         Color
@@ -51,7 +62,7 @@ struct PokeBallBeltView: View {
                                 onShowPokemon(pokemon)
 
                             }, label: {
-                                PokebalView(radius: 25)
+                                PokebalView(radius: pokeballRadius)
                                     .contentShape(Circle())
                                     .contextMenu(ContextMenu(menuItems: {
                                         Button(role: .destructive){
@@ -63,9 +74,16 @@ struct PokeBallBeltView: View {
                             })
                             .matchedGeometryEffect(id: pokemon, in: showPokemonId)
                         }
+                        
+                        if canShowBuildButton  {
+                            buildTeamButton
+                        }
                     }
                 }
             }
+        }
+        .onAppear {
+            print(Self.self, isIphone, UIDevice.current.userInterfaceIdiom)
         }
     }
 }
@@ -73,7 +91,9 @@ struct PokeBallBeltView: View {
 #Preview {
     @Environment(\.diContainer) var container
     
-    return PokeBallBeltView(selectedPokemons: JsonReader.readPokemons(), onShowPokemon: { _ in }, onRemovePokemon: {_ in })
+    return PokeBallBeltView(selectedPokemons: JsonReader.readPokemons(), onShowPokemon: { _ in }, onRemovePokemon: {_ in }, buildTeamButton: {
+        Text("Build Team")
+    })
         .inject(container: container)
         .preferredColorScheme(.dark)
 }

@@ -12,6 +12,8 @@ struct PokemonSelectionGridScreen: View {
     
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchPokemonApi, FetchPokemonApi>.Provider
     
+    @Environment(\.dismissSearch) var dismisSearch
+    @Environment(\.isSearching) var isSearching
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var container
     @DIContainer var speciesApi: PokemonSpeciesApi
@@ -43,20 +45,29 @@ struct PokemonSelectionGridScreen: View {
                 }
             }
             .overlay {
-                PokeBallBeltView(selectedPokemons: provider.selectedPokemons) { show  in
-                    guard let pokemon = show else { return }
-                    if scrollProvider.config.list.contains(where: { $0.element.name == pokemon.name }) {
-                        withAnimation {
-                            reader.scrollTo(pokemon.name)
+                VStack(spacing: 0) {
+                    Spacer()
+                    PokeBallBeltView(selectedPokemons: provider.selectedPokemons) { show  in
+                        guard let pokemon = show else { return }
+                        if scrollProvider.config.list.contains(where: { $0.element.name == pokemon.name }) {
+                            withAnimation {
+                                reader.scrollTo(pokemon.name)
+                            }
+                            scrollProvider.config.searchText = ""
+                        } else {
+                            scrollProvider.config.searchText = pokemon.name
                         }
-                        scrollProvider.config.searchText = ""
-                    } else {
-                        scrollProvider.config.searchText = pokemon.name
+                    } onRemovePokemon: { remove in
+                        provider.selectedPokemons.removeAll(where: { $0.id == remove?.id })
+                    } buildTeamButton: {
+                        if isSearching {
+                            HStack {
+                                buildTeamButton
+                            }
+                        }
                     }
-                } onRemovePokemon: { remove in
-                    provider.selectedPokemons.removeAll(where: { $0.id == remove?.id })
+                    .padding(.bottom, 10)
                 }
-                .padding(.bottom, 10)
             }
         })
         .animation(.easeInOut, body: { view in
@@ -65,13 +76,12 @@ struct PokemonSelectionGridScreen: View {
                 .opacity(provider.teamNameItem == nil ? 1 : 0.5)
         })
         .sheet(item: $provider.teamNameItem) { _ in
-            TeamNameSheet(provider: provider)
-                .presentationDetents([.height(100)])
-                .presentationDragIndicator(.hidden)
-                .presentationContentInteraction(.scrolls)
-                .onDisappear(perform: {
-                    dismiss.callAsFunction()
-                })
+            TeamNameSheet(provider: provider) {
+                dismiss.callAsFunction()
+            }
+            .presentationDetents([.height(100)])
+            .presentationDragIndicator(.hidden)
+            .presentationContentInteraction(.scrolls)
         }
         .preferredColorScheme(.dark)
         .onReceive(provider.eventBound.event, perform: { event in
@@ -210,6 +220,18 @@ struct PokemonSelectionGridScreen: View {
         }
     }
     
+    var buildTeamButton : some View {
+        Button {
+            dismisSearch()
+            provider.teamNameItem = .init()
+        } label: {
+           Image(systemName: "hammer.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50)
+        }
+    }
+    
     @Observable
     class Provider {
         
@@ -227,7 +249,7 @@ struct PokemonSelectionGridScreen: View {
         }
         
         init(selectedPokemons: [Pokemon], modelContext: ModelContext, teamID: PersistentIdentifier?, eventBound: GridCellPOkemonSelectionEventBound = .init()) {
-            self.grid = .init(repeating: .init(.fixed(120)), count: 3)
+            self.grid = .init(repeating: .init(.adaptive(minimum: 120)), count: 3)
             self.selectedPokemons = selectedPokemons
             self.teamID = teamID
             self.teamName = ""
@@ -287,9 +309,8 @@ struct PokemonSelectionGridScreen: View {
 
 struct TeamNameSheet: View {
     
-    @Environment(\.dismiss) var dismiss
     @Bindable var provider: PokemonSelectionGridScreen.Provider
-    
+    var onFinish: () -> Void
     var body: some View {
         LabeledContent("Team name") {
             HStack {
@@ -304,6 +325,7 @@ struct TeamNameSheet: View {
                 
                 Button(action: {
                     provider.handleTeamChanges()
+                    onFinish()
                 }, label: {
                    Image(systemName: "square.and.arrow.down")
                 })
