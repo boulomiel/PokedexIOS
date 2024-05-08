@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resources
 
 public struct CategoryItemQuery: ApiQuery {
     let categoryID: String

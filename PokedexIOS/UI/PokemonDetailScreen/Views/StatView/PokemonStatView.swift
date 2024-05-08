@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import Resources
 
 public struct PokemonStatsView: View {
     

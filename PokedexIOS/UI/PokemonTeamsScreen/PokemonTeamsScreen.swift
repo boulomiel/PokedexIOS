@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Resources
 
 public struct PokemonTeamsScreen: View {
     

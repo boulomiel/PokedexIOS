@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Resources
+
 
 public struct PokemonEvolutionChainQuery: ApiQuery {
     let chainNumber: String

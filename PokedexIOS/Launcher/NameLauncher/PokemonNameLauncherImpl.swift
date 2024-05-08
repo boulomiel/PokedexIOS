@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Resources
 
 public class PokemonNameLauncherImpl: NameLauncherProtocol {
     
@@ -19,7 +20,6 @@ public class PokemonNameLauncherImpl: NameLauncherProtocol {
         self.api = api
         self.speciesApi = speciesApi
     }
-    
     
     public func getCount() async -> Int {
         guard let url = apiEnv.makeSpeciesURL() else {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>categorieItemEndpoint</key>
+	<string>/api/v2/item-category</string>
+	<key>natureEndpoint</key>
+	<string>/api/v2/nature</string>
+	<key>itemEndpoint</key>
+	<string>/api/v2/item</string>
+	<key>machineEndpoint</key>
+	<string>/api/v2/machine</string>
+	<key>moveEndpoint</key>
+	<string>/api/v2/move</string>
+	<key>evolution-chain</key>
+	<string>/api/v2/evolution-chain</string>
+	<key>speciesEndpoint</key>
+	<string>/api/v2/pokemon-species</string>
+	<key>abilityEndpoint</key>
+	<string>/api/v2/ability</string>
+	<key>scheme</key>
+	<string>https</string>
+	<key>host</key>
+	<string>pokeapi.co</string>
+	<key>pokemonEndpoint</key>
+	<string>/api/v2/pokemon</string>
+</dict>
+</plist>

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resources
 
 public struct PokemonMoveQuery: ApiQuery, Hashable {
     let moveId: String

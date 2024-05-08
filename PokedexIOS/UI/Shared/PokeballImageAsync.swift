@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Resources
 
 public struct PokeballImageAsync: View {
     
@@ -16,7 +17,6 @@ public struct PokeballImageAsync: View {
     @State private var isShown: Bool = false
     @State private var id: UUID = .init()
 
-     
     public var body: some View {
         ZStack {
             if isShown {

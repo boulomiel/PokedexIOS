@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Resources
 
 public class ItemNameLauncherImpl: NameLauncherProtocol {
     

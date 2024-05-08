@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resources
 
 public struct PokemonSpeciesQuery: ApiQuery {
     let speciesNumber: String

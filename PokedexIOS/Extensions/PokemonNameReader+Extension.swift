@@ -6,16 +6,10 @@
 //
 
 import Foundation
+import Resources
 
-extension PokemonNameReader {
-    private static func findStringResource(resource: Resources) -> String {
-        guard let url = Bundle.main.url(forResource: resource.rawValue, withExtension: resource.ex) else {
-            fatalError("Cant find \(resource) in bundle")
-        }
-        let string = try! String(contentsOf: url)
-        return string
-    }
-    
+public extension PokemonNameReader {
+
     static func getLocalPokemons() -> [LocalPokemon] {
         let pokeString = findStringResource(resource: .PokemonNames)
         let pokeStringArray = Array(pokeString.split(separator: "\n").enumerated())

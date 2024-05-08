@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Resources
 
 public struct PokeBallBeltView<Content: View>: View {
     

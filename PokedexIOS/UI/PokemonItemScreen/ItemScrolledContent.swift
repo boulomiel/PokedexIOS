@@ -8,6 +8,8 @@
 import SwiftUI
 import Combine
 import SwiftData
+import Resources
+
 public struct ItemScrolledContent: View {
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchItemApi, PokemonItemApi>.Provider
     @Bindable var scrollProvider: ScrollProvider

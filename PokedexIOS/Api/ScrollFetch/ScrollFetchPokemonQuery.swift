@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resources
 
 public struct ScrollFetchPokemonQuery: ScrolledApiQuery {
     let limit: Int
