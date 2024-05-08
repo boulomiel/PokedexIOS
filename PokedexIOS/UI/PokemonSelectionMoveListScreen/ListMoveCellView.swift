@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Resources
 import Tools
+import DI
 
 public struct ListMoveCellView: View {
     let move: Move

@@ -8,6 +8,7 @@
 import SwiftUI
 import Resources
 import Tools
+import DI
 
 public struct PokemonTeamPreviewScreen: View {
     
@@ -174,7 +175,7 @@ public struct PokemonTeamPreviewScreen: View {
     private func makeModel(from success: Ability?) -> PokemonAbilitySelectionModel? {
         guard let success = success else { return nil }
         let effectChange = success.effectChanges
-            .flatMap { $0.effectEntries }
+            .flatMap(\.effectEntries)
             .first(where: { $0.language.name == "en" })?.effect
         
         let effectEntry = success.effectEntries

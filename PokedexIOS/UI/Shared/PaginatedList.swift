@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import SwiftData
+import DI
 
 public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiService: SearchApiProtocol> : View where ScrollService.Requested == ScrollFetchResult {
     
@@ -38,12 +39,12 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
         var container: ModelContainer
         var languageNameFetcher: LanguageNameFetcher
         
-        init(api: ScrollApi, fetchApi: Api, modelContainer: ModelContainer, config: Config = .init()) {
+        init(api: ScrollApi, fetchApi: Api, modelContainer: ModelContainer, languageNameFetcher: LanguageNameFetcher, config: Config = .init()) {
             self.scrollFetchApi = api
             self.fetchApi = fetchApi
             self.config = config
             self.container = modelContainer
-            self.languageNameFetcher = .init(container: modelContainer)
+            self.languageNameFetcher = languageNameFetcher
             Task {
                 await fetch()
             }

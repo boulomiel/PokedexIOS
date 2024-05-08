@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Tools
+import DI
 
 public struct PokemonSelectionGridScreen: View {
     
@@ -392,14 +393,13 @@ public struct TeamNameSheet: View {
     }
 }
 
-
 #Preview {
     
     let preview = Preview(SDTeam.self, SDPokemon.self, SDItem.self, SDMove.self)
     @Environment(\.diContainer) var container
     
     return NavigationStack(root: {
-        PokemonSelectionGridScreen(scrollProvider: .init(api: .init(), fetchApi: .init(), modelContainer: preview.container), provider: .init(selectedPokemons: [], modelContext: preview.container.mainContext, teamID: nil))
+        PokemonSelectionGridScreen(scrollProvider: .init(api: .init(), fetchApi: .init(), modelContainer: preview.container, languageNameFetcher: .init(container: preview.container)), provider: .init(selectedPokemons: [], modelContext: preview.container.mainContext, teamID: nil))
     })
     .preferredColorScheme(.dark)
     .modelContainer(preview.container)

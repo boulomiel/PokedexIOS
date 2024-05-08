@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftData
 import Resources
 import Tools
+import DI
 
 public struct PokemonItemSelectionScreen: View {
     
@@ -95,6 +96,7 @@ public struct PokemonItemSelectionScreen: View {
         init(categoryApi: PokemonCategoryItemApi,
              generalApi: GeneralApi<ItemCategories>,
              pokemonItemApi: PokemonItemApi,
+             languageNameFetcher: LanguageNameFetcher,
              modelContainer: ModelContainer,
              pokemonID: PersistentIdentifier,
              current: Item?
@@ -112,7 +114,7 @@ public struct PokemonItemSelectionScreen: View {
             self.providers = []
             self.paginatedProviders = []
             self.displayedProviders = []
-            self.languageNameFetcher = .init(container: modelContainer)
+            self.languageNameFetcher = languageNameFetcher
             Task {
                 await fetch()
                 onSearch(newValue: current?.name ?? "")
@@ -166,7 +168,10 @@ public struct PokemonItemSelectionScreen: View {
                 }
                 
                 let sortedResult = result.sorted(by: { $0.name < $1.name })
-                let providers = sortedResult.map { CellProvider(api: pokemonItemApi, scrolledFetchedItem: .init(name: $0.name, url: .temporaryDirectory), isSelectable: selectionActive) {[weak self] item, provider in
+                let providers = sortedResult.map {
+                    CellProvider(api: pokemonItemApi,
+                                 scrolledFetchedItem: .init(name: $0.name, url: .temporaryDirectory),
+                                 isSelectable: selectionActive) {[weak self] item, provider in
                     if item.name == self?.current?.name {
                         provider.isSelected = true
                     }
@@ -315,7 +320,7 @@ public struct PokemonItemSelectionScreen: View {
     preview.addExamples([sdPokemon])
     
     return NavigationStack {
-        PokemonItemSelectionScreen(provider: .init(categoryApi: .init(), generalApi: .init(), pokemonItemApi: .init(), modelContainer: preview.container, pokemonID: sdPokemon.persistentModelID, current: nil))
+        PokemonItemSelectionScreen(provider: .init(categoryApi: .init(), generalApi: .init(), pokemonItemApi: .init(), languageNameFetcher: .init(container: preview.container), modelContainer: preview.container, pokemonID: sdPokemon.persistentModelID, current: nil))
             .inject(container: container)
     }
     .modelContainer(preview.container)

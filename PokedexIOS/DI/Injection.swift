@@ -67,6 +67,9 @@ fileprivate extension Container {
         //Player
         register(CriePlayer.self, object: .init())
         
+        //LanguageNameFetcher
+        register(LanguageNameFetcher.self, object: .init(container: modelContainer))
+        
         //NamedDataLauncher
         registration { container in
             container.register(PokemonNameLauncherImpl.self, object: .init(apiEnv: PlistReader.read(list: .pokemonapi), api: scrollFetchGeneralApi, speciesApi: pokemonSpeciesApi))

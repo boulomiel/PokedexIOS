@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DI
 
 public struct GenModel: Hashable, Identifiable {
     

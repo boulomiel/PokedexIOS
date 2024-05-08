@@ -13,4 +13,9 @@ public struct LocalPokemon: Identifiable, Codable, Hashable {
     }
     let index: Int
     let name: String
+    
+    public init(index: Int, name: String) {
+        self.index = index
+        self.name = name
+    }
 }

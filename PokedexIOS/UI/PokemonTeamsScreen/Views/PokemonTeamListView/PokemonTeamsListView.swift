@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Tools
+import DI
 
 public struct PokemonTeamsListView: View {
     

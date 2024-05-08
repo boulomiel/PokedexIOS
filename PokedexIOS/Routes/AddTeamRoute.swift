@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import DI
 
 public struct AddTeamRoute: Identifiable,  Hashable {
     public static func == (lhs: AddTeamRoute, rhs: AddTeamRoute) -> Bool {

@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 import Tools
+import DI
 
 public struct RootView: View {
     @Environment(\.managedObjectContext) private var viewContext

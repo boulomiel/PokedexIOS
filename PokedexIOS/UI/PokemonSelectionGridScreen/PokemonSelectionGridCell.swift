@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import Tools
+import DI
 
 class GridCellPOkemonSelectionEventBound {
     enum EventBound {

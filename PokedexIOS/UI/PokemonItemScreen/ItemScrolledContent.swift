@@ -10,6 +10,7 @@ import Combine
 import SwiftData
 import Resources
 import Tools
+import DI
 
 public struct ItemScrolledContent: View {
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchItemApi, PokemonItemApi>.Provider
@@ -92,7 +93,7 @@ public struct ItemScrolledContent: View {
     }
     
     @Observable
-   public class Provider {
+    public class Provider {
         
         typealias CellProvider = ItemCell.Provider
         
@@ -105,7 +106,7 @@ public struct ItemScrolledContent: View {
         var selectionActive: Bool
         @ObservationIgnored
         var providers: [CellProvider]
-      
+        
         init(
             modelContainer: ModelContainer,
             pokemonID: PersistentIdentifier,
@@ -131,7 +132,7 @@ public struct ItemScrolledContent: View {
             self.providers.append(p)
             return p
         }
-            
+        
         func handleSelection() {
             selectionActive.toggle()
             for provider in providers {
@@ -190,9 +191,24 @@ public struct ItemScrolledContent: View {
     let sdPokemon = SDPokemon(pokemonID: pokemon.order, data: try? JSONEncoder().encode(pokemon))
     preview.addExamples([sdPokemon])
     return NavigationStack {
-        PaginatedList(provider: .init(api: ScrollFetchItemApi(), fetchApi: PokemonItemApi(), modelContainer: preview.container)) { provider in
-            ItemScrolledContent(scrollProvider: provider, provider: .init(modelContainer: preview.container, pokemonID: sdPokemon.persistentModelID, current: nil))
-       }
+        PaginatedList(
+            provider: .init(
+                api: ScrollFetchItemApi(),
+                fetchApi: PokemonItemApi(),
+                modelContainer: preview.container,
+                languageNameFetcher: .init(
+                    container: preview.container
+                )
+            )) { provider in
+                ItemScrolledContent(
+                    scrollProvider: provider,
+                    provider: .init(
+                        modelContainer: preview.container,
+                        pokemonID: sdPokemon.persistentModelID,
+                        current: nil
+                    )
+                )
+            }
     }
     .modelContainer(preview.container)
     .inject(container: container)

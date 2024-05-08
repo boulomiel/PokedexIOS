@@ -8,6 +8,7 @@
 import SwiftUI
 import Resources
 import Tools
+import DI
 
 public struct MoveSectionContentCell: View {
     

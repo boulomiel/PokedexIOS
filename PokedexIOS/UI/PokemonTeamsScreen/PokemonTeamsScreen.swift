@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import Resources
 import Tools
+import DI
 
 public struct PokemonTeamsScreen: View {
     
@@ -25,6 +26,8 @@ public struct PokemonTeamsScreen: View {
     @DIContainer var pokemonItemApi: PokemonItemApi
     @DIContainer var generalApi: GeneralApi<ItemCategories>
     @DIContainer var player: CriePlayer
+    @DIContainer var languageNameFetcher: LanguageNameFetcher
+
     
     @State var teamRouter: TeamRouter
     @State var teamCount: Int = 0
@@ -39,7 +42,7 @@ public struct PokemonTeamsScreen: View {
                         .networkedContentView()
                 })
                 .navigationDestination(for: AddTeamRoute.self) { route in
-                    PaginatedList(provider: .init(api: scrollFetchApi, fetchApi: fetchApi, modelContainer: modelContext.container)) { provider in
+                    PaginatedList(provider: .init(api: scrollFetchApi, fetchApi: fetchApi, modelContainer: modelContext.container, languageNameFetcher: languageNameFetcher)) { provider in
                         PokemonSelectionGridScreen(scrollProvider: provider, provider: .init(selectedPokemons: route.selectedPokemons, modelContext: modelContext, teamID: route.teamID))
                     }
                     .environment(teamRouter)
@@ -62,7 +65,7 @@ public struct PokemonTeamsScreen: View {
                         .networkedContentView()
                 }
                 .navigationDestination(for: AddItemRoute.self, destination: { route in
-                    PaginatedList(provider: .init(api: scrollFetchItemApi, fetchApi: pokemonItemApi, modelContainer: modelContext.container)) { provider in
+                    PaginatedList(provider: .init(api: scrollFetchItemApi, fetchApi: pokemonItemApi, modelContainer: modelContext.container, languageNameFetcher: languageNameFetcher)) { provider in
                         ItemScrolledContent(scrollProvider: provider, provider: .init(modelContainer: modelContext.container, pokemonID: route.pokemonID, current: route.item))
                     }                 
                     .environment(teamRouter)

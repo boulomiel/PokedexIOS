@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DI
 
 extension SDTeam {
     static var examples: [SDTeam] {

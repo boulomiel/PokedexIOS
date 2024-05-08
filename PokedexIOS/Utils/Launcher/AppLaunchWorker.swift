@@ -11,9 +11,9 @@ import SwiftData
 //secondStep = https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1302
 
 @Observable
-class AppLaunchWorker {
+public class AppLaunchWorker {
     
-    var hasBeenLaunched: Bool {
+    private (set) var hasBeenLaunched: Bool {
         get {
             UserDefaults.standard.bool(forKey: "AppLaunchWorker_firstLaunch")
         }
@@ -22,7 +22,7 @@ class AppLaunchWorker {
         }
     }
     
-    var lastLaunched: Date {
+    private (set) var lastLaunched: Date {
         get {
             let timeInterval = UserDefaults.standard.double(forKey: "AppLaunchWorker_lastDate")
             return Date(timeIntervalSince1970: TimeInterval(timeInterval))
@@ -32,14 +32,13 @@ class AppLaunchWorker {
         }
     }
     
-    var shouldWait: Bool {
+    public var shouldWait: Bool {
         !isFinished
     }
     
-    var isFinished: Bool
-    let namedLauncherWorkers: [any NameLauncherProtocol]
-    let container: ModelContainer
-    
+    private var isFinished: Bool
+    private let namedLauncherWorkers: [any NameLauncherProtocol]
+    private let container: ModelContainer
     
     init(namedLauncherWorkers: [any NameLauncherProtocol], container: ModelContainer) {
         self.namedLauncherWorkers = namedLauncherWorkers

@@ -7,6 +7,7 @@
 
 import Foundation
 import Resources
+import DI
 
 public extension JsonReader {
     

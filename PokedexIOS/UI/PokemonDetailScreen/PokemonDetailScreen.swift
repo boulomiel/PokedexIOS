@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Tools
+import DI
 
 public struct PokemonDetailScreen: View {
     

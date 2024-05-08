@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Tools
+import DI
 
 let testpokemonability = PokemonAbilityDetails(
     name: "overgrow",
@@ -162,7 +163,7 @@ public struct PokemonAbilityView: View {
         
         private func makeModel(from success: Ability) {
             let effectChange = success.effectChanges
-                .flatMap { $0.effectEntries }
+                .flatMap(\.effectEntries)
                 .first(where: { $0.language.name == "en" })?.effect
             
             let effectEntry = success.effectEntries

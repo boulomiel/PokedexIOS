@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import DI
 
 public struct MoveScreen: View {
     
     @DIContainer var moveApi: PokemonMoveApi
     @DIContainer var machineApi: PokemonMachineApi
     @DIContainer var generalApi: GeneralApi<Machine>
-
 
     @State var provider: Provider
     

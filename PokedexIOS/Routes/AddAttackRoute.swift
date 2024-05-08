@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import DI
 
 public struct AddAttackRoute: Identifiable, Hashable {
     public let id: UUID = .init()

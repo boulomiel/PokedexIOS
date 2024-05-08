@@ -7,6 +7,7 @@
 
 import Foundation
 import Tools
+import DI
 
 public extension Preview {
     static var allPreview: Preview {

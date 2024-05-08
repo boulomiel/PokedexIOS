@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import Resources
 import Tools
+import DI
 
 public struct PokemonSelectionMoveListScreen: View {
     

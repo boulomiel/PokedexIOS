@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import FirebaseCore
+import DI
 
 @main
 public struct PokedexIOSApp: App {
@@ -21,7 +22,7 @@ public struct PokedexIOSApp: App {
         WindowGroup {
             RootView()
                 .inject(container: container)
-                .modelContainer(container.swiftDataController.container)
+                .modelContainer(container.modelContainer)
         }
     }
 }

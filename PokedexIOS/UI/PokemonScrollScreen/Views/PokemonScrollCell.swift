@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import DI
 
 public struct PokemonScrollCell: View {
     
@@ -73,7 +74,7 @@ public struct PokemonScrollCell: View {
         }
         
         private func fetch() async {
-            let result = await api.fetch(query: .init(pokemonID: pokemon.name))
+            let result = await api.fetch(id: pokemon.name)
             switch result {
             case .success(let result):
                 await MainActor.run {
