@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Resources
+import Tools
 
 public struct ListMoveCellView: View {
     let move: Move

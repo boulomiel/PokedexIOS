@@ -2,11 +2,11 @@
 //  LanguageNameFetcher.swift
 //  PokedexIOS
 //
-//  Created by Ruben Mimoun on 05/05/2024.
+//  Created by Ruben Mimoun on 08/05/2024.
 //
-
 import Foundation
 import SwiftData
+import Tools
 
 public struct LanguageNameFetcher {
     

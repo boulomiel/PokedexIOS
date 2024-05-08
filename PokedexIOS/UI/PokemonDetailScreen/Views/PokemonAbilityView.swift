@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Tools
+
 let testpokemonability = PokemonAbilityDetails(
     name: "overgrow",
     isHidden: false

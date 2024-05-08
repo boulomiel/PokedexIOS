@@ -13,7 +13,6 @@ import FirebaseCore
 public struct PokedexIOSApp: App {
     
     @Environment(\.diContainer) var container
-    let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     public init() {}
@@ -22,7 +21,6 @@ public struct PokedexIOSApp: App {
         WindowGroup {
             RootView()
                 .inject(container: container)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .modelContainer(container.swiftDataController.container)
         }
     }

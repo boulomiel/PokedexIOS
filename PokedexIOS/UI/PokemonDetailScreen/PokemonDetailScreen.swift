@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Tools
 
 public struct PokemonDetailScreen: View {
     
@@ -97,6 +98,5 @@ public struct PokemonDetailScreen: View {
     
     return RootView()
         .inject(container: container)
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         .modelContainer(preview.container)
 }

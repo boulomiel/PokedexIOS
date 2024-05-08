@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Tools
 
 public struct RootView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -116,7 +117,6 @@ public struct RootView: View {
     
     return RootView()
         .inject(container: container)
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         .modelContainer(preview.container)
         .environment(TeamRouter())
 }

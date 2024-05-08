@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Tools
 
 public struct PokemonGenerationSegmentView: View {
     

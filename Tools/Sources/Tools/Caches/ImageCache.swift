@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-actor ImageCache {
+public actor ImageCache {
     
     var cache: NSCache<NSURL, UIImage>
     private let session: URLSession = .init(configuration: .ephemeral)
     
-    init() {
+    public init() {
         self.cache = .init()
     }
     
-    func set(url: URL?, image: UIImage) {
+    public func set(url: URL?, image: UIImage) {
         if let url = url, let nsurl = NSURL(string: url.absoluteString) {
             cache.setObject(image, forKey: nsurl)
         } else {
@@ -25,7 +25,7 @@ actor ImageCache {
         }
     }
     
-    func getSync(url: URL?) -> UIImage? {
+    public func getSync(url: URL?) -> UIImage? {
         if let url = url, let nsurl = NSURL(string: url.absoluteString) {
             if let object = cache.object(forKey: nsurl) {
                 return object
@@ -37,7 +37,7 @@ actor ImageCache {
         }
     }
     
-    func get(url: URL?) async -> UIImage? {
+    public func get(url: URL?) async -> UIImage? {
         if let url = url {
             if let object = getSync(url: url) {
                 return object
