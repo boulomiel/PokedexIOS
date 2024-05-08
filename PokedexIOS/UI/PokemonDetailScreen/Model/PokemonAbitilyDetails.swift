@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonAbilityDetails: Hashable {
+public struct PokemonAbilityDetails: Hashable {
     let name: String
     let isHidden: Bool
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pokedex: Codable {
+public struct Pokedex: Codable {
     
     var id: Int
     var name: String
@@ -29,7 +29,7 @@ struct Pokedex: Codable {
 }
 
 
-struct PokemonEntry: Codable {
+public struct PokemonEntry: Codable {
     
     var entryNumber: Int
     var pokemonSpecies: NamedAPIResource

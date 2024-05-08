@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 import SwiftData
-struct ItemScrolledContent: View {
+public struct ItemScrolledContent: View {
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchItemApi, PokemonItemApi>.Provider
     @Bindable var scrollProvider: ScrollProvider
     @State var provider: Provider
@@ -16,7 +16,7 @@ struct ItemScrolledContent: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.isSearching) var isSearching
     
-    var body: some View {
+    public var body: some View {
         content
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -89,7 +89,7 @@ struct ItemScrolledContent: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         
         typealias CellProvider = ItemCell.Provider
         
@@ -170,11 +170,11 @@ struct ItemScrolledContent: View {
         }
     }
     
-    struct ItemDataModel: Hashable {
+    public struct ItemDataModel: Hashable {
         var name: String
     }
     
-    struct SelectedModel: Hashable {
+    public struct SelectedModel: Hashable {
         let item: Item?
     }
     

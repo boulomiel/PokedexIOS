@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonTeamPreviewScreen: View {
+public struct PokemonTeamPreviewScreen: View {
     
     @Environment(TeamRouter.self) var teamRouter
     @Environment(\.modelContext) var modelContext
@@ -26,7 +26,7 @@ struct PokemonTeamPreviewScreen: View {
         pokemon.item?.decoded
     }
     
-    var body: some View {
+    public var body: some View {
         Form {
             VStack {
                 Text(pokemon.decoded?.name.capitalized ?? "")

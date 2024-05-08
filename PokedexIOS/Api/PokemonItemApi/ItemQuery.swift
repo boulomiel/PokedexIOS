@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct ItemQuery: ApiQuery {
+public struct ItemQuery: ApiQuery {
     let itemID: String
     
-    var urlComponents: URLComponents {
+    public var urlComponents: URLComponents {
         let api: PokemonEnvApi = PlistReader.read(list: .pokemonapi)
         var components = URLComponents()
         components.host = api.host

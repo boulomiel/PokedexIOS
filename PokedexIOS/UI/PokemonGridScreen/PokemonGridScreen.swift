@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonGridScreen: View {
+public struct PokemonGridScreen: View {
     
     @Environment(\.dismiss) var dismiss
     @DIContainer var fetchPokemonApi: FetchPokemonApi
@@ -19,7 +19,7 @@ struct PokemonGridScreen: View {
 
     let provider: Provider
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             PokemonGridListView(provider: .init(fetchApi: fetchPokemonApi, pokemons: provider.pokemons))
                 .navigationDestination(for: LocalPokemon.self) { localPokemon in
@@ -39,7 +39,7 @@ struct PokemonGridScreen: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         let pokemons: [String]
         let title: String?
         

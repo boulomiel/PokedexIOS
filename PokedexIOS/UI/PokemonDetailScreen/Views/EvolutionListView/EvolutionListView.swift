@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct EvolutionListView: View {
+public struct EvolutionListView: View {
 
     typealias EvolutionModelLinked = [Int: [EvolutionModel]]
     
     @Bindable var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         VStack {
             if provider.listReady {
                 ScrollView(.horizontal) {
@@ -35,7 +35,7 @@ struct EvolutionListView: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         typealias CellProvider = EvolutionListViewCell.Provider
         var species: SpeciesModel?
         let evolutionChainAPI: PokemonEvolutionChainApi
@@ -125,7 +125,7 @@ struct EvolutionListView: View {
     }
     
     @Observable
-    class ChainModelBuilder {
+   public class ChainModelBuilder {
         var current: EvolutionModel
         var options: [ChainModelBuilder]
         var next: ChainModelBuilder?
@@ -155,7 +155,7 @@ struct EvolutionListView: View {
     }
 }
 
-struct EvolutionModel {
+public struct EvolutionModel {
     var level: Int
     var current: NamedAPIResource
 }

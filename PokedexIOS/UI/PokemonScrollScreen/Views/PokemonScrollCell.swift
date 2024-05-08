@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct PokemonScrollCell: View {
+public struct PokemonScrollCell: View {
     
     @State var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         NavigationLink(value: provider.pokemon) {
             GroupBox {
                 HStack {
@@ -34,7 +34,7 @@ struct PokemonScrollCell: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         
         let api: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi
@@ -102,7 +102,7 @@ struct PokemonScrollCell: View {
         }
     }
     
-    struct Name {
+    public struct Name {
         let language: String
         let name: String
     }

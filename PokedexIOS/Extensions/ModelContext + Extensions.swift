@@ -28,21 +28,6 @@ extension ModelContext {
         }
     }
     
-//    func fetchUniqueSync<Model: PersistentModel>(with id: PersistentIdentifier) -> Model? {
-//        var descriptor = FetchDescriptor<Model>(predicate: #Predicate<Model>{ model in model.persistentModelID == id })
-//        descriptor.fetchLimit = 1
-//        do {
-//            if let first = try fetch(descriptor).first {
-//                return first
-//            } else {
-//                return nil
-//            }
-//        } catch {
-//            print(#function, error)
-//            return nil
-//        }
-//    }
-    
     func fetchUniqueSync<Model: PersistentModel>(_ type: Model.Type, with id: PersistentIdentifier) -> Model? {
         var descriptor = FetchDescriptor<Model>(predicate: #Predicate<Model>{ model in model.persistentModelID == id })
         descriptor.fetchLimit = 1

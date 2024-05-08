@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Ability: Codable, Hashable {
+public struct Ability: Codable, Hashable {
     var id: Int
     var name: String
     var isMainSeries: Bool

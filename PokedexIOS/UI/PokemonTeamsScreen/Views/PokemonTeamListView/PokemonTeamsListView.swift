@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct PokemonTeamsListView: View {
+public struct PokemonTeamsListView: View {
     
     @Environment(TeamRouter.self)
     var teamRouter
@@ -19,7 +19,7 @@ struct PokemonTeamsListView: View {
     private var teams: [SDTeam]
     private let grid: [GridItem] = Array(repeating: .init(.fixed(120)), count: 3)
     
-    var body: some View {
+    public var body: some View {
         List {
             if teams.isEmpty {
                 NavigationLink(value: AddTeamRoute()) {

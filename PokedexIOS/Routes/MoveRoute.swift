@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct MoveRoute: Hashable {
+public struct MoveRoute: Hashable {
     let moveData: MoveData
 }

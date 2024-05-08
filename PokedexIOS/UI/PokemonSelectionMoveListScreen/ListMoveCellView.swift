@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ListMoveCellView: View {
+public struct ListMoveCellView: View {
     let move: Move
     let isSelectable: Bool
     @Bindable var provider: PokemonSelectionMoveListScreen.Provider
@@ -23,7 +23,7 @@ struct ListMoveCellView: View {
         }
     }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Label(
                 title: {
@@ -43,7 +43,6 @@ struct ListMoveCellView: View {
             }
         }), including: .all)
         .onAppear(perform: {
-            print(move.type.url)
             isSelected = provider.isSelected(move: move)
         })
     }
@@ -98,7 +97,7 @@ struct ListMoveCellView: View {
         }
     }
     
-    struct Anim {
+    public struct Anim {
         var scale: Double
         var color: Color =  Color.gray.opacity(0.3)
     }

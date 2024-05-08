@@ -9,7 +9,7 @@ import Foundation
 
 //Pokeathlon Stats are different attributes of a Pokémon's performance in Pokéathlons. In Pokéathlons, competitions happen on different courses; one for each of the different Pokéathlon stats
 
-struct PokeathlonStat: Codable {
+public struct PokeathlonStat: Codable {
 
     var id: Int
     var name: String
@@ -18,12 +18,12 @@ struct PokeathlonStat: Codable {
     
 }
 
-struct NaturePokeathlonStatAffectSets: Codable {
+public struct NaturePokeathlonStatAffectSets: Codable {
     var increase: [NamedAPIResource] // A list of natures and how they change the referenced Pokéathlon stat.
     var decrease: [NamedAPIResource] // A list of natures and how they change the referenced Pokéathlon stat.
 }
 
-struct NaturePokeathlonStatAffect: Codable {
+public struct NaturePokeathlonStatAffect: Codable {
     var max_change: Int // The maximum amount of change to the referenced Pokéathlon stat.
     var nature: NamedAPIResource // The nature causing the change.
 }

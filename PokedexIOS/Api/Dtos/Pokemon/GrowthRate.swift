@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GrowthRate: Codable {
+public struct GrowthRate: Codable {
     var id: Int
     var name: String
     var formula: String // The formula used to calculate the rate at which the Pokémon species gains level.
@@ -16,7 +16,7 @@ struct GrowthRate: Codable {
     var pokemon_species: [NamedAPIResource]
 }
 
-struct GrowthRateExperienceLevel: Codable {
+public struct GrowthRateExperienceLevel: Codable {
     var level: Int
     var experience: Int
 }

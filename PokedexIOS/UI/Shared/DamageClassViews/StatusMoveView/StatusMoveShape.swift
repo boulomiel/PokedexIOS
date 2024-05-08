@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct StatusMoveShape: Shape {
+public struct StatusMoveShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let start = CGPoint(x: rect.width * 0.18, y: rect.midY)
 
         let path = Path { p in
@@ -26,9 +26,9 @@ struct StatusMoveShape: Shape {
     }
 }
 
-struct StatusOvalMoveShape: Shape {
+public struct StatusOvalMoveShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let start = CGPoint(x: rect.midX, y: rect.minY+8)
         let path = Path { p in
             p.move(to: start)

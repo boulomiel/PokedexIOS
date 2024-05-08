@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BerryFirmness: Codable {
+public struct BerryFirmness: Codable {
     var id: Int
     var name: String
     var berries: [NamedAPIResource]

@@ -22,7 +22,7 @@ class GridCellPOkemonSelectionEventBound {
     }
 }
 
-struct PokemonSelectionGridCell: View {
+public struct PokemonSelectionGridCell: View {
     
     @Environment(TeamRouter.self) var teamRouter
     @State var selectedPokemon: [Pokemon]
@@ -32,7 +32,7 @@ struct PokemonSelectionGridCell: View {
     @State private var showVarietiesForCell: LocalPokemon?
     @Namespace var listSpace
     
-    var body: some View {
+    public var body: some View {
         VStack {
             ScaleAsyncImage(url: provider.sprite, width: 100, height: 100)
             Text(provider.pokemonName.capitalized)
@@ -161,12 +161,12 @@ struct PokemonSelectionGridCell: View {
         }
     }
     
-    struct SelectAnim {
+    public struct SelectAnim {
         var scale: Double = 1.0
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         
         let api: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi

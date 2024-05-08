@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct DescriptionByVersionModel: Identifiable, Hashable {
-    let id: UUID = .init()
+public struct DescriptionByVersionModel: Identifiable, Hashable {
+    public let id: UUID = .init()
     var version: String
     var description: String
     var language: String

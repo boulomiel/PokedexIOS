@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct PokemonAbilitySelectionModel: Hashable, Identifiable {
-    let id: UUID = .init()
+public struct PokemonAbilitySelectionModel: Hashable, Identifiable {
+    public let id: UUID = .init()
     let abilityID: Int
     let name: String
     let isHidden: Bool

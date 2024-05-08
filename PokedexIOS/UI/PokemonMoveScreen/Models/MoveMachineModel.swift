@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MachineModel {
+public struct MachineModel {
     let machineItem: String
     let moveName: String
 }

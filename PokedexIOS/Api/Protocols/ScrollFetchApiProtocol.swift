@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ScrollFetchApiProtocol: FetchApiProtocol {
+public protocol ScrollFetchApiProtocol: FetchApiProtocol {
     func fetch(session: URLSession, offset: Int) async  -> Result<Requested, ApiPokemonError>
 }

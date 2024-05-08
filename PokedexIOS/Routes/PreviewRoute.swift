@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-struct PreviewRoute: Identifiable, Hashable {
-    let id: UUID = .init()
+public struct PreviewRoute: Identifiable, Hashable {
+    public let id: UUID = .init()
     let pokemonID: PersistentIdentifier
 }

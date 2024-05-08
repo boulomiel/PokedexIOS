@@ -8,20 +8,20 @@
 import Foundation
 import SwiftData
 
-class PokemonNameLauncherImpl: NameLauncherProtocol {
+public class PokemonNameLauncherImpl: NameLauncherProtocol {
     
     let apiEnv: PokemonEnvApi
     let api: GeneralApi<ScrollFetchResult>
     let speciesApi: PokemonSpeciesApi
     
-    init(apiEnv: PokemonEnvApi, api: GeneralApi<ScrollFetchResult>, speciesApi: PokemonSpeciesApi) {
+    public init(apiEnv: PokemonEnvApi, api: GeneralApi<ScrollFetchResult>, speciesApi: PokemonSpeciesApi) {
         self.apiEnv = apiEnv
         self.api = api
         self.speciesApi = speciesApi
     }
     
     
-    func getCount() async -> Int {
+    public func getCount() async -> Int {
         guard let url = apiEnv.makeSpeciesURL() else {
             fatalError("\(#function), invalid URL!")
         }
@@ -35,7 +35,7 @@ class PokemonNameLauncherImpl: NameLauncherProtocol {
         }
     }
     
-    func getAll() async -> [NamedAPIResource] {
+    public func getAll() async -> [NamedAPIResource] {
         let count = await getCount()
         guard var url = apiEnv.makeSpeciesURL() else {
             fatalError("\(#function), invalid URL!")
@@ -51,7 +51,7 @@ class PokemonNameLauncherImpl: NameLauncherProtocol {
         }
     }
     
-    func get(for name: String) async -> PokemonSpecies? {
+    public func get(for name: String) async -> PokemonSpecies? {
         let result = await speciesApi.fetch(query: .init(speciesNumber: name))
         switch result {
         case .success(let success):
@@ -62,7 +62,7 @@ class PokemonNameLauncherImpl: NameLauncherProtocol {
         }
     }
     
-    func buildModel(for name: String) async -> SDLanguagePokemonName? {
+    public func buildModel(for name: String) async -> SDLanguagePokemonName? {
         let species = await get(for: name)
         guard let species else { return nil }
         let names = species.names.map {
@@ -75,7 +75,7 @@ class PokemonNameLauncherImpl: NameLauncherProtocol {
         return sdNames
     }
     
-    func setup(container: ModelContainer) async {
+    public func setup(container: ModelContainer) async {
         let pokemons = await getAll()
         await withTaskGroup(of: SDLanguagePokemonName?.self) {group in
             let dataHandler = BackgroundDataHander(with: container)

@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct PokemonNatureQuery: ApiQuery, Hashable {
+public struct PokemonNatureQuery: ApiQuery, Hashable {
     
     let id: String
     
-    var urlComponents: URLComponents {
+    public var urlComponents: URLComponents {
         let api: PokemonEnvApi = PlistReader.read(list: .pokemonapi)
         var components = URLComponents()
         components.host = api.host

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct PokemonGenerationSegmentView: View {
+public struct PokemonGenerationSegmentView: View {
     
     @Bindable var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         Picker("Hello", selection: $provider.selected) {
             ForEach(provider.generations, id: \.id) {
                 Text($0.id)
@@ -26,7 +26,7 @@ struct PokemonGenerationSegmentView: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         var generations: [GenModel]
         var selected: GenModel
         

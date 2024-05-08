@@ -8,7 +8,7 @@
 import Foundation
 
 //Move Ailments are status conditions caused by moves used during battle.
-struct MoveAilments: Codable {
+public struct MoveAilments: Codable {
     var id: Int
     var name: String
     var moves: [NamedAPIResource]

@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct StatBackgroundShape: Shape {
+public struct StatBackgroundShape: Shape {
     
     var radius: CGFloat = 180
     var statCount: Int = 6
         
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let viewCenter = CGPoint(x: rect.midX, y: rect.midY)
         var points = makeBackgroundPoints(in: viewCenter)
         return Path { p in

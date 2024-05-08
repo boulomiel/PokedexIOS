@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct PokebalView: View {
+public struct PokebalView: View {
     
     let radius: CGFloat
     @State private var appeared: Bool = false
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 0) {
             Rectangle()
                 .fill(Color.red)
@@ -53,7 +53,7 @@ struct PokebalView: View {
 
     }
     
-    struct Anim {
+    public struct Anim {
         var rotation: Double = 0.0
         var scale: Double = 0.2
     }

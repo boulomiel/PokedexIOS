@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct PokemonGridCell: View {
+public struct PokemonGridCell: View {
     
     let provider: Provider
     
-    var body: some View {
+    public var body: some View {
         NavigationLink(value: LocalPokemon(index: provider.number ?? -1, name: provider.pokemon)) {
             VStack {
                 ScaleAsyncImage(url: provider.sprite, width: 100, height: 100)
@@ -43,8 +43,8 @@ struct PokemonGridCell: View {
     }
     
     @Observable
-    class Provider: Identifiable {
-        let id: UUID = .init()
+   public class Provider: Identifiable {
+        public let id: UUID = .init()
         var sprite: URL?
         var number: Int?
         let pokemon: String

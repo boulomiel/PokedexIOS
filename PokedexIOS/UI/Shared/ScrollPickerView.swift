@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ScrollPickerView: View {
+public struct ScrollPickerView: View {
     let options: [String]
     @Binding var selected: String
     
@@ -32,7 +32,7 @@ struct ScrollPickerView: View {
     @State private var scrollPosition: String?
     @Namespace var scrollPickerView
     
-    var body: some View {
+    public var body: some View {
         VStack {
             GeometryReader { geo in
                 let frame = geo.frame(in: .global)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FetchApiProtocol {
+public protocol FetchApiProtocol {
    associatedtype Query: ApiQuery
    associatedtype Requested: Decodable
    associatedtype Failed: Error   
@@ -16,7 +16,6 @@ protocol FetchApiProtocol {
 extension FetchApiProtocol {
     func fetch(session: URLSession = .shared, query: Query) async  -> Result<Requested, ApiPokemonError> {
         let urlComponents = query.urlComponents
-       // print(urlComponents.description)
         guard let url = urlComponents.url else {
             fatalError("\(#function), \n \(urlComponents.description), \n could not be url with components")
         }

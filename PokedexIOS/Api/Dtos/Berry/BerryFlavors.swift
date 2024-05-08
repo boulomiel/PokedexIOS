@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BerryFlavors: Codable {
+public struct BerryFlavors: Codable {
     var id: Int
     var name: String
     var berries: [BerryFlavorMap]

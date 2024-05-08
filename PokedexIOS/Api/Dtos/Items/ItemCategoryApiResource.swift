@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct ItemCategoryApiResource: Codable, Hashable {
-    static func == (lhs: ItemCategoryApiResource, rhs: ItemCategoryApiResource) -> Bool {
+public struct ItemCategoryApiResource: Codable, Hashable {
+    public static func == (lhs: ItemCategoryApiResource, rhs: ItemCategoryApiResource) -> Bool {
         lhs.url == rhs.url
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(url)
     }
     
@@ -21,7 +21,7 @@ struct ItemCategoryApiResource: Codable, Hashable {
 }
 
 
-struct ItemCategories: Codable {
+public struct ItemCategories: Codable {
     var count: Int
     var next, previous: URL?
     var results: [ItemCategoryApiResource]

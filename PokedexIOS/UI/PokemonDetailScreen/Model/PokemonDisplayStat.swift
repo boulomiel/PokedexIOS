@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct PokemonDisplayStat: Identifiable, Equatable {
-    let id: UUID = .init()
+public struct PokemonDisplayStat: Identifiable, Equatable {
+    public let id: UUID = .init()
     let name: String
     // api value / 200
     var value: Double

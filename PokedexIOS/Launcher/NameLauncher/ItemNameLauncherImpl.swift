@@ -8,19 +8,19 @@
 import Foundation
 import SwiftData
 
-class ItemNameLauncherImpl: NameLauncherProtocol {
+public class ItemNameLauncherImpl: NameLauncherProtocol {
     
     let apiEnv: PokemonEnvApi
     let api: GeneralApi<ScrollFetchResult>
     let itemApi: PokemonItemApi
 
-    init(apiEnv: PokemonEnvApi, api: GeneralApi<ScrollFetchResult>, itemApi: PokemonItemApi) {
+    public init(apiEnv: PokemonEnvApi, api: GeneralApi<ScrollFetchResult>, itemApi: PokemonItemApi) {
         self.apiEnv = apiEnv
         self.api = api
         self.itemApi = itemApi
     }
     
-    func getCount() async -> Int {
+    public func getCount() async -> Int {
         guard let url = apiEnv.makeSpeciesURL() else {
             fatalError("\(#function), invalid URL!")
         }
@@ -34,7 +34,7 @@ class ItemNameLauncherImpl: NameLauncherProtocol {
         }
     }
     
-    func getAll() async -> [NamedAPIResource] {
+    public func getAll() async -> [NamedAPIResource] {
         let count = await getCount()
         guard var url = apiEnv.makeSpeciesURL() else {
             fatalError("\(#function), invalid URL!")
@@ -50,7 +50,7 @@ class ItemNameLauncherImpl: NameLauncherProtocol {
         }
     }
     
-    func get(for name: String) async -> Item? {
+    public func get(for name: String) async -> Item? {
         let result = await itemApi.fetch(query: .init(itemID: name))
         switch result {
         case .success(let success):
@@ -61,7 +61,7 @@ class ItemNameLauncherImpl: NameLauncherProtocol {
         }
     }
     
-    func buildModel(for name: String) async -> SDLanguageItemName? {
+    public func buildModel(for name: String) async -> SDLanguageItemName? {
         let species = await get(for: name)
         guard let species else { return nil }
         let names = species.names.map {
@@ -74,7 +74,7 @@ class ItemNameLauncherImpl: NameLauncherProtocol {
         return sdNames
     }
     
-    func setup(container: ModelContainer) async {
+    public func setup(container: ModelContainer) async {
         let items = await getAll()
         await withTaskGroup(of: SDLanguageItemName?.self) {group in
             let dataHandler = BackgroundDataHander(with: container)

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct LocalPokemon: Identifiable, Codable, Hashable {
-    var id: Int {
+public struct LocalPokemon: Identifiable, Codable, Hashable {
+    public var id: Int {
         index
     }
     let index: Int

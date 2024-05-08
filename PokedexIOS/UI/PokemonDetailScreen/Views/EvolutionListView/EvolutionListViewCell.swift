@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct EvolutionListViewCell: View {
+public struct EvolutionListViewCell: View {
     
     @Environment(PokemonDetailsProvider.self) var parent
     @Bindable var provider: Provider
@@ -18,7 +18,7 @@ struct EvolutionListViewCell: View {
         parent.localPokemon.name != provider.pokemon.name ? provider.pokemon : nil
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationLink(value: link) {
             VStack(spacing: 8) {
                 if let imageUrl = provider.genModels.first(where: { parent.segmentProvider?.selected == $0 })?.sprite?.frontDefault ?? provider.sprite {
@@ -42,9 +42,9 @@ struct EvolutionListViewCell: View {
     }
     
     @Observable
-    class Provider: Identifiable {
+   public class Provider: Identifiable {
         
-        let id: UUID = .init()
+        public let id: UUID = .init()
         let api: FetchPokemonApi
         var pokemon: LocalPokemon
         var sprite: URL?

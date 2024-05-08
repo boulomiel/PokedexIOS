@@ -7,20 +7,16 @@
 
 import Foundation
 
-struct ScrollFetchPokemonQuery: ScrolledApiQuery {
+public struct ScrollFetchPokemonQuery: ScrolledApiQuery {
     let limit: Int
     let offset: Int
     
-    init(limit: Int, offset: Int) {
+    public init(limit: Int, offset: Int) {
         self.limit = limit
         self.offset = offset
     }
     
-    func next() -> Self {
-        .init(limit: limit, offset: offset + 50)
-    }
-    
-    var urlComponents: URLComponents {
+    public var urlComponents: URLComponents {
         let api: PokemonEnvApi = PlistReader.read(list: .pokemonapi)
         var components = URLComponents()
         components.host = api.host

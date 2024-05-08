@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - WelcomeEffectEntry
-struct VerboseEffect: Codable, Hashable {
+public struct VerboseEffect: Codable, Hashable {
     var effect: String
     var language: NamedAPIResource
     var shortEffect: String

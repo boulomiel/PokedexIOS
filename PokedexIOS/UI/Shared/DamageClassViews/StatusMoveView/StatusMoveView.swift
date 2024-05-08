@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct StatusMoveView: View {
+public struct StatusMoveView: View {
     
-    var body: some View {
+    public var body: some View {
         GeometryReader { geo  in
             let frame = geo.frame(in: .local)
             ZStack {
@@ -34,11 +34,11 @@ struct StatusMoveView: View {
     }
 }
 
-struct StatusMoveView2: View {
+public struct StatusMoveView2: View {
     
     var height: CGFloat = 35
     
-    var body: some View {
+    public var body: some View {
         
         ZStack {
             Rectangle()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Characteristics: Codable {
+public struct Characteristics: Codable {
     var id: Int
     var gene_modulo: Int
     var possible_values: [Int]

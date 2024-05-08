@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct SelectableCellModifier: ViewModifier {
+public struct SelectableCellModifier: ViewModifier {
     
     @Binding var isSelected: Bool
     let isSelectable: Bool
@@ -18,7 +18,7 @@ struct SelectableCellModifier: ViewModifier {
     @State private var show: Bool = false
     @State private var id: UUID = .init()
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .overlay(alignment: alignment) {
                 if isSelectable, show {

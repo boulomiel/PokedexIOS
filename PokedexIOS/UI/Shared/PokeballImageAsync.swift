@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokeballImageAsync: View {
+public struct PokeballImageAsync: View {
     
     let url: URL?
     let width: CGFloat
@@ -17,7 +17,7 @@ struct PokeballImageAsync: View {
     @State private var id: UUID = .init()
 
      
-    var body: some View {
+    public var body: some View {
         ZStack {
             if isShown {
                 ScaleAsyncImage(url: url)

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import SwiftData
 
-struct PokemonNatureSelectionScreen: View {
+public struct PokemonNatureSelectionScreen: View {
     
     @Environment(\.dismiss) var dimiss
     @Environment(\.isLandscape) var isLandscape
@@ -17,7 +17,7 @@ struct PokemonNatureSelectionScreen: View {
 
     let provider: Provider
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Spacer()
             if provider.natures.isEmpty {
@@ -99,7 +99,7 @@ struct PokemonNatureSelectionScreen: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         let api: PokemonNatureApi
         let pokemonID: PersistentIdentifier
         var stats: [PokemonDisplayStat]
@@ -190,7 +190,7 @@ struct PokemonNatureSelectionScreen: View {
     }
 }
 
-struct NatureStatBridge {
+public struct NatureStatBridge {
     let natureName: String
     let improvedStat: String?
     let decreasedStat: String?

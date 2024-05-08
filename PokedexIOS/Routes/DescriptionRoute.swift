@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct DescriptionRoute: Hashable {
+public struct DescriptionRoute: Hashable {
     let values: [DescriptionByVersionModel]
 }

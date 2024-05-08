@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoveEffectItem: Hashable {
+public struct MoveEffectItem: Hashable {
     let effect: String
     let language: String
 }

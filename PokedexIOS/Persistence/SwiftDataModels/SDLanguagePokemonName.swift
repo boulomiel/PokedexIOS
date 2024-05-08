@@ -8,14 +8,11 @@
 import Foundation
 import SwiftData
 
-//[("ja-Hrkt", "ピカチュウ"), ("roomaji", "Pikachu"), ("ko", "피카츄"), ("zh-Hant", "皮卡丘"), ("fr", "Pikachu"), ("de", "Pikachu"), ("es", "Pikachu"), ("it", "Pikachu"), ("en", "Pikachu"), ("ja", "ピカチュウ"), ("zh-Hans", "皮卡丘")]
-
-
 
 protocol LanguageModel: PersistentModel { }
 
 @Model
-class SDLanguageModel {
+public class SDLanguageModel {
     let japHrkt: String
     let roomaji: String
     let ko: String
@@ -28,7 +25,7 @@ class SDLanguageModel {
     let ja: String
     let zhHans: String
     
-    init(_ names: [String: String]) {
+    public init(_ names: [String: String]) {
         japHrkt = names["jap-Hrkt"] ?? ""
         roomaji = names["roomaji"] ?? ""
         ko = names["ko"] ?? ""
@@ -44,7 +41,7 @@ class SDLanguageModel {
 }
 
 @Model
-class SDLanguagePokemonName: LanguageModel {
+public class SDLanguagePokemonName: LanguageModel {
     
     var japHrkt: String
     let roomaji: String
@@ -58,7 +55,7 @@ class SDLanguagePokemonName: LanguageModel {
     let ja: String
     let zhHans: String
 
-    init(_ names: [String: String]) {
+    public init(_ names: [String: String]) {
         japHrkt = names["jap-Hrkt"] ?? ""
         roomaji = names["roomaji"] ?? ""
         ko = names["ko"] ?? ""
@@ -75,7 +72,7 @@ class SDLanguagePokemonName: LanguageModel {
 
 
 @Model
-class SDLanguageItemName: LanguageModel {
+public class SDLanguageItemName: LanguageModel {
     
     let japHrkt: String
     let roomaji: String
@@ -89,7 +86,7 @@ class SDLanguageItemName: LanguageModel {
     let ja: String
     let zhHans: String
 
-    init(_ names: [String: String]) {
+    public init(_ names: [String: String]) {
         japHrkt = names["jap-Hrkt"] ?? ""
         roomaji = names["roomaji"] ?? ""
         ko = names["ko"] ?? ""
@@ -104,7 +101,7 @@ class SDLanguageItemName: LanguageModel {
     }
 }
 
-enum LanguageName {
+public enum LanguageName {
     case japHrkt(englishName: String, name: String)
     case roomaji(englishName: String, name: String)
     case ko(englishName: String, name: String)
@@ -117,7 +114,7 @@ enum LanguageName {
     case ja(englishName: String, name: String)
     case zhHans(englishName: String, name: String)
     
-    var english: String {
+    public var english: String {
         switch self {
         case .japHrkt(let englishName, _):
             fallthrough
@@ -144,7 +141,7 @@ enum LanguageName {
         }
     }
     
-    var foreign: String {
+    public var foreign: String {
         switch self {
         case .en(let englishName):
             return englishName
@@ -198,7 +195,7 @@ enum LanguageName {
         }
     }
     
-    init(_ model: SDLanguageItemName, searchedBy input: String) {
+    public init(_ model: SDLanguageItemName, searchedBy input: String) {
         if model.japHrkt.contains(input) {
             self = .japHrkt(englishName: model.en, name: model.japHrkt)
         } else
@@ -236,7 +233,7 @@ enum LanguageName {
         }
     }
     
-    init(_ model: SDLanguagePokemonName, searchedBy input: String) {
+    public init(_ model: SDLanguagePokemonName, searchedBy input: String) {
         if model.japHrkt.contains(input) {
             self = .japHrkt(englishName: model.en, name: model.japHrkt)
         } else

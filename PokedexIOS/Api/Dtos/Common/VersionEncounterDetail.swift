@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VersionEncounterDetail: Codable {
+public struct VersionEncounterDetail: Codable {
     
     var version: NamedAPIResource
     var maxChance: Int

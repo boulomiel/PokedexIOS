@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ScaleAsyncImage: View {
+public struct ScaleAsyncImage: View {
     
     @DIContainer var imageCache: ImageCache
     
@@ -18,7 +18,7 @@ struct ScaleAsyncImage: View {
     @State var shouldAnimate: Bool = false
     @State private var id: UUID = .init()
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             CachedAsyncImage(url: url, width: width, height: height)
                 .clipped()

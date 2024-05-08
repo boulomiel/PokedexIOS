@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct PokemonMoveDetailsScreen: View {
+public struct PokemonMoveDetailsScreen: View {
     
     let move: MoveItemDataHolder
     
-    var body: some View {
+    public var body: some View {
         ScrollView {
             moveHeader
             VStack {

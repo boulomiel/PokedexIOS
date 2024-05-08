@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-struct LanguageNameFetcher {
+public struct LanguageNameFetcher {
     
     private let container: ModelContainer
     

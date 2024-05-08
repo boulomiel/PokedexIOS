@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EncounterMethod: Codable {
+public struct EncounterMethod: Codable {
     var id: Int
     var name: String
     var order: Int

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocationArea: Codable {
+public struct LocationArea: Codable {
     
     var id: Int
     var name: String
@@ -26,7 +26,7 @@ struct LocationArea: Codable {
     }
 }
 
-struct EncounterMethodRates: Codable {
+public struct EncounterMethodRates: Codable {
     
     var encounterMethod: NamedAPIResource
     var versionDetails: [EncounterVersionDetails]
@@ -37,13 +37,13 @@ struct EncounterMethodRates: Codable {
     }
 }
 
-struct EncounterVersionDetails: Codable {
+public struct EncounterVersionDetails: Codable {
     var rate: Int
     var version: NamedAPIResource
 }
 
 
-struct PokemonEncounter: Codable {
+public struct PokemonEncounter: Codable {
     var pokemon: NamedAPIResource
     var versionDetails: [VersionEncounterDetail]
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FlavorText: Codable {
+public struct FlavorText: Codable {
     var flavorText: String
     var language, version: NamedAPIResource
 

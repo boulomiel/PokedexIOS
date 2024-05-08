@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CachedAsyncImage: View {
+public struct CachedAsyncImage: View {
     
     @DIContainer var imageCache: ImageCache
     var url: URL?
@@ -16,7 +16,7 @@ struct CachedAsyncImage: View {
     var height: CGFloat
     @State private var image: UIImage?
 
-    var body: some View {
+    public var body: some View {
         imageView
     }
     

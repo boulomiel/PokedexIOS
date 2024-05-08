@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ApiError {
+public protocol ApiError {
     static func http(description: Error) -> Self
     static func status(description: Int) -> Self
     static func decoding(description: Error) -> Self

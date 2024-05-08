@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SuperContestEffects: Codable {
+public struct SuperContestEffects: Codable {
     var id: Int
     var appeal: Int
     var moves: [NamedAPIResource]

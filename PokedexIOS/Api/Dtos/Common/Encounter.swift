@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Encounter: Codable {
+public struct Encounter: Codable {
     
     var minLevel: Int
     var maxLevel: Int

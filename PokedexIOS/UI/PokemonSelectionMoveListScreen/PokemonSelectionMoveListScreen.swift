@@ -8,13 +8,13 @@
 import SwiftUI
 import SwiftData
 
-struct PokemonSelectionMoveListScreen: View {
+public struct PokemonSelectionMoveListScreen: View {
     
     @Environment(TeamRouter.self) var teamRouter
     @State var provider: Provider
     @State private var remindMoveItem: RemindMovesItem?
     @Namespace var loading
-    var body: some View {
+    public var body: some View {
         List(provider.moves) { move in
             ListMoveCellView(move: move, isSelectable: true, provider: provider)
         }
@@ -75,12 +75,12 @@ struct PokemonSelectionMoveListScreen: View {
         .presentationDetents([.height(340)])
     }
     
-    struct RemindMovesItem: Identifiable {
-        let id: UUID = .init()
+    public struct RemindMovesItem: Identifiable {
+        public let id: UUID = .init()
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         let movesAPI: PokemonMoveApi
         let movesURL: [URL]
         var selectedMoves: [Move]
@@ -104,38 +104,7 @@ struct PokemonSelectionMoveListScreen: View {
         }
         
         func fetch() async {
-//            
-//            let moves = await withTaskGroup(of: Move?.self) { group in
-//                let chunks = self.movesURL.chunkedStream(by: 20)
-//                var iterator = chunks.makeAsyncIterator()
-//                while let next = await iterator.next() {
-//                    next.forEach { url in
-//                        group.addTask {
-//                            let result = await self.movesAPI.fetch(query: .init(moveId: url.lastPathComponent))
-//                            switch result {
-//                            case .success(let success):
-//                                return success
-//                            case .failure(let failure):
-//                                print(#file, failure)
-//                                return nil
-//                            }
-//                        }
-//                    }
-//                }
-//                
-//                return await group.reduce(into: [Move]()) { partialResult, move in
-//                    if let move { partialResult.append(move) }
-//                }
-//            }
-//            
-//            let sorted = moves.sorted(by: { $0.power ?? 0 < $1.power ?? 0 })
-//            await MainActor.run {
-//                withAnimation(.snappy) {
-//                    self.moves = sorted
-//                }
-//            }
 
-            
             let moves = await withTaskGroup(of: Move?.self) { group in
                 self.movesURL.forEach { url in
                     group.addTask {

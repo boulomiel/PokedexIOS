@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Language: Codable {
+public struct Language: Codable {
     var id: Int
     var name: String
     var official: Bool

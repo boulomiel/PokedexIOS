@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct ItemCell: View {
+public struct ItemCell: View {
     
     @State var provider: Provider
     var onSelect: ((Item?) -> Void)? = nil
     var onDeselect: ((Item?) -> Void)? = nil
 
-    var body: some View {
+    public var body: some View {
         GroupBox {
             Group {
                 if let description = provider.description {
@@ -73,9 +73,9 @@ struct ItemCell: View {
     }
     
     @Observable
-    class Provider: Identifiable {
+   public class Provider: Identifiable {
         
-        let id: UUID = .init()
+        public let id: UUID = .init()
         let api: PokemonItemApi
         let scrolledFetchedItem: NamedAPIResource?
         var isSelectable: Bool

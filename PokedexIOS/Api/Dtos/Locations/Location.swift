@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Location: Codable {
+public struct Location: Codable {
     var id: Int
     var name: String
     var region: NamedAPIResource

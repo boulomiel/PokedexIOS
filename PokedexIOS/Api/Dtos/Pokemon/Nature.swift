@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Nature: Codable, Hashable {
+public struct Nature: Codable, Hashable {
     var id: Int
     var name: String
     var decreased_stat: NamedAPIResource?
@@ -19,12 +19,12 @@ struct Nature: Codable, Hashable {
     var names: [Name]
 }
 
-struct NatureStatChange: Codable, Hashable {
+public struct NatureStatChange: Codable, Hashable {
     var max_change: Int
     var pokeathlon_stat: NamedAPIResource
 }
 
-struct MoveBattleStylePreference: Codable, Hashable {
+public struct MoveBattleStylePreference: Codable, Hashable {
     var low_hp_preference: Int
     var high_hp_preference: Int
     var move_battle_style: NamedAPIResource

@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 import SwiftData
 
-class Container {
+public class Container {
     var factory: [String: () -> Any]
     var store: [String: Any]
     let swiftDataController: SwiftDataController
     var modelContainer: ModelContainer
     
-    init() {
+    public init() {
         print(#file, #function)
         swiftDataController = .init(models: SDTeam.self, SDPokemon.self, SDMove.self, SDItem.self, SDAbility.self, SDSpecies.self, SDLanguagePokemonName.self, SDLanguageItemName.self, isTesting: false)
         self.modelContainer = swiftDataController.container
@@ -23,11 +23,11 @@ class Container {
         self.factory = [:]
     }
 
-    func registration(register: @escaping ((Container) -> Void)) {
+    public func registration(register: @escaping ((Container) -> Void)) {
         register(self)
     }
     
-    func register<T>(_ type: T.Type, object: T, with container: ((Container) -> Void)? = nil) {
+    public func register<T>(_ type: T.Type, object: T, with container: ((Container) -> Void)? = nil) {
         factory[String(describing: T.self)] = {
             object
         }
@@ -35,14 +35,14 @@ class Container {
         container?(self)
     }
     
-    func resolve<T>() -> T {
+    public func resolve<T>() -> T {
         guard let resolved = store[String(describing: T.self)] as? T else {
             fatalError("\(T.self) has not been registered yet !")
         }
         return resolved
     }
     
-    func resolve<T>(_ type: T.Type) -> T {
+    public func resolve<T>(_ type: T.Type) -> T {
         guard let resolved = store[String(describing: T.self)] as? T else {
             fatalError("\(T.self) has not been registered yet !")
         }
@@ -50,11 +50,11 @@ class Container {
     }
 }
 
-struct ContainerKey: EnvironmentKey {
-    static var defaultValue: Container = .init()
+public struct ContainerKey: EnvironmentKey {
+    public static var defaultValue: Container = .init()
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
     var diContainer: Container {
         get { self[ContainerKey.self] }
         set { self[ContainerKey.self] =  newValue }

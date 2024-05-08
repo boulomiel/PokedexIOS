@@ -8,8 +8,8 @@
 import Foundation
 import SwiftData
 
-struct AddAbilityRoute: Hashable, Identifiable {
-    let id: UUID = .init()
+public struct AddAbilityRoute: Hashable, Identifiable {
+    public let id: UUID = .init()
     let pokemonID: PersistentIdentifier
     let abilities: [PokemonAbility]
     let current: PokemonAbilitySelectionModel?

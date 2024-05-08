@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DescriptionScreen: View {
+public struct DescriptionScreen: View {
     
     let descriptions: [DescriptionByVersionModel]
     @State var selectedLanguage: String
@@ -20,7 +20,7 @@ struct DescriptionScreen: View {
         descriptions.filter { $0.language == selectedLanguage }
     }
     
-    var body: some View {
+    public var body: some View {
         ScrollView {
             VStack {
                 ScrollPickerView(options: languages, selected: $selectedLanguage)

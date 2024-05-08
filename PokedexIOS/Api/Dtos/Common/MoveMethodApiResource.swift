@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoveMethodApiResource: Codable {
+public struct MoveMethodApiResource: Codable {
     var name: MoveLearnMethodType
     var url: URL
 }

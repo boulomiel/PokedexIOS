@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct PokemonTeamsScreen: View {
+public struct PokemonTeamsScreen: View {
     
     @Environment(\.modelContext) var modelContext
     @DIContainer var scrollFetchApi : ScrollFetchPokemonApi
@@ -27,7 +27,7 @@ struct PokemonTeamsScreen: View {
     @State var teamRouter: TeamRouter
     @State var teamCount: Int = 0
     
-    var body: some View {
+    public var body: some View {
         NavigationStack(path: $teamRouter.path) {
             PokemonTeamsListView()
                 .navigationTitle("Teams")

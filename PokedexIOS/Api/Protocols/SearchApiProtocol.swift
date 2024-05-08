@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SearchApiProtocol: FetchApiProtocol {
+public protocol SearchApiProtocol: FetchApiProtocol {
     func fetch(id: String) async  -> Result<Requested, ApiPokemonError>
 }

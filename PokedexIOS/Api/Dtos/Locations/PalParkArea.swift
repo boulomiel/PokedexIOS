@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PalParkArea: Codable {
+public struct PalParkArea: Codable {
     
     var id: Int
     var name: String
@@ -21,7 +21,7 @@ struct PalParkArea: Codable {
     
 }
 
-struct PalParkEncounterSpecies: Codable {
+public struct PalParkEncounterSpecies: Codable {
     
     var baseScore: Int
     var rate: Int

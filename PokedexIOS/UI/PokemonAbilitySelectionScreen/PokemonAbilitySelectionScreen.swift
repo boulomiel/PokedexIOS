@@ -8,14 +8,14 @@
 import SwiftUI
 import SwiftData
 
-struct PokemonAbilitySelectionScreen: View {
+public struct PokemonAbilitySelectionScreen: View {
     
     @Environment(\.isIphone) var isIphone
     @Environment(\.isLandscape) var isLandscape
     @Environment(\.dismiss) var dismiss
     @State var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Picker(selection: $provider.selected) {
                 ForEach(provider.pokemonAbilities, id: \.id) { ability in
@@ -64,7 +64,7 @@ struct PokemonAbilitySelectionScreen: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         
         let pokemonID: PersistentIdentifier
         let abilities: [PokemonAbility]

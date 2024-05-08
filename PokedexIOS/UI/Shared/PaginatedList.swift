@@ -10,14 +10,14 @@ import SwiftUI
 import Combine
 import SwiftData
 
-struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiService: SearchApiProtocol> : View where ScrollService.Requested == ScrollFetchResult {
+public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiService: SearchApiProtocol> : View where ScrollService.Requested == ScrollFetchResult {
     
     typealias Provider = ScrollProvider<ScrollService, ApiService>
 
     @State var provider: Provider
     @ViewBuilder var scroller: (Provider) -> Scroller
     
-    var body: some View {
+    public var body: some View {
         scroller(provider)
             .searchable(text: $provider.config.searchText)
             .autocorrectionDisabled(true) 
@@ -28,7 +28,7 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
     }
     
     @Observable
-    class ScrollProvider<ScrollApi: ScrollFetchApiProtocol, Api: SearchApiProtocol> where ScrollApi.Requested == ScrollFetchResult {
+   public class ScrollProvider<ScrollApi: ScrollFetchApiProtocol, Api: SearchApiProtocol> where ScrollApi.Requested == ScrollFetchResult {
         var subscriptions: Set<AnyCancellable> = .init()
         let scrollFetchApi: ScrollApi
         let fetchApi: Api
@@ -133,7 +133,7 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
             searchTask = nil
         }
         
-        struct Config {
+        public struct Config {
             var searchText: String = ""
             var scrollFetch: [NamedAPIResource] = []
             var currentOffset: Int = 0
@@ -147,7 +147,7 @@ struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiS
             }
         }
         
-        struct SearchedElement<Content: Decodable> {
+        public struct SearchedElement<Content: Decodable> {
             let element: Content
             let language: LanguageName
         }
@@ -159,7 +159,7 @@ protocol NameFetchingProtocol {
     func fetchNameForLanguage(for name: String) async -> String?
 }
 
-struct AnyNameFetchingProvider<ItemApi>: NameFetchingProtocol {
+public struct AnyNameFetchingProvider<ItemApi>: NameFetchingProtocol {
     private let _fetchNameForLanguage: (String) async -> String?
     
     init<T: NameFetchingProtocol>(_ provider: T) where T.ItemApi == ItemApi {

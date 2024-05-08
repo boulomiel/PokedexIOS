@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ContestType: Codable {
+public struct ContestType: Codable {
     
     var id: Int
     var name: String

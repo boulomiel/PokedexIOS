@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct PhysicalMoveShape: Shape {
+public struct PhysicalMoveShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let start = CGPoint(x: rect.midX, y: rect.minY+8)
         let path =  Path { p in
             ///RIGHT HALF -> from top to bottom

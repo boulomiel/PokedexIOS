@@ -8,18 +8,18 @@
 import Foundation
 
 
-struct JsonReader {
+public final class JsonReader {
     
-    enum JsonFiles: String, CaseIterable {
+    public enum JsonFiles: String, CaseIterable {
         case pikachu = "Pikachu", mew = "Mew", mewtwo = "Mewtwo", bulbasaur = "Bulbasaur", dragonite = "Dragonite", hypno = "Hypno"
         case slam = "Slam", confusion = "Confusion", focusEnergy = "FocusEnergy", swordDance = "SwordDance"
         
-        static var pokemonFiles: [JsonFiles] = [.pikachu, .mew, .mewtwo, .bulbasaur, .dragonite, .hypno]
-        static var pokemonMoves: [JsonFiles] = [.slam, .confusion, .focusEnergy, .swordDance]
+        public static var pokemonFiles: [JsonFiles] = [.pikachu, .mew, .mewtwo, .bulbasaur, .dragonite, .hypno]
+        public static var pokemonMoves: [JsonFiles] = [.slam, .confusion, .focusEnergy, .swordDance]
     }
     
     static func read<T: Decodable>(for file: JsonFiles) -> T {
-        guard let url = Bundle.main.url(forResource: file.rawValue, withExtension: "json") else {
+        guard let url = Bundle(for: Self.self).url(forResource: file.rawValue, withExtension: "json") else {
             fatalError("This file \(file.rawValue) cannot be found within the package")
         }
         
@@ -32,13 +32,5 @@ struct JsonReader {
         } catch {
             fatalError("\(error)")
         }
-    }
-    
-    static func readPokemons() -> [Pokemon] {
-        return JsonFiles.pokemonFiles.map { self.read(for: $0) }
-    }
-    
-    static func readMoves() -> [Move] {
-        return JsonFiles.pokemonMoves.map { self.read(for: $0) }
     }
 }

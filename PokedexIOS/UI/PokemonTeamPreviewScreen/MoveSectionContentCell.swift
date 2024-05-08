@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct MoveSectionContentCell: View {
+public struct MoveSectionContentCell: View {
     
     let moves: [Move]
     @State private var showDescription: Bool = false
     
-    var body: some View {
+    public var body: some View {
         VStack {
             ForEach(moves) { move in
                 Cell(move: move)
@@ -20,12 +20,12 @@ struct MoveSectionContentCell: View {
         }
     }
     
-    struct Cell: View {
+    public struct Cell: View {
         
         let move: Move
         @State private var showDescription: Bool = false
 
-        var body: some View {
+        public var body: some View {
             VStack {
                 titleRow(move: move)
                 if showDescription {

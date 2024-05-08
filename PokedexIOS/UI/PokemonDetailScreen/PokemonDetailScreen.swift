@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonDetailScreen: View {
+public struct PokemonDetailScreen: View {
     
     @DIContainer var fetchPokemonApi: FetchPokemonApi
     @DIContainer var evolutionChainApi: PokemonEvolutionChainApi
@@ -17,7 +17,7 @@ struct PokemonDetailScreen: View {
     @State var areDescriptionsExpanded: Bool = true
     @State var areMovesExpanded: Bool = true
 
-    var body: some View {
+    public var body: some View {
         List {
             Section("Generation") {
                 segmentedGenView

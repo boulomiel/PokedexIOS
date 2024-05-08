@@ -9,12 +9,12 @@ import Foundation
 import SwiftUI
 import Combine
 
-struct PokemonStatsView: View {
+public struct PokemonStatsView: View {
     
     @Environment(\.isIphone) private var isIphone
     @Environment(\.isLandscape) private var isLandscape
     
-    //Constructor
+    //Conpublic structor
     let pokemonStats: [PokemonDisplayStat]
     let backgroundColor: Color
     let dataColor: Color
@@ -29,7 +29,7 @@ struct PokemonStatsView: View {
         self.radius = radius
     }
     
-    var body: some View {
+    public var body: some View {
         StatBackgroundShape(radius: radius)
             .fill(backgroundColor)
             .coordinateSpace(.named("StatSpace"))
@@ -65,9 +65,6 @@ struct PokemonStatsView: View {
                     .font(.caption)
                     .minimumScaleFactor(0.1)
                     .position(position)
-            }
-            .onAppear {
-                print(frame, isLandscape)
             }
         }
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PastMoveValues: Codable, Hashable {
+public struct PastMoveValues: Codable, Hashable {
     var accuracy: Int?
     var effect_chance: Int?
     var power: Int?

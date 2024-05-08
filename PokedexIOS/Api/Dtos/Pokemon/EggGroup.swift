@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EggGroup: Codable {
+public struct EggGroup: Codable {
     var id: Int
     var name: String
     var names: [Name]

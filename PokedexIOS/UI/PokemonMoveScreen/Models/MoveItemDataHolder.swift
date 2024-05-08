@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct MoveItemDataHolder: Hashable, Identifiable {
-    var id: Int
+public struct MoveItemDataHolder: Hashable, Identifiable {
+    public var id: Int
     var name: [MoveNameItem] //language: name
     let effects: [MoveEffectItem] //language: effect description
     var type: String

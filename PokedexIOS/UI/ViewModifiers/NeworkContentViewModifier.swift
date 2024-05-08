@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct NetworkContentViewModifier: ViewModifier {
+public struct NetworkContentViewModifier: ViewModifier {
     
     @DIContainer var networkManager: NetworkManager
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         if networkManager.status.showContent {
             content
         } else {

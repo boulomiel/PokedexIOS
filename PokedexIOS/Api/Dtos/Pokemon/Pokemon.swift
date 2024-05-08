@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pokemon: Codable, Hashable {
+public struct Pokemon: Codable, Hashable {
     var id: Int
     var name: String
     var height: Int
@@ -43,7 +43,7 @@ struct Pokemon: Codable, Hashable {
 
 class PokemonSprites: Codable, Hashable {
     
-    static func == (lhs: PokemonSprites, rhs: PokemonSprites) -> Bool {
+    public static func == (lhs: PokemonSprites, rhs: PokemonSprites) -> Bool {
         lhs.frontDefault == rhs.frontDefault &&
         lhs.frontShiny == rhs.frontShiny &&
         lhs.frontFemale == rhs.frontFemale &&
@@ -54,7 +54,7 @@ class PokemonSprites: Codable, Hashable {
         lhs.versions == rhs.versions
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(frontDefault)
     }
     
@@ -82,7 +82,7 @@ class PokemonSprites: Codable, Hashable {
     }
 }
 // MARK: - Ability
-struct PokemonAbility: Codable, Hashable {
+public struct PokemonAbility: Codable, Hashable {
     var ability: NamedAPIResource
     var isHidden: Bool
     var slot: Int
@@ -94,22 +94,22 @@ struct PokemonAbility: Codable, Hashable {
     }
 }
 
-struct PokemonFormType: Codable, Hashable {
+public struct PokemonFormType: Codable, Hashable {
     var slot: Int
     var type: NamedAPIResource
 }
 
-struct PokemonTypePast: Codable, Hashable {
+public struct PokemonTypePast: Codable, Hashable {
     var generation: NamedAPIResource
     var types: [PokemonType]
 }
 
-struct PokemonType: Codable, Hashable {
+public struct PokemonType: Codable, Hashable {
     var slot: Int
     var type: NamedAPIResource
 }
 
-struct PokemonHeldItem: Codable, Hashable {
+public struct PokemonHeldItem: Codable, Hashable {
     var item: NamedAPIResource
     var versionDetails: [PokemonHeldItemVersion]
 
@@ -119,18 +119,18 @@ struct PokemonHeldItem: Codable, Hashable {
     }
 }
 
-struct PokemonHeldItemVersion: Codable, Hashable {
+public struct PokemonHeldItemVersion: Codable, Hashable {
     var rarity: Int
     var version: NamedAPIResource
 }
 
 
-struct PokemonMove: Codable, Hashable {
+public struct PokemonMove: Codable, Hashable {
     var move: NamedAPIResource
     var version_group_details: [PokemonMoveVersion]
 }
 
-struct PokemonMoveVersion: Codable, Hashable {
+public struct PokemonMoveVersion: Codable, Hashable {
     var move_learn_method: NamedAPIResource
     var version_group: NamedAPIResource
     var level_learned_at: Int
@@ -138,7 +138,7 @@ struct PokemonMoveVersion: Codable, Hashable {
 
 
 // MARK: - GenerationI
-struct GenerationI: Codable, Hashable {
+public struct GenerationI: Codable, Hashable {
     var redBlue, yellow: PokemonSprites?
 
     enum CodingKeys: String, CodingKey {
@@ -148,13 +148,13 @@ struct GenerationI: Codable, Hashable {
 }
 
 // MARK: - GenerationIi
-struct GenerationIi: Codable, Hashable {
+public struct GenerationIi: Codable, Hashable {
     var crystal: PokemonSprites?
     var gold, silver: PokemonSprites?
 }
 
 // MARK: - GenerationIii
-struct GenerationIii: Codable, Hashable {
+public struct GenerationIii: Codable, Hashable {
     var emerald: PokemonSprites?
     var fireredLeafgreen, rubySapphire: PokemonSprites?
 
@@ -166,7 +166,7 @@ struct GenerationIii: Codable, Hashable {
 }
 
 // MARK: - GenerationIv
-struct GenerationIv: Codable, Hashable {
+public struct GenerationIv: Codable, Hashable {
     var diamondPearl, heartgoldSoulsilver, platinum: PokemonSprites?
 
     enum CodingKeys: String, CodingKey {
@@ -177,7 +177,7 @@ struct GenerationIv: Codable, Hashable {
 }
 
 // MARK: - GenerationV
-struct GenerationV: Codable, Hashable {
+public struct GenerationV: Codable, Hashable {
     var blackWhite: PokemonSprites?
 
     enum CodingKeys: String, CodingKey {
@@ -186,7 +186,7 @@ struct GenerationV: Codable, Hashable {
 }
 
 // MARK: - GenerationVii
-struct GenerationVi: Codable, Hashable {
+public struct GenerationVi: Codable, Hashable {
     var omegaAlpha: PokemonSprites?
 
     enum CodingKeys: String, CodingKey {
@@ -195,7 +195,7 @@ struct GenerationVi: Codable, Hashable {
 }
 
 // MARK: - GenerationVii
-struct GenerationVii: Codable, Hashable {
+public struct GenerationVii: Codable, Hashable {
     var icons: PokemonSprites?
     var ultraSunUltraMoon: PokemonSprites?
 
@@ -206,12 +206,12 @@ struct GenerationVii: Codable, Hashable {
 }
 
 // MARK: - GenerationViii
-struct GenerationViii: Codable, Hashable {
+public struct GenerationViii: Codable, Hashable {
     var icons: PokemonSprites?
 }
 
 // MARK: - Stat
-struct PokemonStat: Codable, Hashable {
+public struct PokemonStat: Codable, Hashable {
     var baseStat, effort: Int
     var stat: NamedAPIResource
 
@@ -221,7 +221,7 @@ struct PokemonStat: Codable, Hashable {
     }
 }
 
-struct PokemonVersion: Codable, Hashable {
+public struct PokemonVersion: Codable, Hashable {
     var generationI: GenerationI
     var generationIi: GenerationIi
     var generationIii: GenerationIii
@@ -243,7 +243,7 @@ struct PokemonVersion: Codable, Hashable {
     }
 }
 
-struct PokemonCries: Codable, Hashable {
+public struct PokemonCries: Codable, Hashable {
     var latest: URL?
     var legacy: URL?
 }

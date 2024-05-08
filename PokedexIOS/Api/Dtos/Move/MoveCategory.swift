@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoveCategory: Codable {
+public struct MoveCategory: Codable {
     var id: Int
     var name: String
     var moves: [NamedAPIResource]

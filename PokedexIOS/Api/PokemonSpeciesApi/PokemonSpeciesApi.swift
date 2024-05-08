@@ -7,8 +7,8 @@
 
 import Foundation
 
-class PokemonSpeciesApi: FetchApiProtocol {
-    typealias Query = PokemonSpeciesQuery
-    typealias Requested = PokemonSpecies
-    typealias Failed = ApiPokemonError
+public class PokemonSpeciesApi: FetchApiProtocol {
+    public typealias Query = PokemonSpeciesQuery
+    public typealias Requested = PokemonSpecies
+    public typealias Failed = ApiPokemonError
 }

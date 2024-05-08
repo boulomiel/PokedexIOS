@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct PokemonScrollScreen: View {
+public struct PokemonScrollScreen: View {
     
     @Environment(\.modelContext) var modelContext
     @DIContainer var scrollApi: ScrollFetchPokemonApi
     @DIContainer var fetchApi: FetchPokemonApi
     
-    var body: some View {
+    public var body: some View {
         PaginatedList(
             provider: .init(api: scrollApi, fetchApi: fetchApi, modelContainer: modelContext.container),
             scroller: { provider  in

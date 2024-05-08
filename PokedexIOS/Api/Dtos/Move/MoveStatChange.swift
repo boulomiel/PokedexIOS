@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoveStatChange: Codable, Hashable {
+public struct MoveStatChange: Codable, Hashable {
     var change: Int
     var stat: NamedAPIResource
 }

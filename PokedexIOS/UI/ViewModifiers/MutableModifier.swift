@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct MutableModifier: ViewModifier {
+public struct MutableModifier: ViewModifier {
     
     @DIContainer var player: CriePlayer
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .toolbar(content: {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -34,7 +34,7 @@ struct MutableModifier: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     
     func showMutableIcon() -> some View {
         modifier(MutableModifier())

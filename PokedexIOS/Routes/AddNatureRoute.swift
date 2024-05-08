@@ -8,8 +8,8 @@
 import Foundation
 import SwiftData
 
-struct AddNatureRoute: Hashable, Identifiable {
-    let id: UUID = .init()
+public struct AddNatureRoute: Hashable, Identifiable {
+    public let id: UUID = .init()
     let pokemonID: PersistentIdentifier
     let stats: [PokemonStat]
     let current: Nature?

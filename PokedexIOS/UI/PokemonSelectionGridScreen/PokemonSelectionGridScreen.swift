@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct PokemonSelectionGridScreen: View {
+public struct PokemonSelectionGridScreen: View {
     
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchPokemonApi, FetchPokemonApi>.Provider
     
@@ -26,7 +26,7 @@ struct PokemonSelectionGridScreen: View {
     @Namespace var listSpace
 
     
-    var body: some View {
+    public var body: some View {
         ScrollViewReader(content: { reader in
             ZStack {
                 if let showVarietiesFor {
@@ -275,7 +275,7 @@ struct PokemonSelectionGridScreen: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         
         var selectedPokemons: [Pokemon]
         private var modelContext: ModelContext
@@ -357,11 +357,11 @@ struct PokemonSelectionGridScreen: View {
     }
 }
 
-struct TeamNameSheet: View {
+public struct TeamNameSheet: View {
     
     @Bindable var provider: PokemonSelectionGridScreen.Provider
     var onFinish: () -> Void
-    var body: some View {
+    public var body: some View {
         LabeledContent("Team name") {
             HStack {
                 TextField("", text: $provider.teamName)
@@ -386,8 +386,8 @@ struct TeamNameSheet: View {
         .padding(.horizontal)
     }
     
-    struct TeamNameItem: Identifiable, Hashable {
-        let id: UUID = .init()
+    public struct TeamNameItem: Identifiable, Hashable {
+        public let id: UUID = .init()
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SegmentData: Hashable {
+public struct SegmentData: Hashable {
     var genModels: [GenModel]
     var selected: GenModel
 }

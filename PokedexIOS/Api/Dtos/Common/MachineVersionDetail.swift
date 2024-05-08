@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MachineVersionDetail: Codable, Hashable {
+public struct MachineVersionDetail: Codable, Hashable {
     var machine: APIResource
     var versionGroup: NamedAPIResource
     

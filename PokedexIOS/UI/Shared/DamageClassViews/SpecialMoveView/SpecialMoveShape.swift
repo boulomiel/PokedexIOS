@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct SpecialMoveShape: Shape {
+public struct SpecialMoveShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let start = CGPoint(x: rect.midX, y: rect.minY+8)
 
         let path = Path { p in
@@ -23,13 +23,13 @@ struct SpecialMoveShape: Shape {
 }
 
 
-struct SpecialMoveView: View {
+public struct SpecialMoveView: View {
     
     let deepDarkBlue = Color("DeepDarkBlue")
     let darkBlue = Color("DarkBlue")
     let lightBlue = Color("LightBlue")
     
-    var body: some View {
+    public var body: some View {
         GeometryReader { geo  in
             let frame = geo.frame(in: .local)
             VStack {
@@ -69,14 +69,14 @@ struct SpecialMoveView: View {
     }
 }
 
-struct SpecialMoveView2: View {
+public struct SpecialMoveView2: View {
     
     let deepDarkBlue = Color("DeepDarkBlue")
     let darkBlue = Color("DarkBlue")
     let lightBlue = Color("LightBlue")
     var height: CGFloat = 45
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             
             Rectangle()

@@ -8,14 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct VarietiesListView<Cell: View>: View {
+public struct VarietiesListView<Cell: View>: View {
     
     @Bindable var provider: Provider
     @ViewBuilder var cell: (LocalPokemon) -> Cell
     @State var additionnalCell: (() -> AnyView)?
     @Namespace var varieties
     
-    var body: some View {
+    public var body: some View {
         if provider.isGrid {
             ScrollView {
                 LazyVGrid(columns: provider.grid,
@@ -50,7 +50,7 @@ struct VarietiesListView<Cell: View>: View {
 
     
     @Observable
-    class Provider {
+   public class Provider {
         let species: SpeciesModel?
         let fetchApi: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi

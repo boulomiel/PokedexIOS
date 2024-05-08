@@ -21,19 +21,19 @@ let testpokemonability3 = PokemonAbilityDetails(
     isHidden: false
 )
 
-struct ShowOtherItem: Identifiable {
-    let id: UUID = .init()
+public struct ShowOtherItem: Identifiable {
+    public let id: UUID = .init()
     let title: String
     let pokemons: [String]
 }
 
-struct PokemonAbilityView: View {
+public struct PokemonAbilityView: View {
     
     let provider: Provider
     @State private var isExpanded: Bool = false
     @State private var showOtherItem: ShowOtherItem?
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 8) {
             disclosedContent
         }
@@ -131,9 +131,9 @@ struct PokemonAbilityView: View {
     }
     
     @Observable
-    class Provider: Identifiable {
+   public class Provider: Identifiable {
         
-        let id: UUID = .init()
+        public let id: UUID = .init()
         let ability: PokemonAbilityDetails
         let api: PokemonAbilityApi
         var pokemonAbilityListModel: PokemonAbilityListModel?
@@ -181,8 +181,8 @@ struct PokemonAbilityView: View {
     }
 }
 
-struct PokemonAbilityListModel: Hashable, Identifiable {
-    let id: UUID = .init()
+public struct PokemonAbilityListModel: Hashable, Identifiable {
+    public let id: UUID = .init()
     let effectChange: String?
     let effectEntry: String?
     let flavorText: String?

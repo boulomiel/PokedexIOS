@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct PokemonListAbilityView: View {
+public struct PokemonListAbilityView: View {
     
     @Bindable var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         ForEach(provider.providers, id: \.id) { provider in
             PokemonAbilityView(provider: provider)
         }
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         typealias CellProvider = PokemonAbilityView.Provider
         let abilityApi: PokemonAbilityApi
         let abilities: [PokemonAbilityDetails]

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SelectionIndicatorView: View {
+public struct SelectionIndicatorView: View {
     
     @Binding var isSelected: Bool
     
-    var body: some View {
+    public var body: some View {
         Image(systemName: isSelected ? "checkmark.circle" : "circle")
             .foregroundStyle(isSelected ? Color.blue : Color.gray.opacity(0.3))
             .keyframeAnimator(initialValue: Anim(scale: 1.0), trigger: isSelected, content: { view, value in
@@ -26,7 +26,7 @@ struct SelectionIndicatorView: View {
             .foregroundStyle( isSelected ? .blue : Color.gray.opacity(0.3))
     }
     
-    struct Anim {
+    public struct Anim {
         var scale: Double
         var color: Color =  Color.gray.opacity(0.3)
     }

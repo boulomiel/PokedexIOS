@@ -9,7 +9,7 @@ import Foundation
 
 //Targets moves can be directed at during battle. Targets can be Pokémon, environments or even other moves.
 
-struct MoveTarget: Codable {
+public struct MoveTarget: Codable {
     var id: Int
     var name: String
     var descriptions: [Description]

@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct GenModel: Hashable, Identifiable {
+public struct GenModel: Hashable, Identifiable {
     
     
-    static func == (lhs: GenModel, rhs: GenModel) -> Bool {
+    public static func == (lhs: GenModel, rhs: GenModel) -> Bool {
         lhs.id == rhs.id
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
     
-    let id: String
+    public let id: String
     let sprite: PokemonSprites?
     
     static func generate(from pokemonDTO: Pokemon) -> [GenModel] {

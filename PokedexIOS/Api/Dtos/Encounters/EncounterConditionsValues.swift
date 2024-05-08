@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EncounterConditionsValues: Codable {
+public struct EncounterConditionsValues: Codable {
     var id: Int
     var name: String
     var values: [NamedAPIResource]

@@ -9,22 +9,13 @@ import Foundation
 import SwiftData
 
 @Model
-class SDTeam {
+public class SDTeam {
     @Attribute(.unique) let teamID: UUID
-    @Attribute(.unique) var name: String
+    @Attribute(.unique) public var name: String
     @Relationship(deleteRule: .nullify, inverse: \SDPokemon.team) var pokemons: [SDPokemon]?
     
-    init(teamID: UUID = .init(), name: String) {
+    public init(teamID: UUID = .init(), name: String) {
         self.teamID = teamID
         self.name = name
-    }
-    
-    static var examples: [SDTeam] {
-        [
-            .init(name: "DreamTeam"),
-            .init(name: "LooserTeam"),
-            .init(name: "MyFavorites"),
-            .init(name: "WaterSwimmer")
-        ]
     }
 }

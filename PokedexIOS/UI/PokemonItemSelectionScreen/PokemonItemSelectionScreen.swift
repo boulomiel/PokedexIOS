@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 import SwiftData
 
-struct PokemonItemSelectionScreen: View {
+public struct PokemonItemSelectionScreen: View {
     
     @Environment(\.dismiss) var dismiss
     @DIContainer var itemApi: PokemonItemApi
     @State var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         ScrollViewReader { reader  in
             if let fetched = provider.searched {
                 VStack {
@@ -59,7 +59,7 @@ struct PokemonItemSelectionScreen: View {
     }
 
     @Observable
-    class Provider {
+   public class Provider {
         
         typealias CellProvider = ItemCell.Provider
         
@@ -261,8 +261,6 @@ struct PokemonItemSelectionScreen: View {
                 }
                 return
             }
-           /// _ =  languageNameFetcher.fetchItemNames(for: name)
-            //let fetchableName = (languageNamed.first ?? name).lowercased().replacingOccurrences(of: " ", with: "-")
             let filtered = providers.filter { $0.scrolledFetchedItem?.name.contains(name) ?? false }
             if !filtered.isEmpty {
                 await MainActor.run {
@@ -272,17 +270,6 @@ struct PokemonItemSelectionScreen: View {
                 }
                 return
             }
-//            let result = await pokemonItemApi.fetch(id: fetchableName)
-//            switch result {
-//            case .success(let result):
-//                await MainActor.run {
-//                    searched = .init(api: pokemonItemApi, scrolledFetchedItem: .init(name: result.name, url: .cachesDirectory), isSelectable: selectionActive)
-//                    searched?.isSelected = current?.name == result.name
-//                }
-//            case .failure(let error):
-//                searched = nil
-//                print(#function, error)
-//            }
         }
         
         private func cleanSearchTask() {
@@ -308,11 +295,11 @@ struct PokemonItemSelectionScreen: View {
         }
     }
     
-    struct ItemDataModel: Hashable {
+    public struct ItemDataModel: Hashable {
         var name: String
     }
     
-    struct SelectedModel: Hashable {
+    public struct SelectedModel: Hashable {
         let item: Item?
     }
 }

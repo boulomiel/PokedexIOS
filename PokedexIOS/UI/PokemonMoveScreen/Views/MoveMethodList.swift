@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct MethodMoveList: View {
+public struct MethodMoveList: View {
     
     let width: CGFloat
     let provider: Provider
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Text(provider.method.rawValue.capitalized)
                 .bold()
@@ -28,7 +28,7 @@ struct MethodMoveList: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         let method: MoveLearnMethodType
         let moveApi: PokemonMoveApi
         let generalApi: GeneralApi<Machine>

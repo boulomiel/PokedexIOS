@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-//struct PokemonItemScreen: View {
+//public struct PokemonItemScreen: View {
 //    
 //    @Environment(\.modelContext) var moc
 //    @DIContainer var scrollFetchItemApi: ScrollFetchItemApi
 //    @DIContainer var fetchItemApi: PokemonItemApi
 //
-//    var body: some View {
+//    public var body: some View {
 //        ItemScrolledContent(provider: .init(api: scrollFetchItemApi, fetchApi: fetchItemApi, modelContainer: moc.container))
 //    }
 //}

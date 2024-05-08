@@ -7,12 +7,12 @@
 
 import Foundation
 
-class PokemonItemApi: SearchApiProtocol {
-    typealias Query = ItemQuery
-    typealias Requested = Item
-    typealias Failed = ApiPokemonError
+public class PokemonItemApi: SearchApiProtocol {
+    public typealias Query = ItemQuery
+    public typealias Requested = Item
+    public typealias Failed = ApiPokemonError
     
-    func fetch(id: String) async -> Result<Item, ApiPokemonError> {
+    public func fetch(id: String) async -> Result<Item, ApiPokemonError> {
         let query: Query = .init(itemID: id)
         return await fetch(session: .shared, query: query)
     }

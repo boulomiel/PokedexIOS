@@ -7,14 +7,9 @@
 
 import Foundation
 
-struct ScrollFetchResult: Codable {
+public struct ScrollFetchResult: Codable {
     var count: Int
     var next, previous: URL?
     var results: [NamedAPIResource]
 }
-//
-//// MARK: - Result
-//struct ScrolledFetchedElement: Codable, Hashable {
-//    var name: String
-//    var url: URL
-//}
+

@@ -1,5 +1,5 @@
 //
-//  class GeneralApi.swift
+// public class GeneralApi.swift
 //  PokedexIOS
 //
 //  Created by Ruben Mimoun on 22/04/2024.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-class GeneralApi<Requested: Decodable>: FetchApiProtocol {
-    typealias Query = GeneralQuery
-    typealias Requested = Requested
-    typealias Failed = ApiPokemonError
+public class GeneralApi<Requested: Decodable>: FetchApiProtocol {
+    public typealias Query = GeneralQuery
+    public typealias Requested = Requested
+    public typealias Failed = ApiPokemonError
     
-    struct GeneralQuery: ApiQuery {
+    public struct GeneralQuery: ApiQuery {
         let url: URL
-        var urlComponents: URLComponents {
+        public var urlComponents: URLComponents {
             return .init()
         }
     }

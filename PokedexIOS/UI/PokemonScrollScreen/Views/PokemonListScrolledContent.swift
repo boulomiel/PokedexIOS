@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct PokemonListScrolledContent: View {
+public struct PokemonListScrolledContent: View {
     
     typealias Provider = PaginatedList<Self, ScrollFetchPokemonApi, FetchPokemonApi>.Provider
     @DIContainer var speciesApi: PokemonSpeciesApi
     @Bindable var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         content
     }
     

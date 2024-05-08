@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct APIResource: Codable, Hashable {
+public struct APIResource: Codable, Hashable {
     var url: URL
 }

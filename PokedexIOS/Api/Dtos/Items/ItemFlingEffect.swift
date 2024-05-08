@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemFlingEffect: Codable {
+public struct ItemFlingEffect: Codable {
     var id: Int
     var name: String
     var effect_entries: [Effect]

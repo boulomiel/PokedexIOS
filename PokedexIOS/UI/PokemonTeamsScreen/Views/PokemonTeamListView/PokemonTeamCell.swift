@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonTeamCell: View {
+public struct PokemonTeamCell: View {
     
     var team: SDTeam
     @Environment(TeamRouter.self) var teamRouter
@@ -17,7 +17,7 @@ struct PokemonTeamCell: View {
     }
     private let grid: [GridItem] = Array(repeating: .init(.flexible(minimum: 120)), count: 3)
     
-    var body: some View {
+    public var body: some View {
         LazyVGrid(columns: grid, content: {
             ForEach(pokemons, id: \.id) { pokemon in
                 if let decoded = pokemon.decoded {

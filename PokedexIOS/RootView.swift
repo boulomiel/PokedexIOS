@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct RootView: View {
+public struct RootView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @DIContainer var appLauncher: AppLaunchWorker
     @DIContainer var fetchApi: FetchPokemonApi
@@ -16,7 +16,7 @@ struct RootView: View {
     @State var breath: Bool = false
     @State var tabRoot: TabRoot? = .pokedex
     
-    var body: some View {
+    public var body: some View {
         if appLauncher.shouldWait {
             setupView
         } else {
@@ -105,7 +105,7 @@ struct RootView: View {
         case pokedex, teams
     }
     
-    struct Anim {
+    public struct Anim {
         var scaleEffect: CGFloat
     }
 

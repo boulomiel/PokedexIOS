@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Effect: Codable, Hashable {
+public struct Effect: Codable, Hashable {
     var effect: String
     var language: NamedAPIResource
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoveDamageClass: Codable {
+public struct MoveDamageClass: Codable {
     var id: Int
     var name: String
     var descriptions: [Description]

@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct MoveViewCell: View {
+public struct MoveViewCell: View {
     
     let provider: Provider
     let width: CGFloat
     @State private var selectedMove: MoveItemDataHolder?
     
-    var body: some View {
+    public var body: some View {
 
         if let move = provider.moveItemHolder {
             NavigationLink(value: MoveDetailsRoute(move: move)) {
@@ -89,7 +89,7 @@ struct MoveViewCell: View {
         
     }
     
-    struct Config {
+    public struct Config {
         let learningMethod: MoveLearnMethodType
         
         var methodText: String {
@@ -113,9 +113,9 @@ struct MoveViewCell: View {
     }
     
     @Observable
-    class Provider: Identifiable {
+   public class Provider: Identifiable {
         
-        let id: UUID = .init()
+        public let id: UUID = .init()
         let moveApi: PokemonMoveApi
         let generalApi: GeneralApi<Machine>
         let config: Config

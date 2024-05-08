@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct PokedexScreen: View {
+public struct PokedexScreen: View {
     
     @DIContainer var fetchApi: FetchPokemonApi
     @DIContainer var speciesApi: PokemonSpeciesApi
@@ -16,7 +16,7 @@ struct PokedexScreen: View {
     @DIContainer var evolutionChainApi: PokemonEvolutionChainApi
     @DIContainer var abilitiesApi: PokemonAbilityApi
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             PokemonScrollScreen()
                 .navigationDestination(for: LocalPokemon.self) { pokemon in

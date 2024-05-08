@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct LoadingModifier: ViewModifier {
+public struct LoadingModifier: ViewModifier {
     
     let showProgress: Bool
     @Namespace var loading
     static var loadingID: String = "loading"
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .overlay {
                 if showProgress {

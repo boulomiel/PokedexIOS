@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GenerationGameIndex: Codable, Hashable {
+public struct GenerationGameIndex: Codable, Hashable {
     
     var gameIndex: Int
     var generation: NamedAPIResource

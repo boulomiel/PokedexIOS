@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonEnvApi: Codable {
+public struct PokemonEnvApi: Codable {
     let scheme: String
     let host: String
     let pokemonEndpoint: String
@@ -20,12 +20,12 @@ struct PokemonEnvApi: Codable {
     let itemEndpoint: String
     let categorieItemEndpoint: String
     
-    enum CodingKeys : String, CodingKey {
+    public enum CodingKeys : String, CodingKey {
         case scheme, host,pokemonEndpoint, abilityEndpoint, speciesEndpoint, moveEndpoint, machineEndpoint, natureEndpoint, itemEndpoint, categorieItemEndpoint
         case evolutionChain = "evolution-chain"
     }
     
-    var urlComponents: URLComponents {
+    public var urlComponents: URLComponents {
         let api: PokemonEnvApi = PlistReader.read(list: .pokemonapi)
         var components = URLComponents()
         components.host = api.host
@@ -33,13 +33,13 @@ struct PokemonEnvApi: Codable {
         return components
     }
     
-    func makeItemURL() -> URL? {
+    public func makeItemURL() -> URL? {
         var c = urlComponents
         c.path = categorieItemEndpoint
         return c.url
     }
     
-    func makeSpeciesURL() -> URL? {
+    public func makeSpeciesURL() -> URL? {
         var c = urlComponents
         c.path = speciesEndpoint
         return c.url

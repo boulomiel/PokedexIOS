@@ -8,14 +8,14 @@
 import Foundation
 import SwiftData
 
-struct AddTeamRoute: Identifiable,  Hashable {
-    static func == (lhs: AddTeamRoute, rhs: AddTeamRoute) -> Bool {
+public struct AddTeamRoute: Identifiable,  Hashable {
+    public static func == (lhs: AddTeamRoute, rhs: AddTeamRoute) -> Bool {
         lhs.id == rhs.id
     }
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    let id: UUID = .init()
+    public let id: UUID = .init()
     var selectedPokemons: [Pokemon] = []
     var teamID: PersistentIdentifier?
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ContestEffects: Codable {
+public struct ContestEffects: Codable {
     
     var id: Int
     var appeal: Int

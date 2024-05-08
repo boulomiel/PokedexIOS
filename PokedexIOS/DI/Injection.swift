@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct InjectModifier: ViewModifier, DynamicProperty {
+public struct InjectModifier: ViewModifier, DynamicProperty {
     
     let container : Container
     
@@ -17,7 +17,7 @@ struct InjectModifier: ViewModifier, DynamicProperty {
         self.container.inject()
     }
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
     }
 }

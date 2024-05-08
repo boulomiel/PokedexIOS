@@ -9,15 +9,17 @@ import Foundation
 import SwiftUI
 
 @propertyWrapper
-struct DIContainer<T>: DynamicProperty {
+public struct DIContainer<T>: DynamicProperty {
     
-    @Environment(\.diContainer) var container
+    @Environment(\.diContainer) public var container
     
-    var wrappedValue: T {
+    public init() {}
+    
+    public var wrappedValue: T {
         value
     }
     
-    var value: T {
+    public var value: T {
         container.resolve()
     }
 }

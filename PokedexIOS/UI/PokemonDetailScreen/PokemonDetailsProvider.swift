@@ -134,17 +134,17 @@ class PokemonDetailsProvider {
     }
 }
 
-struct MoveData: Hashable {
+public struct MoveData: Hashable {
     var metaVersions:  [MoveVersionMeta]
 }
 
-struct MoveItemData: Hashable {
+public struct MoveItemData: Hashable {
     var querys: PokemonMoveQuery
     var metaVersion: [String : [MoveVersionMeta]]
 
 }
 
-struct MoveVersionMeta: Hashable {
+public struct MoveVersionMeta: Hashable {
     var moveName: String
     var version: VersionGroupType
     var levelLearntAt: Int

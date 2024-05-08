@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ApiQuery { 
+public protocol ApiQuery { 
     var urlComponents: URLComponents { get }
 }
 

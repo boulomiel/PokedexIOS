@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ContestName: Codable {
+public struct ContestName: Codable {
     var name: String
     var color: String
     var language: NamedAPIResource

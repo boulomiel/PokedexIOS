@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-protocol NameLauncherProtocol {
+public protocol NameLauncherProtocol {
     associatedtype T: Decodable
     associatedtype Model: PersistentModel
     func getCount() async -> Int

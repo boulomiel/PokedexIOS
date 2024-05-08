@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct PokemonGridListView: View {
+public struct PokemonGridListView: View {
     @DIContainer var fetchApi: FetchPokemonApi
     let provider: Provider
     
-    var body: some View {
+    public var body: some View {
         ScrollView {
             LazyVGrid(columns: provider.gridItems, content: {
                 ForEach(provider.providers, id: \.id) { provider in
@@ -23,7 +23,7 @@ struct PokemonGridListView: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         typealias CellProvider = PokemonGridCell.Provider
         let pokemons: [String]
         let gridItems: [GridItem]

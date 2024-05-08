@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct PokeBallTopShape: Shape {
+public struct PokeBallTopShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let start = CGPoint(x: rect.midX, y: rect.maxY)
         let outerPath = Path { p in
             p.addArc(center: start, radius: rect.width * 0.5, startAngle: .radians(.pi), endAngle: .radians(.zero), clockwise: false)
@@ -22,9 +22,9 @@ struct PokeBallTopShape: Shape {
     }
 }
 
-struct PokeBallBottomShape: Shape {
+public struct PokeBallBottomShape: Shape {
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let start = CGPoint(x: rect.midX, y: rect.maxY)
         let outerPath = Path { p in
             p.addArc(center: start, radius: rect.width * 0.5, startAngle: .radians(.zero), endAngle: .radians(.pi), clockwise: false)
@@ -36,11 +36,11 @@ struct PokeBallBottomShape: Shape {
     }
 }
 
-struct TestBeltView: View {
+public struct TestBeltView: View {
     
     let count: Int = 6
     
-    var body: some View {
+    public var body: some View {
         ScrollView(.horizontal) {
             HStack {
                 ForEach(0..<count, id: \.self) { i in

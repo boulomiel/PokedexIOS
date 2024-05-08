@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Generation: Codable {
+public struct Generation: Codable {
     
     var id: Int
     var name: String

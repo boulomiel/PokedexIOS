@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemAttribute: Codable {
+public struct ItemAttribute: Codable {
     var id: Int
     var name: String
     var items: [NamedAPIResource]

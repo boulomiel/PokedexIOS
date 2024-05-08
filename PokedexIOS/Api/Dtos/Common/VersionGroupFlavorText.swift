@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VersionGroupFlavorText: Codable, Hashable {
+public struct VersionGroupFlavorText: Codable, Hashable {
     
     var text: String
     var language: NamedAPIResource

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokeBallBeltView<Content: View>: View {
+public struct PokeBallBeltView<Content: View>: View {
     
     let selectedPokemons: [Pokemon]
     var onShowPokemon: (Pokemon?) -> Void
@@ -27,7 +27,7 @@ struct PokeBallBeltView<Content: View>: View {
     @State private var showPokemon: Pokemon?
     @Namespace private var showPokemonId
 
-    var body: some View {
+    public var body: some View {
         VStack {
             if showPokemon != nil {
                 ScaleAsyncImage(url: showPokemon?.sprites?.frontDefault, width: 300, height: 300)
@@ -81,9 +81,6 @@ struct PokeBallBeltView<Content: View>: View {
                     }
                 }
             }
-        }
-        .onAppear {
-            print(Self.self, isIphone, UIDevice.current.userInterfaceIdiom)
         }
     }
 }

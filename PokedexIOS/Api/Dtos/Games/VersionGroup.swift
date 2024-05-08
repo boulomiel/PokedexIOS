@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct VersionGroup {
+public struct VersionGroup {
     
     var id: Int
     var name: String

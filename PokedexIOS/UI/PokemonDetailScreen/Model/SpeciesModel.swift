@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SpeciesModel: Identifiable, Equatable, Hashable {
-    var id: String
+public struct SpeciesModel: Identifiable, Equatable, Hashable {
+    public var id: String
 }

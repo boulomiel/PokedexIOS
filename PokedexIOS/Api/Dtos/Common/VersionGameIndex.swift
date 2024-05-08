@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VersionGameIndex: Codable, Hashable {
+public struct VersionGameIndex: Codable, Hashable {
     
     var gameIndex: Int
     var version: NamedAPIResource

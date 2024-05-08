@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MoveScreen: View {
+public struct MoveScreen: View {
     
     @DIContainer var moveApi: PokemonMoveApi
     @DIContainer var machineApi: PokemonMachineApi
@@ -16,7 +16,7 @@ struct MoveScreen: View {
 
     @State var provider: Provider
     
-    var body: some View {
+    public var body: some View {
         VStack {
             ScrollPickerView(options: provider.versions, selected: $provider.selectedVersions)
             GeometryReader {  geo in
@@ -37,7 +37,7 @@ struct MoveScreen: View {
     }
     
     @Observable
-    class Provider {
+   public class Provider {
         
         let moveData: MoveData
         
@@ -74,7 +74,7 @@ struct MoveScreen: View {
     }
 }
 
-struct MoveCellData: Hashable {
+public struct MoveCellData: Hashable {
     var query: PokemonMoveQuery
     var versionMeta: MoveVersionMeta
 }

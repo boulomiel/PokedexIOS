@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Item: Codable, Hashable {
+public struct Item: Codable, Hashable {
     var id: Int
     var name: String
     var cost: Int
@@ -47,7 +47,7 @@ extension Item {
     }
 }
 
-struct ItemSprites: Codable, Hashable {
+public struct ItemSprites: Codable, Hashable {
     
     var defaultSprite: URL?
     
@@ -56,7 +56,7 @@ struct ItemSprites: Codable, Hashable {
     }
 }
 
-struct ItemHolderPokemon: Codable, Hashable {
+public struct ItemHolderPokemon: Codable, Hashable {
     
     var pokemon: NamedAPIResource
     var versionDetails: [ItemHolderVersionDetail]
@@ -68,13 +68,13 @@ struct ItemHolderPokemon: Codable, Hashable {
 }
 
 
-struct ItemHolderVersionDetail: Codable, Hashable {
+public struct ItemHolderVersionDetail: Codable, Hashable {
     var rarity: Int
     var version: NamedAPIResource
 }
 
 
-struct ItemAttributes: Codable, Hashable {
+public struct ItemAttributes: Codable, Hashable {
     var id: Int
     var name: String
     var descriptions: ItemAttributesDescription
@@ -86,7 +86,7 @@ struct ItemAttributes: Codable, Hashable {
     }
 }
 
-struct ItemAttributesDescription: Codable, Hashable {
+public struct ItemAttributesDescription: Codable, Hashable {
     var description: String
     var language: NamedAPIResource
 }

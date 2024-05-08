@@ -9,43 +9,43 @@ import Foundation
 import SwiftUI
 import Accelerate
 
-struct AnimatableVector: VectorArithmetic {
-    static var zero = AnimatableVector(values: [0.0])
+public struct AnimatableVector: VectorArithmetic, Sendable {
+    public static var zero = AnimatableVector(values: [0.0])
     
-    static func + (lhs: AnimatableVector, rhs: AnimatableVector) -> AnimatableVector {
+    public static func + (lhs: AnimatableVector, rhs: AnimatableVector) -> AnimatableVector {
         let count = min(lhs.values.count, rhs.values.count)
         return AnimatableVector(values: vDSP.add(lhs.values[0..<count], rhs.values[0..<count]))
     }
     
-    static func += (lhs: inout AnimatableVector, rhs: AnimatableVector) {
+    public static func += (lhs: inout AnimatableVector, rhs: AnimatableVector) {
         let count = min(lhs.values.count, rhs.values.count)
         vDSP.add(lhs.values[0..<count], rhs.values[0..<count], result: &lhs.values[0..<count])
     }
     
-    static func - (lhs: AnimatableVector, rhs: AnimatableVector) -> AnimatableVector {
+    public static func - (lhs: AnimatableVector, rhs: AnimatableVector) -> AnimatableVector {
         let count = min(lhs.values.count, rhs.values.count)
         return AnimatableVector(values: vDSP.subtract(lhs.values[0..<count], rhs.values[0..<count]))
     }
     
-    static func -= (lhs: inout AnimatableVector, rhs: AnimatableVector) {
+    public static func -= (lhs: inout AnimatableVector, rhs: AnimatableVector) {
         let count = min(lhs.values.count, rhs.values.count)
         vDSP.subtract(lhs.values[0..<count], rhs.values[0..<count], result: &lhs.values[0..<count])
     }
     
-    var values: [Double]
+    public var values: [Double]
     
-    mutating func scale(by rhs: Double) {
+    public mutating func scale(by rhs: Double) {
         values = vDSP.multiply(rhs, values)
     }
     
-    var magnitudeSquared: Double {
+    public var magnitudeSquared: Double {
         vDSP.sum(vDSP.multiply(values, values))
     }
 }
 
-struct StatShape: Shape {
+public struct StatShape: Shape {
     
-    var animatableData: AnimatableVector {
+    public var animatableData: AnimatableVector {
         get { stats }
         set { stats = newValue }
     }
@@ -53,7 +53,7 @@ struct StatShape: Shape {
     var radius: CGFloat = 180
     var stats: AnimatableVector
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let viewCenter = CGPoint(x: rect.midX, y: rect.midY)
         return Path { p in
             stats.values.enumerated().forEach { i, stat in

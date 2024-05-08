@@ -7,7 +7,7 @@
 
 import Foundation
 // TH - HM (way to lean moves)
-struct Machine: Codable {
+public struct Machine: Codable {
     
     var id: Int
     var item: NamedAPIResource

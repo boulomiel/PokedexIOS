@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct PokemonMoveQuery: ApiQuery, Hashable {
+public struct PokemonMoveQuery: ApiQuery, Hashable {
     let moveId: String
     
-    var urlComponents: URLComponents {
+    public var urlComponents: URLComponents {
         let api: PokemonEnvApi = PlistReader.read(list: .pokemonapi)
         var components = URLComponents()
         components.host = api.host

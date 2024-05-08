@@ -1,5 +1,5 @@
 //
-//  struct MoveNameItem- Hashable {     let name- String     let language- String }.swift
+//  public struct MoveNameItem- Hashable {     let name- String     let language- String }.swift
 //  PokedexIOS
 //
 //  Created by Ruben Mimoun on 23/04/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoveNameItem: Hashable {
+public struct MoveNameItem: Hashable {
     let name: String
     let language: String
 }

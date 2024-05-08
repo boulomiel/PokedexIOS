@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct PhysicalMoveView: View {
+public struct PhysicalMoveView: View {
     
-    var body: some View {
+    public var body: some View {
         GeometryReader { geo  in
             let frame = geo.frame(in: .local)
             PhysicalMoveShape()
@@ -25,11 +25,11 @@ struct PhysicalMoveView: View {
     }
 }
 
-struct PhysicalMoveView2: View {
+public struct PhysicalMoveView2: View {
     
     var height: CGFloat = 45
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             Rectangle()
                 .fill(Color.yellow.gradient)
