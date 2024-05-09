@@ -69,6 +69,8 @@
 		878D73942BD6567B00DAE405 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878D73932BD6567B00DAE405 /* String+Extension.swift */; };
 		87ACE8662BECA3C60028EC64 /* Color+ Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */; };
 		87ACE8682BECA5710028EC64 /* PokemonType + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */; };
+		87ACE86A2BECC7C30028EC64 /* Move + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8692BECC7C30028EC64 /* Move + Extension.swift */; };
+		87ACE86C2BECC99C0028EC64 /* ShrinkText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE86B2BECC99C0028EC64 /* ShrinkText.swift */; };
 		87DADE5B2BD7BFF300457062 /* PokemonMoveDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DADE5A2BD7BFF300457062 /* PokemonMoveDetailsScreen.swift */; };
 		87DADE5D2BD7C0D800457062 /* MoveDetailsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DADE5C2BD7C0D800457062 /* MoveDetailsRoute.swift */; };
 		87DADE602BD7C44100457062 /* MoveItemDataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DADE5F2BD7C44100457062 /* MoveItemDataHolder.swift */; };
@@ -170,6 +172,8 @@
 		878D73932BD6567B00DAE405 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+ Extension.swift"; sourceTree = "<group>"; };
 		87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonType + Extension.swift"; sourceTree = "<group>"; };
+		87ACE8692BECC7C30028EC64 /* Move + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Move + Extension.swift"; sourceTree = "<group>"; };
+		87ACE86B2BECC99C0028EC64 /* ShrinkText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkText.swift; sourceTree = "<group>"; };
 		87DADE5A2BD7BFF300457062 /* PokemonMoveDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMoveDetailsScreen.swift; sourceTree = "<group>"; };
 		87DADE5C2BD7C0D800457062 /* MoveDetailsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailsRoute.swift; sourceTree = "<group>"; };
 		87DADE5F2BD7C44100457062 /* MoveItemDataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveItemDataHolder.swift; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 				87313BCA2BEB5BE90081DD85 /* JsonReader+Extension.swift */,
 				87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */,
 				87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */,
+				87ACE8692BECC7C30028EC64 /* Move + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 				870BE8B22BE2111100D6B1BF /* PokeballImageAsync.swift */,
 				870BE8BC2BE250F900D6B1BF /* SelectionIndicatorView.swift */,
 				870BE8C02BE2598400D6B1BF /* ItemCell.swift */,
+				87ACE86B2BECC99C0028EC64 /* ShrinkText.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -820,8 +826,10 @@
 				87DADE742BD7D8B200457062 /* SpecialMoveShape.swift in Sources */,
 				87DADE642BD7C46300457062 /* MoveEffectItem.swift in Sources */,
 				87DADE952BD913E500457062 /* PokemonListScrolledContent.swift in Sources */,
+				87ACE86C2BECC99C0028EC64 /* ShrinkText.swift in Sources */,
 				876A7A042BD2793B00E8E210 /* PokemonAbilityView.swift in Sources */,
 				87DADE5B2BD7BFF300457062 /* PokemonMoveDetailsScreen.swift in Sources */,
+				87ACE86A2BECC7C30028EC64 /* Move + Extension.swift in Sources */,
 				870BE8BD2BE250F900D6B1BF /* SelectionIndicatorView.swift in Sources */,
 				876A79E82BD03A0F00E8E210 /* PokemonGenerationSegmentView.swift in Sources */,
 				87DADED32BDE03E900457062 /* PokemonAbilitySelectionModel.swift in Sources */,

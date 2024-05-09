@@ -37,10 +37,7 @@ public struct PokemonSelectionGridCell: View {
     public var body: some View {
         VStack {
             ScaleAsyncImage(url: provider.sprite, width: 100, height: 100)
-            Text(provider.pokemonName.capitalized)
-                .frame(maxWidth: .infinity)
-                .minimumScaleFactor(0.1)
-                .bold()
+            ShrinkText(text: provider.pokemonName.capitalized, alignment: .center, font: .body.bold(), width: nil)
             
         }
         .keyframeAnimator(initialValue: SelectAnim(), trigger: provider.isSelected) { view, value in

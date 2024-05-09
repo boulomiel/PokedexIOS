@@ -47,12 +47,9 @@ public struct PokemonTeamPreviewScreen: View {
             .overlay(alignment: .bottomTrailing) {
                 VStack {
                     let itemName = item?.name ?? "Item"
-                    Text(itemName.uppercased())
-                        .minimumScaleFactor(0.1)
-                        .font(.caption)
-                        .lineLimit(1)
-                        .foregroundStyle(.white.opacity(0.6))
-                        .frame(width: 50)
+                    ShrinkText(text: itemName.uppercased(), alignment: .center, font: .caption.bold(), width: 50)
+                        .foregroundStyle(.white.opacity(0.3))
+                    
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.gray.opacity(0.3))
                         .frame(width: 50, height: 50)

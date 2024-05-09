@@ -62,10 +62,7 @@ public struct PokemonStatsView: View {
             ForEach(0..<pokemonStats.count, id: \.self) { index in
                 let stat = pokemonStats[index]
                 let position = pos(for: (Double(index*2) * .pi / 6 - .pi / 2), with: width, center: center)
-                Text(stat.displayName)
-                    .bold()
-                    .font(.caption)
-                    .minimumScaleFactor(0.1)
+                ShrinkText(text: stat.displayName, alignment: .center, font: .caption.bold(), lineLimit: 2)
                     .position(position)
             }
         }

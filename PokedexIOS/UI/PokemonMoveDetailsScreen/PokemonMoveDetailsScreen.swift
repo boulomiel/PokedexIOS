@@ -59,14 +59,13 @@ public struct PokemonMoveDetailsScreen: View {
         }
     }
     
+    @ViewBuilder
     var moveTypeInfoLeading: some View {
+        let color = Color(move.type.capitalized).gradient
         HStack {
-            Image(move.type)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
+            move.Icon(50)
                 .padding(10)
-                .background(Circle().stroke().foregroundStyle(.white))
+                .background(Circle().stroke().foregroundStyle(color))
             VStack {
                 Text(move.name.first(where: { $0.language == "en" })?.name ?? "")
                     .frame(maxWidth: .infinity, alignment: .leading)

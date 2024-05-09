@@ -61,8 +61,7 @@ public struct ListMoveCellView: View {
                 
             } else {
                 HStack {
-                    Text(move.name.capitalized)
-                        .bold()
+                    ShrinkText(text: move.name.capitalized, alignment: .leading, font: .body.bold())
                         .padding(.leading, 30)
                     
                     Spacer()
@@ -75,10 +74,8 @@ public struct ListMoveCellView: View {
                     }
                     .frame(width: 100)
                     
-                    Image(move.type.name)
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .scaledToFit()
+                    move.Icon(25)
+
                 }
                 .transition(.opacity)
                 

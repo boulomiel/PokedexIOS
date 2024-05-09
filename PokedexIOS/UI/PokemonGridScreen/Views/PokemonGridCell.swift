@@ -17,12 +17,7 @@ public struct PokemonGridCell: View {
             VStack {
                 ScaleAsyncImage(url: provider.sprite, width: 100, height: 100)
 
-                Text(pokemonName)
-                    .frame(maxWidth: .infinity)
-                    .minimumScaleFactor(0.6)
-                    .lineLimit(1)
-                    .layoutPriority(1)
-                    .bold()
+                ShrinkText(text: pokemonName, alignment: .center, font: .body.bold())
                     .foregroundStyle(.white)
             }
             .padding(.vertical, 4)

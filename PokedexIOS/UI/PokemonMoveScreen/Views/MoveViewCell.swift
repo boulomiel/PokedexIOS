@@ -43,14 +43,18 @@ public struct MoveViewCell: View {
         
     }
     
+    @ViewBuilder
     func moveTitleType(move: MoveItemDataHolder) -> some View {
+        let color = Color(move.type.capitalized).gradient
         HStack {
-                Image(move.type)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 20, height: 20)
-                    .padding(4)
-                    .background(Circle().stroke().foregroundStyle(.white))
+            Image(move.type)
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .padding(4)
+                .foregroundStyle(color)
+                .background(Circle().stroke().foregroundStyle(color))
             
                 Text(move.name.first(where: { $0.language == "en" })?.name ?? "")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -68,10 +72,7 @@ public struct MoveViewCell: View {
     
     @ViewBuilder
     func moveTextAtLevel(width: CGFloat) -> some View {
-        Text(provider.moveTextAtLevel)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .bold()
-            .minimumScaleFactor(0.1)
+        ShrinkText(text: provider.moveTextAtLevel, alignment: .leading, font: .body.bold())
             .opacity(provider.doesNotNeedThisInfo ? 0 : 1)
     }
     
@@ -169,25 +170,7 @@ public struct MoveViewCell: View {
         
         @MainActor
         private func makeItem(for move: Move) {
-            self.moveItemHolder = MoveItemDataHolder(
-                id: move.id,
-                name: move.names.map { MoveNameItem(name: $0.name, language: $0.language.name) },
-                effects: move.effectEntries.map { MoveEffectItem(effect: $0.shortEffect, language: $0.language.name) },
-                type: move.type.name,
-                damageClass: .init(rawValue: move.damageClass.name),
-                generation: move.generation.name,
-                drain: move.meta?.drain,
-                healing: move.meta?.healing,
-                critRate: move.meta?.crit_rate,
-                ailmentChance: move.meta?.ailment_chance,
-                flintChance: move.meta?.flinch_chance,
-                statChance: move.meta?.stat_chance,
-                learntBy: move.learnedByPokemon.map(\.name),
-                priority: move.priority,
-                pp: move.pp,
-                power: move.power
-                
-            )
+            self.moveItemHolder = move.dataHolder
         }
         
         private func getMachine(for move: Move) async {

@@ -33,10 +33,7 @@ public struct DescriptionScreen: View {
                     }
                     ForEach(filtered, id: \.id) { description in
                         GridRow {
-                            Text(description.readableVersion)
-                                .bold()
-                                .minimumScaleFactor(0.1)
-                                .multilineTextAlignment(.center)
+                            ShrinkText(text: description.readableVersion, alignment: .center, font: .body.bold())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .overlay(alignment: .bottom) {
                                     bottomLine

@@ -26,10 +26,7 @@ public struct EvolutionListViewCell: View {
                     ScaleAsyncImage(url: imageUrl, width: 100, height: 100)
                 }
                 
-                Text(provider.pokemon.name.capitalized)
-                    .bold()
-                    .font(.caption)
-                    .minimumScaleFactor(0.1)
+                ShrinkText(text: provider.pokemon.name.capitalized, alignment: .center, font: .caption.bold())
             }
             .frame(width: 120, height: 120)
             .padding(.bottom, 8)
