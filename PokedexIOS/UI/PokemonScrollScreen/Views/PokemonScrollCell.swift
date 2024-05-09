@@ -15,35 +15,41 @@ public struct PokemonScrollCell: View {
     
     public var body: some View {
         NavigationLink(value: provider.pokemon) {
-            GroupBox {
                 HStack {
                     Text(provider.pokemonName)
                         .bold()
                         .font(.title2)
+                        .foregroundStyle(.white)
+                        .padding(.leading)
                     
                     Spacer()
-                
+                    
                     Circle()
-                        .fill(Color.gray.opacity(0.1))
+                        .fill(Color.gray.opacity(0.5))
                         .frame(width: 100, height: 100)
                         .overlay {
                             PokeballImageAsync(url: provider.sprite, width: 100, height: 100)
                         }
+                        .padding(.trailing)
                 }
-            }
+                .padding(.vertical)
         }
+        .pokemonTypeBackgroundH(types: provider.types)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
     
     @Observable
-   public class Provider {
+    public class Provider {
         
         let api: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi
         var pokemon: LocalPokemon
-        var sprite: URL?
-        var languageName: LanguageName
+        
         
         var names: [String: String]
+        var sprite: URL?
+        var types: [PokemonType.PT]
+        var languageName: LanguageName
         
         var pokemonName: String {
             if case .en(let englishName) = languageName {
@@ -58,6 +64,7 @@ public struct PokemonScrollCell: View {
             self.speciesApi = speciesApi
             self.pokemon = pokemon
             self.names = [:]
+            self.types = []
             self.languageName = .en(englishName: pokemon.name)
             Task {
                 await fetch()
@@ -71,6 +78,7 @@ public struct PokemonScrollCell: View {
             self.names = [:]
             self.sprite = sprite
             self.languageName = languageName
+            self.types = []
         }
         
         private func fetch() async {
@@ -78,6 +86,8 @@ public struct PokemonScrollCell: View {
             switch result {
             case .success(let result):
                 await MainActor.run {
+                    print(result.types)
+                    types = result.types.pt
                     sprite = result.sprites?.frontDefault
                 }
             case .failure(let error):

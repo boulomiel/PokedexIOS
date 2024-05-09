@@ -27,8 +27,16 @@ public struct PokemonGridCell: View {
             }
             .padding(.vertical, 4)
             .padding(.horizontal, 8)
-            .background(shape.fill(Color.white.opacity(0.2)))
         }
+        .background {
+            ZStack {
+                Spacer()
+            }
+            .frame(width: 80, height: 80, alignment: .leading)
+            .pokemonTypeBackgroundCircle(types: provider.types)
+            .clipShape(Circle())
+        }
+        .background(shape.fill(Color.white.opacity(0.2)))
     }
     
     var shape: RoundedRectangle {
@@ -46,14 +54,17 @@ public struct PokemonGridCell: View {
     @Observable
    public class Provider: Identifiable {
         public let id: UUID = .init()
-        var sprite: URL?
-        var number: Int?
         let pokemon: String
         let fechPokemonApi: FetchPokemonApi
+       
+       var sprite: URL?
+       var number: Int?
+       var types: [PokemonType.PT]
         
         init(pokemon: String, fechPokemonApi: FetchPokemonApi) {
             self.pokemon = pokemon
             self.fechPokemonApi = fechPokemonApi
+            self.types = []
             Task {
                 await fetch()
             }
@@ -64,6 +75,7 @@ public struct PokemonGridCell: View {
             switch result {
             case .success(let success):
                 await MainActor.run {
+                    self.types = success.types.pt
                     self.sprite = success.sprites?.frontDefault
                     self.number = success.id
                 }

@@ -67,6 +67,8 @@
 		878D738D2BD54DA000DAE405 /* MoveRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878D738C2BD54DA000DAE405 /* MoveRoute.swift */; };
 		878D73922BD54EC700DAE405 /* DescriptionRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878D73912BD54EC700DAE405 /* DescriptionRoute.swift */; };
 		878D73942BD6567B00DAE405 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878D73932BD6567B00DAE405 /* String+Extension.swift */; };
+		87ACE8662BECA3C60028EC64 /* Color+ Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */; };
+		87ACE8682BECA5710028EC64 /* PokemonType + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */; };
 		87DADE5B2BD7BFF300457062 /* PokemonMoveDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DADE5A2BD7BFF300457062 /* PokemonMoveDetailsScreen.swift */; };
 		87DADE5D2BD7C0D800457062 /* MoveDetailsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DADE5C2BD7C0D800457062 /* MoveDetailsRoute.swift */; };
 		87DADE602BD7C44100457062 /* MoveItemDataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DADE5F2BD7C44100457062 /* MoveItemDataHolder.swift */; };
@@ -166,6 +168,8 @@
 		878D738C2BD54DA000DAE405 /* MoveRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveRoute.swift; sourceTree = "<group>"; };
 		878D73912BD54EC700DAE405 /* DescriptionRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionRoute.swift; sourceTree = "<group>"; };
 		878D73932BD6567B00DAE405 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+ Extension.swift"; sourceTree = "<group>"; };
+		87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonType + Extension.swift"; sourceTree = "<group>"; };
 		87DADE5A2BD7BFF300457062 /* PokemonMoveDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMoveDetailsScreen.swift; sourceTree = "<group>"; };
 		87DADE5C2BD7C0D800457062 /* MoveDetailsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailsRoute.swift; sourceTree = "<group>"; };
 		87DADE5F2BD7C44100457062 /* MoveItemDataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveItemDataHolder.swift; sourceTree = "<group>"; };
@@ -392,6 +396,8 @@
 				87313BC62BEAA47B0081DD85 /* ScrollFetchItemQuery + Extension.swift */,
 				87313BC82BEAA4F90081DD85 /* EnvironmentValues + Extension.swift */,
 				87313BCA2BEB5BE90081DD85 /* JsonReader+Extension.swift */,
+				87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */,
+				87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -846,6 +852,7 @@
 				87DADEA72BD959C000457062 /* PokemonTeamPreviewScreen.swift in Sources */,
 				87DADE9B2BD91E5F00457062 /* PokeBallOuterShape.swift in Sources */,
 				876A7ABF2BD3D4B100E8E210 /* EvolutionListView.swift in Sources */,
+				87ACE8682BECA5710028EC64 /* PokemonType + Extension.swift in Sources */,
 				876A79E02BD01A2B00E8E210 /* PokemonScrollScreen.swift in Sources */,
 				878D73922BD54EC700DAE405 /* DescriptionRoute.swift in Sources */,
 				87DADEA32BD94EB500457062 /* PokemonTeamCell.swift in Sources */,
@@ -864,6 +871,7 @@
 				87DADEC72BDA40D000457062 /* ListMoveCellView.swift in Sources */,
 				878D738A2BD5408800DAE405 /* MoveViewCell.swift in Sources */,
 				87313BC52BEAA4520081DD85 /* ScrollFetchPokemonQuery+Extensions.swift in Sources */,
+				87ACE8662BECA3C60028EC64 /* Color+ Extension.swift in Sources */,
 				871DE6132BEA209C0009C885 /* MoveMethodList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

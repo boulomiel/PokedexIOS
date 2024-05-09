@@ -23,6 +23,8 @@ public struct PokemonListScrolledContent: View {
         List {
             listContent
         }
+        .scrollContentBackground(.hidden)
+
     }
     
     var forEach: some View {
@@ -32,6 +34,8 @@ public struct PokemonListScrolledContent: View {
                     provider.update(from: index)
                 }
                 .id(pokemon.name)
+                .listRowBackground(Color.clear)
+
         }
     }
     
@@ -42,6 +46,7 @@ public struct PokemonListScrolledContent: View {
                     provider.update(from: offset)
                 }
                 .id(pokemon.language.english)
+                .listRowBackground(Color.clear)
         }
     }
     

@@ -21,6 +21,7 @@ public struct PokemonDetailScreen: View {
 
     public var body: some View {
         List {
+
             Section("Generation") {
                 segmentedGenView
                 HStack {
@@ -29,11 +30,15 @@ public struct PokemonDetailScreen: View {
                     Spacer()
                 }
             }
+            .listRowBackground(Color.clear)
+
             
             if let evolutionViewProvider = provider.evolutionViewProvider {
                 Section("Evolutions") {
                     EvolutionListView(provider: evolutionViewProvider)
                 }
+                .listRowBackground(Color.clear)
+
             }
             
             if let speciesProvider = provider.speciesProvider {
@@ -42,12 +47,16 @@ public struct PokemonDetailScreen: View {
                         EvolutionListViewCell(provider: .init(api: provider.fetchPokemonApi, pokemon: pokemon))
                     }
                 }
+                .listRowBackground(Color.clear)
+
             }
             
             if let abilityProvider = provider.abilityProvider {
                 Section("Abilities") {
                     PokemonListAbilityView(provider: abilityProvider)
                 }
+                .listRowBackground(Color.clear)
+
             }
         
             Section("Statistics", isExpanded: $isStatsExpanded) {
@@ -57,12 +66,21 @@ public struct PokemonDetailScreen: View {
                     Spacer()
                 }
             }
+            .listRowBackground(Color.clear)
+
             NavigationLink("Moves", value: MoveRoute(moveData: provider.moveData))
+                .listRowBackground(Color.clear)
+
             NavigationLink("Descriptions", value: DescriptionRoute(values: provider.descriptionsByVersions))
+                .listRowBackground(Color.clear)
+
         }
         .listStyle(.sidebar)
         .navigationTitle(provider.localPokemon.name.capitalized)
         .preferredColorScheme(.dark)
+        .toolbarBackground(.hidden, for: .navigationBar)
+        .pokemonTypeBackgroundV(types: provider.pokemon?.types.pt ?? [])
+        .scrollContentBackground(.hidden)
         .environment(provider)
     }
     

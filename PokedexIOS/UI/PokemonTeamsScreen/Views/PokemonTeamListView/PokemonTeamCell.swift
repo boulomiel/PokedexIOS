@@ -18,6 +18,7 @@ public struct PokemonTeamCell: View {
     private var pokemons: [SDPokemon] {
         team.pokemons?.sorted(by: { $0.pokemonID < $1.pokemonID }) ?? []
     }
+        
     private let grid: [GridItem] = Array(repeating: .init(.flexible(minimum: 120)), count: 3)
     
     public var body: some View {
@@ -40,6 +41,14 @@ public struct PokemonTeamCell: View {
                                 }
                         }
                     })
+                    .background {
+                        ZStack {
+                            Spacer()
+                        }
+                        .frame(width: 80, height: 80, alignment: .leading)
+                        .pokemonTypeBackgroundCircle(types: decoded.types.pt)
+                        .clipShape(Circle())
+                    }
                     .onTapGesture {
                         teamRouter.root(as: PreviewRoute(pokemonID: pokemon.persistentModelID))
                     }

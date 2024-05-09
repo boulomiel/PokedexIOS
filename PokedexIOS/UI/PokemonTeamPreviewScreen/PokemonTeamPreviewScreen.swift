@@ -29,6 +29,10 @@ public struct PokemonTeamPreviewScreen: View {
         pokemon.item?.decoded
     }
     
+    var types: [PokemonType.PT] {
+        pokemon.decoded?.types.pt ?? []
+    }
+    
     public var body: some View {
         Form {
             VStack {
@@ -78,6 +82,8 @@ public struct PokemonTeamPreviewScreen: View {
 
         }
         .navigationBarTitleDisplayMode(.inline)
+        .pokemonTypeBackgroundV(types: types)
+        .scrollContentBackground(.hidden)
         .task {
             let crie = pokemon.decoded?.cries
             await player.play(crie?.latest ?? crie?.legacy)

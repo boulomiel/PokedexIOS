@@ -30,7 +30,7 @@ public struct PokemonSelectionGridCell: View {
     @State var selectedPokemon: [Pokemon]
     @State var showSelection: Bool
     @State var provider: Provider
-
+    
     @State private var showVarietiesForCell: LocalPokemon?
     @Namespace var listSpace
     
@@ -56,7 +56,14 @@ public struct PokemonSelectionGridCell: View {
             selectionIndicatorImage
         })
         .padding(4)
-        .background(shape.fill(Color.gray.opacity(0.3)))
+        .background {
+            ZStack {
+                Spacer()
+            }
+            .frame(width: 80, height: 80, alignment: .leading)
+            .pokemonTypeBackgroundCircle(types: provider.types)
+            .clipShape(Circle())
+        }
         .onTapGesture {
             onCellTapAction()
         }
@@ -168,7 +175,7 @@ public struct PokemonSelectionGridCell: View {
     }
     
     @Observable
-   public class Provider {
+    public class Provider {
         
         let api: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi
@@ -191,9 +198,12 @@ public struct PokemonSelectionGridCell: View {
         var isDefaultForm: Bool {
             fetchedPokemon?.isDefault ?? false
         }
+        var types: [PokemonType.PT] {
+            fetchedPokemon?.types.pt ?? []
+        }
         var isSelected: Bool
         var showVarietyButton: Bool
-                
+        
         init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, pokemon: LocalPokemon, eventBound: GridCellPOkemonSelectionEventBound) {
             self.api = api
             self.pokemon = pokemon
@@ -255,7 +265,7 @@ public struct PokemonSelectionGridCell: View {
         selectedPokemon:
             []
         ,
-        showSelection: false, 
+        showSelection: false,
         provider: .init(
             api: .init(),
             speciesApi: .init(),
