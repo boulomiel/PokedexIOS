@@ -50,14 +50,14 @@ public struct ItemScrolledContent: View {
             }
     }
     
-    var content: some View {
+    private var content: some View {
         List {
             listContent
                 .listRowBackground(EmptyView())
         }
     }
     
-    func forEach(providers: [Provider.CellProvider]) -> some View {
+    private func forEach(providers: [Provider.CellProvider]) -> some View {
         ForEach(Array(providers.enumerated()), id:\.offset) { offset, element in
             ItemCell(provider: element, onSelect: { provider.handleSelection($0) }, onDeselect: { provider.handleDeselection($0) })
                 .onAppear {
@@ -68,7 +68,7 @@ public struct ItemScrolledContent: View {
         .loadable(isLoading: providers.isEmpty)
     }
     
-    func searchedList(_ searched: [Provider.CellProvider]) -> some View {
+    private func searchedList(_ searched: [Provider.CellProvider]) -> some View {
         ForEach(Array(searched.enumerated()), id:\.offset) { offset, item in
             ItemCell(provider: item, onSelect: { provider.handleSelection($0) }, onDeselect: { provider.handleDeselection($0) })
                 .onAppear {
@@ -80,7 +80,7 @@ public struct ItemScrolledContent: View {
     }
     
     @ViewBuilder
-    var listContent: some View {
+    private  var listContent: some View {
         if let fetched = scrollProvider.searched {
             searchedList(fetched.map { provider.toProvider(searched: $0, fetchApi: scrollProvider.fetchApi)  })
                 .onAppear {
@@ -94,7 +94,7 @@ public struct ItemScrolledContent: View {
     }
     
     @Observable
-    public class Provider {
+    public final class Provider {
         
         typealias CellProvider = ItemCell.Provider
         

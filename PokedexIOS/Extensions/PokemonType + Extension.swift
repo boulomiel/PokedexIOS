@@ -16,7 +16,7 @@ extension PokemonType {
         return .init(typeString: type.name.capitalized)
     }
     
-    enum PT: String {
+    public enum PT: String {
         case normal
         case fire
         case water
@@ -36,7 +36,7 @@ extension PokemonType {
         case steel
         case fairy
         
-        init?(typeString: String) {
+        public init?(typeString: String) {
             // Convert the type string to lowercase to handle case insensitivity
             let lowercaseTypeString = typeString.lowercased()
             switch lowercaseTypeString {
@@ -80,14 +80,14 @@ extension PokemonType {
     }
 }
 
-extension Array where Element == PokemonType {
+public extension Array where Element == PokemonType {
     
     var pt: [PokemonType.PT] {
         self.compactMap { $0.pokemonType }
     }
 }
 
-extension Array where Element == PokemonType.PT {
+public extension Array where Element == PokemonType.PT {
     
     var horizontalLinearGradient: some ShapeStyle {
         Color.makeLinearGradient(for: map(\.color), startPoint: .leading, endPoint: .trailing)

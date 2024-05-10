@@ -10,7 +10,7 @@ import SwiftUI
 public struct LoadingModifier: ViewModifier {
     
     let showProgress: Bool
-    @Namespace var loading
+    @Namespace private var loading
     static var loadingID: String = "loading"
 
     public func body(content: Content) -> some View {

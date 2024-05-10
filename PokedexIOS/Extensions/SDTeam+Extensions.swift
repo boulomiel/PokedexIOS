@@ -8,7 +8,7 @@
 import Foundation
 import DI
 
-extension SDTeam {
+public extension SDTeam {
     static var examples: [SDTeam] {
         [
             .init(name: "DreamTeam"),

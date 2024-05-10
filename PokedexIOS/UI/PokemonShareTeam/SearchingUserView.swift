@@ -34,6 +34,7 @@ struct SearchingUserView: View {
                 .navigationTitle("Discovered trainers")
             }
         }
+        .animation(.bouncy, value: shareSession.peers)
         .onAppear {
             shareSession.start(as: displayName) {
                 shouldOpenSettings.toggle()

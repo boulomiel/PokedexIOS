@@ -11,7 +11,7 @@ import DI
 import Tools
 import ShareTeam
 
-struct StartSharingView: View {
+public struct StartSharingView: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
@@ -20,9 +20,13 @@ struct StartSharingView: View {
     @State private var username: String = ""
     @State private var saved: Bool = false
     
-    let provider: Provider
+    private let provider: Provider
+    
+    init(provider: Provider) {
+        self.provider = provider
+    }
         
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             if !saved {
                 content()
@@ -33,6 +37,7 @@ struct StartSharingView: View {
                     .onReceive(sharingSession.event, perform: { event in
                         switch event {
                         case .sent:
+                            Vibrator.notify(of: .success)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 dismiss.callAsFunction()
                             }
@@ -44,7 +49,7 @@ struct StartSharingView: View {
     }
     
     @ViewBuilder
-    func content() -> some View {
+    private func content() -> some View {
         if let first = shareUser.first {
             UserFoundUI(user: first)
         } else {
@@ -135,7 +140,7 @@ struct StartSharingView: View {
     }
     
     @Observable
-    class Provider {
+    final class Provider {
         
         let teamID: PersistentIdentifier
         let container: ModelContainer

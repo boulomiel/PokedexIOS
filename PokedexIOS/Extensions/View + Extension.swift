@@ -10,7 +10,7 @@ import SwiftUI
 import DI
 import Dtos
 
-extension View {
+public extension View {
     @ViewBuilder
     func wrappedInScroll(_ isWrapped: Bool, axis: Axis.Set) -> some View {
         if isWrapped {

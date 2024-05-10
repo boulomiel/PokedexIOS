@@ -11,10 +11,11 @@ import DI
 
 public struct PokemonScrollScreen: View {
     
-    @Environment(\.modelContext) var modelContext
-    @DIContainer var scrollApi: ScrollFetchPokemonApi
-    @DIContainer var fetchApi: FetchPokemonApi
-    @DIContainer var languageNameFetcher: LanguageNameFetcher
+    @Environment(\.modelContext)
+    private var modelContext
+    @DIContainer private var scrollApi: ScrollFetchPokemonApi
+    @DIContainer private var fetchApi: FetchPokemonApi
+    @DIContainer private var languageNameFetcher: LanguageNameFetcher
     
     public var body: some View {
         PaginatedList(

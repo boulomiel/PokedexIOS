@@ -12,7 +12,7 @@ import DI
 import Dtos
 
 @Observable
-class PokemonDetailsProvider {
+public final class PokemonDetailsProvider {
     
     let fetchPokemonApi: FetchPokemonApi
     let speciesApi: PokemonSpeciesApi
@@ -135,21 +135,4 @@ class PokemonDetailsProvider {
             self.abilityProvider = .init(abilityApi: abilitiesApi, abilities: abilities)
         }
     }
-}
-
-public struct MoveData: Hashable {
-    var metaVersions:  [MoveVersionMeta]
-}
-
-public struct MoveItemData: Hashable {
-    var querys: PokemonMoveQuery
-    var metaVersion: [String : [MoveVersionMeta]]
-
-}
-
-public struct MoveVersionMeta: Hashable {
-    var moveName: String
-    var version: VersionGroupType
-    var levelLearntAt: Int
-    var learningMethod: MoveLearnMethodType 
 }

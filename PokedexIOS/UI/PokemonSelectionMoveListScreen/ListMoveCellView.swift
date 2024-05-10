@@ -13,11 +13,13 @@ import DI
 import Dtos
 
 public struct ListMoveCellView: View {
+    
+    @State private var isSelected: Bool = false
+    @State private var showEffect: Bool = false
+    
     let move: Move
     let isSelectable: Bool
     @Bindable var provider: PokemonSelectionMoveListScreen.Provider
-    @State private var isSelected: Bool = false
-    @State private var showEffect: Bool = false
     
     var movePower: String {
         if let power = move.power, power > 0 {

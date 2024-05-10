@@ -14,10 +14,16 @@ import Dtos
 
 public struct PokemonSelectionMoveListScreen: View {
     
-    @Environment(TeamRouter.self) var teamRouter
-    @State var provider: Provider
-    @State private var remindMoveItem: RemindMovesItem?
-    @Namespace var loading
+    @Environment(TeamRouter.self)
+    private var teamRouter
+    @State 
+    private var remindMoveItem: RemindMovesItem?
+    @Namespace 
+    private var loading
+    
+    @State 
+    var provider: Provider
+
     public var body: some View {
         List(provider.moves) { move in
             ListMoveCellView(move: move, isSelectable: true, provider: provider)

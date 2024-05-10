@@ -65,48 +65,6 @@ public struct PokemonTeamsListView: View {
             Vibrator.notify(of: .success)
         })
     }
-    
-    @Observable
-    class Provider {
-
-        let grid: [GridItem] = Array(repeating: .init(.fixed(120)), count: 3)
-        let modelContainer: ModelContainer
-        var teams: [SDTeam]
-        var subscriptions: Set<AnyCancellable>
-        
-        init(modelContainer: ModelContainer) {
-            self.modelContainer = modelContainer
-            self.teams = []
-            self.subscriptions = .init()
-            observer()
-            Task {
-                await fetch()
-            }
-        }
-        
-        private func observer() {
-            NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
-                .receive(on: DispatchQueue.main)
-                .sink { notification in
-                    guard let userInfo = notification.userInfo else { return }
-                    Task { [weak self] in
-                        await self?.fetch()
-                    }
-                }
-                .store(in: &subscriptions)
-        }
-        
-        @MainActor
-        private func fetch() {
-            let fetchDescriptor = FetchDescriptor<SDTeam>(sortBy: [SortDescriptor(\.name, order: .forward)])
-            do {
-                self.teams = try modelContainer.mainContext.fetch(fetchDescriptor)
-            } catch {
-                print(#function, #file, error)
-            }
-        }
-        
-    }
 }
 
 #Preview {

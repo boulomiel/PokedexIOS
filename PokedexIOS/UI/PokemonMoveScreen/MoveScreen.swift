@@ -11,9 +11,9 @@ import Dtos
 
 public struct MoveScreen: View {
     
-    @DIContainer var moveApi: PokemonMoveApi
-    @DIContainer var machineApi: PokemonMachineApi
-    @DIContainer var generalApi: GeneralApi<Machine>
+    @DIContainer private var moveApi: PokemonMoveApi
+    @DIContainer private var machineApi: PokemonMachineApi
+    @DIContainer private var generalApi: GeneralApi<Machine>
 
     @State var provider: Provider
     
@@ -33,12 +33,12 @@ public struct MoveScreen: View {
     }
     
     @ViewBuilder
-    func moveListByMethod(_ method: MoveLearnMethodType, width: CGFloat) -> some View {
+    private func moveListByMethod(_ method: MoveLearnMethodType, width: CGFloat) -> some View {
         MethodMoveList(width: width, provider: .init(method: method, moveApi: moveApi, generalApi: generalApi, methodMove: provider.getByMethods(method)))
     }
     
     @Observable
-   public class Provider {
+   public final class Provider {
         
         let moveData: MoveData
         

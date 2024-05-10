@@ -8,9 +8,9 @@
 import Foundation
 import SwiftData
 
-struct ShareTeamRoute: Hashable, Identifiable {
-    var id: PersistentIdentifier {
+public struct ShareTeamRoute: Hashable, Identifiable {
+    public var id: PersistentIdentifier {
         return teamID
     }
-    let teamID: PersistentIdentifier
+    public let teamID: PersistentIdentifier
 }

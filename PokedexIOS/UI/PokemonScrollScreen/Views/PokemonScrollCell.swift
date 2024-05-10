@@ -40,7 +40,7 @@ public struct PokemonScrollCell: View {
     }
     
     @Observable
-    public class Provider {
+    public final class Provider {
         
         let api: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi

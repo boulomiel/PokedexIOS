@@ -15,9 +15,12 @@ import Dtos
 
 public struct PokemonItemSelectionScreen: View {
     
-    @Environment(\.dismiss) var dismiss
-    @DIContainer var itemApi: PokemonItemApi
-    @State var provider: Provider
+    @Environment(\.dismiss) private var dismiss
+    @State private var provider: Provider
+    
+    public init(provider: Provider) {
+        self.provider = provider
+    }
     
     public var body: some View {
         ScrollViewReader { reader  in
@@ -53,7 +56,7 @@ public struct PokemonItemSelectionScreen: View {
         .loadable(isLoading: provider.paginatedProviders.isEmpty)
     }
     
-    func CellContent(_ cellProvider: Provider.CellProvider, index: Int) -> some View {
+    private func CellContent(_ cellProvider: Provider.CellProvider, index: Int) -> some View {
         ItemCell(provider: cellProvider, onSelect: { self.provider.handleSelection($0) }, onDeselect: { self.provider.handleDeselection($0) })
             .id(cellProvider.item?.id)
             .onAppear {
@@ -63,7 +66,7 @@ public struct PokemonItemSelectionScreen: View {
     }
 
     @Observable
-   public class Provider {
+   public final class Provider {
         
         typealias CellProvider = ItemCell.Provider
         

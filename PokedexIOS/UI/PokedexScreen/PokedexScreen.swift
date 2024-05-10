@@ -12,11 +12,11 @@ import DI
 
 public struct PokedexScreen: View {
     
-    @DIContainer var fetchApi: FetchPokemonApi
-    @DIContainer var speciesApi: PokemonSpeciesApi
-    @DIContainer var player: CriePlayer
-    @DIContainer var evolutionChainApi: PokemonEvolutionChainApi
-    @DIContainer var abilitiesApi: PokemonAbilityApi
+    @DIContainer private var fetchApi: FetchPokemonApi
+    @DIContainer private var speciesApi: PokemonSpeciesApi
+    @DIContainer private var player: CriePlayer
+    @DIContainer private var evolutionChainApi: PokemonEvolutionChainApi
+    @DIContainer private var abilitiesApi: PokemonAbilityApi
     
     public var body: some View {
         NavigationStack {

@@ -12,7 +12,7 @@ import DI
 
 public struct MutableModifier: ViewModifier {
     
-    @DIContainer var player: CriePlayer
+    @DIContainer private var player: CriePlayer
     
     public func body(content: Content) -> some View {
         content
@@ -30,14 +30,13 @@ public struct MutableModifier: ViewModifier {
                             .scaleEffect(isMuted ? 1 : 0.8)
                             .opacity(isMuted ? 1 : 0.8)
                     }
-
+                    
                 }
             })
     }
 }
 
 public extension View {
-    
     func showMutableIcon() -> some View {
         modifier(MutableModifier())
     }

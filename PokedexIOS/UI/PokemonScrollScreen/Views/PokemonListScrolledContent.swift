@@ -20,7 +20,7 @@ public struct PokemonListScrolledContent: View {
         content
     }
     
-    var content: some View {
+    private var content: some View {
         List {
             listContent
         }
@@ -28,7 +28,7 @@ public struct PokemonListScrolledContent: View {
 
     }
     
-    var forEach: some View {
+    private var forEach: some View {
         ForEach(provider.config.list, id: \.0) { (index, pokemon) in
             PokemonScrollCell(provider: .init(api: provider.fetchApi, speciesApi: speciesApi, pokemon: .init(index: index+1, name: pokemon.name)))
                 .onAppear {
@@ -40,7 +40,7 @@ public struct PokemonListScrolledContent: View {
         }
     }
     
-    func searchedList(_ searched: [Provider.SearchedElement<Pokemon>]) -> some View {
+    private func searchedList(_ searched: [Provider.SearchedElement<Pokemon>]) -> some View {
         ForEach(Array(searched.enumerated()), id:\.offset) { offset, pokemon in
             PokemonScrollCell(provider: .init(api: provider.fetchApi, speciesApi: speciesApi, pokemon: .init(index: pokemon.element.order, name: pokemon.element.name),sprite: pokemon.element.sprites?.frontDefault,types: pokemon.element.types.pt, languageName: pokemon.language))
                 .onAppear {
@@ -52,7 +52,7 @@ public struct PokemonListScrolledContent: View {
     }
     
     @ViewBuilder
-    var listContent: some View {
+    private var listContent: some View {
         if let fetched = provider.searched {
             searchedList(fetched)
         } else {

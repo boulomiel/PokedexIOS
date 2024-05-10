@@ -60,7 +60,7 @@ public struct PokemonTeamCell: View {
                 Button(action: {
                     teamRouter.sharingSheet(ShareTeamRoute(teamID: team.persistentModelID))
                 }, label: {
-                    Label("Share team", image: "square.and.arrow.up")
+                    Label("Share team", systemImage: "square.and.arrow.up")
                 })
             }))
         })

@@ -9,9 +9,6 @@ import SwiftUI
 
 public struct DescriptionScreen: View {
     
-    let descriptions: [DescriptionByVersionModel]
-    @State var selectedLanguage: String
-    
     private let grid: [GridItem] = [GridItem(.fixed(80), spacing: 0), GridItem(.flexible(minimum: 250, maximum: 300))]
     private var languages: [String] {
         Array(Set(descriptions.map(\.language))).sorted()
@@ -19,6 +16,9 @@ public struct DescriptionScreen: View {
     private var filtered: [DescriptionByVersionModel] {
         descriptions.filter { $0.language == selectedLanguage }
     }
+    
+    let descriptions: [DescriptionByVersionModel]
+    @State var selectedLanguage: String
     
     public var body: some View {
         ScrollView {
@@ -59,7 +59,7 @@ public struct DescriptionScreen: View {
         }
     }
     
-    func headerText(_ title: String) -> some View {
+    private func headerText(_ title: String) -> some View {
         Text(title)
             .bold()
             .frame(maxWidth: .infinity)
@@ -69,13 +69,13 @@ public struct DescriptionScreen: View {
             }
     }
     
-    var bottomLine: some View {
+    private var bottomLine: some View {
         Rectangle()
             .fill(Color.white.opacity(0.3))
             .frame(height: 1)
     }
     
-    var sideLine: some View {
+    private var sideLine: some View {
         Rectangle()
             .fill(Color.white.opacity(0.3))
             .frame(width: 1)

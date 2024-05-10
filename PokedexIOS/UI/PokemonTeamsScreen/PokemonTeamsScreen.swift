@@ -14,22 +14,22 @@ import Dtos
 
 public struct PokemonTeamsScreen: View {
     
-    @Environment(\.modelContext) var modelContext
-    @DIContainer var scrollFetchApi : ScrollFetchPokemonApi
-    @DIContainer var scrollFetchItemApi : ScrollFetchItemApi
-    @DIContainer var fetchApi: FetchPokemonApi
-    @DIContainer var movesApi: PokemonMoveApi
-    @DIContainer var abilityApi: PokemonAbilityApi
-    @DIContainer var speciesApi: PokemonSpeciesApi
-    @DIContainer var natureApi: PokemonNatureApi
-    @DIContainer var evolutionChainApi: PokemonEvolutionChainApi
-    @DIContainer var categoryItemApi: PokemonCategoryItemApi
-    @DIContainer var pokemonItemApi: PokemonItemApi
-    @DIContainer var generalApi: GeneralApi<ItemCategories>
-    @DIContainer var player: CriePlayer
-    @DIContainer var languageNameFetcher: LanguageNameFetcher
+    @Environment(\.modelContext)
+    private var modelContext
+    @DIContainer private var scrollFetchApi : ScrollFetchPokemonApi
+    @DIContainer private var scrollFetchItemApi : ScrollFetchItemApi
+    @DIContainer private var fetchApi: FetchPokemonApi
+    @DIContainer private var movesApi: PokemonMoveApi
+    @DIContainer private var abilityApi: PokemonAbilityApi
+    @DIContainer private var speciesApi: PokemonSpeciesApi
+    @DIContainer private var natureApi: PokemonNatureApi
+    @DIContainer private var evolutionChainApi: PokemonEvolutionChainApi
+    @DIContainer private var categoryItemApi: PokemonCategoryItemApi
+    @DIContainer private var pokemonItemApi: PokemonItemApi
+    @DIContainer private var generalApi: GeneralApi<ItemCategories>
+    @DIContainer private var player: CriePlayer
+    @DIContainer private var languageNameFetcher: LanguageNameFetcher
 
-    
     @State var teamRouter: TeamRouter
     @State var teamCount: Int = 0
     
@@ -111,22 +111,22 @@ public struct PokemonTeamsScreen: View {
         }
     }
     
-    func getTeamCount() {
+    private func getTeamCount() {
         teamCount = modelContext.getCount(SDTeam.self)
     }
     
-    func fetchPokemon(with id: Int, and teamID: UUID) -> SDPokemon? {
+    private func fetchPokemon(with id: Int, and teamID: UUID) -> SDPokemon? {
         modelContext.fetchUniqueSync(with: id, limit: 1, predicate: #Predicate { $0.pokemonID == id})
     }
     
-    func fetchPokemon(with id: PersistentIdentifier) -> SDPokemon? {
+    private func fetchPokemon(with id: PersistentIdentifier) -> SDPokemon? {
         modelContext.fetchUniqueSync(SDPokemon.self, with: id)
     }
     
 }
 
 @Observable
-class TeamRouter {
+public final class TeamRouter {
     var path: NavigationPath
     var sharingSheet: ShareTeamRoute?
     

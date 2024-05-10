@@ -10,7 +10,7 @@ import DI
 import SwiftUI
 import Dtos
 
-extension Move {
+public extension Move {
     
     var dataHolder: MoveItemDataHolder {
         MoveItemDataHolder(
@@ -45,8 +45,7 @@ extension Move {
 }
 
 
-extension MoveItemDataHolder {
-    
+public extension MoveItemDataHolder {
     func Icon(_ size: CGFloat) -> some View {
         Image(type)
             .resizable()

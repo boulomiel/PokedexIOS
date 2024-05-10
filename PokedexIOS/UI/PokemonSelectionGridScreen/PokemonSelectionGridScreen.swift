@@ -283,7 +283,7 @@ public struct PokemonSelectionGridScreen: View {
         var selectedPokemons: [Pokemon]
         private var modelContext: ModelContext
         private var teamID: PersistentIdentifier?
-        var eventBound: GridCellPOkemonSelectionEventBound
+        var eventBound: GridCellPokemonSelectionEventBound
         
         var teamName: String
         var teamNameItemIphone: TeamNameSheet.TeamNameItem?
@@ -299,7 +299,7 @@ public struct PokemonSelectionGridScreen: View {
             teamID == nil
         }
         
-        init(selectedPokemons: [Pokemon], modelContext: ModelContext, teamID: PersistentIdentifier?, eventBound: GridCellPOkemonSelectionEventBound = .init()) {
+        init(selectedPokemons: [Pokemon], modelContext: ModelContext, teamID: PersistentIdentifier?, eventBound: GridCellPokemonSelectionEventBound = .init()) {
             self.grid = .init(repeating: .init(.adaptive(minimum: 120)), count: 3)
             self.selectedPokemons = selectedPokemons
             self.teamID = teamID

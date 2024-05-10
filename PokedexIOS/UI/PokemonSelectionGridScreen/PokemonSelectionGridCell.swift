@@ -11,20 +11,6 @@ import Tools
 import DI
 import Dtos
 
-class GridCellPOkemonSelectionEventBound {
-    enum EventBound {
-        case showSelection(Bool)
-        case selectedPokemon(pokemons: [Pokemon])
-        case showVarietiesForCell(local: LocalPokemon?)
-    }
-    
-    let event: PassthroughSubject<EventBound, Never>
-    
-    init(event: PassthroughSubject<EventBound, Never> = .init()) {
-        self.event = event
-    }
-}
-
 public struct PokemonSelectionGridCell: View {
     
     @Environment(TeamRouter.self) var teamRouter
@@ -178,7 +164,7 @@ public struct PokemonSelectionGridCell: View {
         let api: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi
         var pokemon: LocalPokemon
-        let eventBound: GridCellPOkemonSelectionEventBound
+        let eventBound: GridCellPokemonSelectionEventBound
         var fetchedPokemon: Pokemon?
         let languageName: LanguageName
         
@@ -202,7 +188,7 @@ public struct PokemonSelectionGridCell: View {
         var isSelected: Bool
         var showVarietyButton: Bool
         
-        init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, pokemon: LocalPokemon, eventBound: GridCellPOkemonSelectionEventBound) {
+        init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, pokemon: LocalPokemon, eventBound: GridCellPokemonSelectionEventBound) {
             self.api = api
             self.pokemon = pokemon
             self.isSelected = false
@@ -215,7 +201,7 @@ public struct PokemonSelectionGridCell: View {
             }
         }
         
-        init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, fetchedPokemon: Pokemon, languageName: LanguageName, eventBound: GridCellPOkemonSelectionEventBound) {
+        init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, fetchedPokemon: Pokemon, languageName: LanguageName, eventBound: GridCellPokemonSelectionEventBound) {
             self.api = api
             self.isSelected = false
             self.showVarietyButton = false

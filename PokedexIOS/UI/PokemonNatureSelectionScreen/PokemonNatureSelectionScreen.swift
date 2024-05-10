@@ -15,10 +15,15 @@ import Dtos
 
 public struct PokemonNatureSelectionScreen: View {
     
-    @Environment(\.dismiss) var dimiss
-    @Environment(\.isLandscape) var isLandscape
-    @Environment(\.isIpad) var isIpad
-
+    @Environment(\.dismiss)
+    private var dimiss
+    
+    @Environment(\.isLandscape)
+    private var isLandscape
+    
+    @Environment(\.isIpad)
+    private var isIpad
+    
     let provider: Provider
     
     public var body: some View {
@@ -65,7 +70,7 @@ public struct PokemonNatureSelectionScreen: View {
         .wrappedInScroll(isLandscape, axis: .vertical)
     }
     
-    func languagePickerView(_ selected: String) -> some View {
+    private func languagePickerView(_ selected: String) -> some View {
         Picker(selection: Binding(get: { selected }, set: { provider.selectedLanguage = $0 })) {
             ForEach(provider.languages, id:\.self) { language in
                 Text(language.capitalized)
@@ -77,7 +82,7 @@ public struct PokemonNatureSelectionScreen: View {
         .pickerStyle(.palette)
     }
     
-    func naturePickerView(_ selected: Nature, natures: [Nature]) -> some View {
+    private func naturePickerView(_ selected: Nature, natures: [Nature]) -> some View {
         Picker(selection: Binding(get: { selected }, set: { provider.selected = $0 })) {
             ForEach(natures, id:\.id) { nature in
                 Text(nature.names.first(where: { $0.language.name == provider.selectedLanguage })?.name ?? "")
@@ -89,7 +94,7 @@ public struct PokemonNatureSelectionScreen: View {
         .pickerStyle(.palette)
     }
     
-    var statView: some View {
+    private var statView: some View {
         PokemonStatsView(
             pokemonStats: provider.stats,
             backgroundColor: .white.opacity(
@@ -103,11 +108,11 @@ public struct PokemonNatureSelectionScreen: View {
     }
     
     @Observable
-   public class Provider {
-        let api: PokemonNatureApi
-        let pokemonID: PersistentIdentifier
+    public final class Provider {
+        private let api: PokemonNatureApi
+        private let pokemonID: PersistentIdentifier
         var stats: [PokemonDisplayStat]
-        let modelContext: ModelContext
+        private let modelContext: ModelContext
         
         @ObservationIgnored private var bastStats: [PokemonDisplayStat]
         @ObservationIgnored private var current: Nature?
@@ -208,8 +213,8 @@ public struct NatureStatBridge {
     let sdPokemon = SDPokemon(pokemonID: pokemon.id, data: try? JSONEncoder().encode(pokemon))
     preview.addExamples([sdPokemon])
     return PokemonNatureSelectionScreen(provider: .init(api: .init(), pokemonID: sdPokemon.persistentModelID, stats: pokemon.stats, current: nil, modelContext: preview.container.mainContext))
-    .inject(container: container)
-    .modelContainer(preview.container)
-    .preferredColorScheme(.dark)
+        .inject(container: container)
+        .modelContainer(preview.container)
+        .preferredColorScheme(.dark)
 }
 

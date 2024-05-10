@@ -52,7 +52,7 @@ public struct PokemonMoveDetailsScreen: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    var moveHeader: some View {
+    private var moveHeader: some View {
         HStack {
             moveTypeInfoLeading
             moveDamageInfoTrainling
@@ -60,7 +60,7 @@ public struct PokemonMoveDetailsScreen: View {
     }
     
     @ViewBuilder
-    var moveTypeInfoLeading: some View {
+    private var moveTypeInfoLeading: some View {
         let color = Color(move.type.capitalized).gradient
         HStack {
             move.Icon(50)
@@ -80,7 +80,7 @@ public struct PokemonMoveDetailsScreen: View {
         }
     }
     
-    var moveDamageInfoTrainling: some View {
+    private var moveDamageInfoTrainling: some View {
         VStack(alignment: .listRowSeparatorTrailing) {
             move.damageClass.image(width: 80, height: 40)
             Text("Power Points: \(move.pp)")

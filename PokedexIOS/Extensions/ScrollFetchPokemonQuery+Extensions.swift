@@ -8,7 +8,7 @@
 import Foundation
 import DI
 
-extension ScrollFetchPokemonQuery {
+public extension ScrollFetchPokemonQuery {
     func next() -> Self {
         .init(limit: limit, offset: offset + 50)
     }

@@ -14,9 +14,13 @@ import Dtos
 
 public struct PokemonAbilitySelectionScreen: View {
     
-    @Environment(\.isIphone) var isIphone
-    @Environment(\.isLandscape) var isLandscape
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.isIphone) 
+    private var isIphone
+    @Environment(\.isLandscape)
+    private var isLandscape
+    @Environment(\.dismiss)
+    private var dismiss
+    
     @State var provider: Provider
     
     public var body: some View {
@@ -68,7 +72,7 @@ public struct PokemonAbilitySelectionScreen: View {
     }
     
     @Observable
-   public class Provider {
+   public final class Provider {
         
         let pokemonID: PersistentIdentifier
         let abilities: [PokemonAbility]

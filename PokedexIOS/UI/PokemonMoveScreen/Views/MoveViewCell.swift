@@ -16,7 +16,6 @@ public struct MoveViewCell: View {
     @State private var selectedMove: MoveItemDataHolder?
     
     public var body: some View {
-
         if let move = provider.moveItemHolder {
             NavigationLink(value: MoveDetailsRoute(move: move)) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -34,7 +33,6 @@ public struct MoveViewCell: View {
                         .foregroundStyle(Color.gray.opacity(0.3))
                         .frame(height: 2)
                         .padding(.top, 2)
-                    
                 }
             }
             .foregroundStyle(.white)
@@ -45,7 +43,7 @@ public struct MoveViewCell: View {
     }
     
     @ViewBuilder
-    func moveTitleType(move: MoveItemDataHolder) -> some View {
+    private func moveTitleType(move: MoveItemDataHolder) -> some View {
         let color = Color(move.type.capitalized).gradient
         HStack {
             Image(move.type)
@@ -57,31 +55,31 @@ public struct MoveViewCell: View {
                 .foregroundStyle(color)
                 .background(Circle().stroke().foregroundStyle(color))
             
-                Text(move.name.first(where: { $0.language == "en" })?.name ?? "")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .multilineTextAlignment(.leading)
-                    .bold()
+            Text(move.name.first(where: { $0.language == "en" })?.name ?? "")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.leading)
+                .bold()
             
         }
         .padding(.leading, 2)
     }
     
-    func moveTextLearnAt(width: CGFloat) -> some View {
+    private func moveTextLearnAt(width: CGFloat) -> some View {
         Text(provider.config.methodText)
             .frame(maxWidth: width, alignment: .leading)
     }
     
     @ViewBuilder
-    func moveTextAtLevel(width: CGFloat) -> some View {
+    private func moveTextAtLevel(width: CGFloat) -> some View {
         ShrinkText(text: provider.moveTextAtLevel, alignment: .leading, font: .body.bold())
             .opacity(provider.doesNotNeedThisInfo ? 0 : 1)
     }
     
-    var seeMoveButton: some View {
+    private var seeMoveButton: some View {
         Image(systemName: "chevron.right")
     }
     
-    struct CellKey: PreferenceKey {
+    private struct CellKey: PreferenceKey {
         static var defaultValue: CGRect = .zero
         
         static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
@@ -116,7 +114,7 @@ public struct MoveViewCell: View {
     }
     
     @Observable
-   public class Provider: Identifiable {
+    public class Provider: Identifiable {
         
         public let id: UUID = .init()
         let moveApi: PokemonMoveApi
@@ -126,11 +124,11 @@ public struct MoveViewCell: View {
         var moveItemHolder: MoveItemDataHolder?
         var machineModel: MachineModel?
         
-        var isLevelUp: Bool {
+        private var isLevelUp: Bool {
             moveVersionData.learningMethod == .levelUp
         }
         
-        var isMachine: Bool {
+        private var isMachine: Bool {
             moveVersionData.learningMethod == .machine
         }
         

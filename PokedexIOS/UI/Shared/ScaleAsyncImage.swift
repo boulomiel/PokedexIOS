@@ -39,5 +39,4 @@ public struct ScaleAsyncImage: View {
         }
         .frame(width: width, height: height)
     }
-    
 }

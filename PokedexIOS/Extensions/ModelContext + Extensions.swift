@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-extension ModelContext {
+public extension ModelContext {
     func getCount<Model: PersistentModel>(_ type: Model.Type) -> Int {
         (try? fetchCount(FetchDescriptor<Model>())) ?? 0
     }

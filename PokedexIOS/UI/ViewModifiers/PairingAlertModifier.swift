@@ -10,24 +10,26 @@ import SwiftUI
 import ShareTeam
 import DI
 import Dtos
+import Tools
 
 struct PairingAlertModifier: ViewModifier {
     
-    @Environment(\.modelContext) var modelContext
-    @DIContainer var shareSession: ShareSession
+    @Environment(\.modelContext) 
+    private var modelContext
+    @DIContainer private var shareSession: ShareSession
     @State private var inviteFrom: String = ""
     @State private var showInvitation: Bool = false
-    @State private var isPaired: Bool = false
     
     func body(content: Content) -> some View {
         content
             .onReceive(shareSession.event, perform: { event in
                 switch event {
-                case let .isPaired(isPaired):
-                    self.isPaired = isPaired
+                case .isPaired:
+                    break
                 case let .receivedData(data: data):
                     decodeData(data: data)
                 case let .receivedInvite(from: invite):
+                    Vibrator.change(of: .heavy)
                     self.inviteFrom = invite.displayName
                     self.showInvitation = true
                 case .sent:
