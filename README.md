@@ -1,6 +1,6 @@
 # Mobile Pokédex
 
-Mobile Pokédex is an iOS app designed to provide comprehensive information about Pokémon, allowing users to explore the Pokémon world in multiple languages and strategize for battles.
+Mobile Pokédex is an iOS app designed to provide comprehensive information about Pokémon, allowing users to explore the Pokémon world in multiple languages and strategize for battles. Build and share your teams !
 
 ## Features
 
@@ -36,14 +36,19 @@ Mobile Pokédex is an iOS app designed to provide comprehensive information abou
 - Api: Each Api endpoints encapsulated within and ApiProtocol and an ApiQueryProtocol
 - Cache: NSCache<NSUrl,UIImage>
 - Persistence: SwiftData for Team building
-- Modules: DI ( PersitentModels, Api, Manager ), Tools, Resources
+- Modules: DI ( PersitentModels, Api, Manager ), Tools, Resources, ShareTeam (MultipeerConnection in order to send a built team)
   
-<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/df4c2ac4-3a7f-4633-bfd5-0eb376cf5ba7" width="300">
-<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/c8ad1944-89d9-4bf1-a4ed-3f7fe06ef2e2" width="300">
-<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/9a9c4fdf-3228-4d32-9bbd-4c9929dc4514" width="300">
-<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/22b299eb-fb3a-4a50-8b0e-fe7cd4db3221" width="300">
-<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/03cc507d-590f-4447-8640-90d7913b74e8" width="400">
-<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/5fd7304a-114d-4e62-b280-3505e4c0d04b" width="400">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/7c9d6831-a15e-4769-829c-02fe4aa92171" width="300">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/3f330eb7-32a3-409b-a8bc-12a01d64ea0f" width="300">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/382935bb-6df5-4482-b452-860dbe7a5066" width="300">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/3a87f008-efa4-4c07-bd9c-64878052b2f0" width="300">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/a78109b9-0e1f-4b4b-a322-e870c95ce588" width="300">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/62e6fb42-3a74-459c-95f6-10345ab820ab" width="300">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/de0b1d76-141b-4139-bb82-b61ce550cf48" width="300">
+
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/3b58cbea-4b5b-4b59-8a9e-aaba5f548879" width="400">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/1959b926-e23e-42bb-be10-38571ac25c82" width="400">
+<img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/aec98e23-c1bc-4dfa-8b09-1b0508ba8adb" width="400">
 
 
 ## Contributing
