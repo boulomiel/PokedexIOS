@@ -21,11 +21,12 @@ public struct PokemonTeamsListView: View {
     @Environment(\.modelContext)
     var modelContext
 
-    let provider: Provider
+    @Query(FetchDescriptor<SDTeam>(sortBy: [SortDescriptor(\.name, order: .forward)]))
+    var teams: [SDTeam]
     
     public var body: some View {
         List {
-            if provider.teams.isEmpty {
+            if teams.isEmpty {
                 NavigationLink(value: AddTeamRoute()) {
                    Text("Add first team")
                 }
@@ -38,7 +39,7 @@ public struct PokemonTeamsListView: View {
     }
     
     var teamList: some View {
-        ForEach(provider.teams) { team  in
+        ForEach(teams) { team  in
             Section {
                 PokemonTeamCell(team: team)
             } header: {
@@ -57,7 +58,7 @@ public struct PokemonTeamsListView: View {
         }
         .onDelete(perform: { indexSet in
             for offset in indexSet {
-                let remove = provider.teams[offset]
+                let remove = teams[offset]
                 modelContext.delete(remove)
             }
             try? modelContext.save()
@@ -91,17 +92,8 @@ public struct PokemonTeamsListView: View {
                     Task { [weak self] in
                         await self?.fetch()
                     }
-//                    if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-//                    }
-//                    if let removed = userInfo[NSDeletedObjectsKey] as? Set<SDTeam> {  }
-//                    
-//                    if let updated = userInfo[NSUpdatedObjectsKey] as? Set<SDTeam> {
-//
-//                    }
                 }
                 .store(in: &subscriptions)
-            
-
         }
         
         @MainActor

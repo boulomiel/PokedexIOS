@@ -35,7 +35,7 @@ public struct PokemonTeamsScreen: View {
     
     public var body: some View {
         NavigationStack(path: $teamRouter.path) {
-            PokemonTeamsListView(provider: .init(modelContainer: modelContext.container))
+            PokemonTeamsListView()
                 .navigationTitle("Teams")
                 .navigationDestination(for: LocalPokemon.self, destination: { localPokemon in
                     PokemonDetailScreen(provider: .init(api: fetchApi, speciesApi: speciesApi, evolutionChainApi: evolutionChainApi, abilitiesApi: abilityApi , localPokemon: localPokemon, player: player))
