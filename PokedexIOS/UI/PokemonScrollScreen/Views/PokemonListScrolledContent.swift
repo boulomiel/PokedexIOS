@@ -42,7 +42,7 @@ public struct PokemonListScrolledContent: View {
     
     func searchedList(_ searched: [Provider.SearchedElement<Pokemon>]) -> some View {
         ForEach(Array(searched.enumerated()), id:\.offset) { offset, pokemon in
-            PokemonScrollCell(provider: .init(api: provider.fetchApi, speciesApi: speciesApi, pokemon: .init(index: pokemon.element.order, name: pokemon.element.name),sprite: pokemon.element.sprites?.frontDefault, languageName: pokemon.language))
+            PokemonScrollCell(provider: .init(api: provider.fetchApi, speciesApi: speciesApi, pokemon: .init(index: pokemon.element.order, name: pokemon.element.name),sprite: pokemon.element.sprites?.frontDefault,types: pokemon.element.types.pt, languageName: pokemon.language))
                 .onAppear {
                     provider.update(from: offset)
                 }

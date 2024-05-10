@@ -21,6 +21,7 @@ public struct PokemonGridListView: View {
             })
         }
         .padding()
+        .loadable(isLoading: provider.providers.isEmpty)
     }
     
     @Observable
@@ -50,21 +51,18 @@ public struct PokemonGridListView: View {
         
         private func makeProviders(fetchApi: FetchPokemonApi) {
             Task {
-                let chunks = pokemons.chunked(by: 10)
-                await withTaskGroup(of: [CellProvider].self) { group in
-                    chunks.forEach { chunk in
+                await withTaskGroup(of: CellProvider.self) { group in
+                    pokemons.forEach { name in
                         group.addTask {
-                            chunk.map { name in
-                                PokemonGridCell.Provider(
-                                    pokemon: name,
-                                    fechPokemonApi: fetchApi
-                                )
-                            }
+                            PokemonGridCell.Provider(
+                                pokemon: name,
+                                fechPokemonApi: fetchApi
+                            )
                         }
                     }
-                    for await providers in group {
+                    for await provider in group {
                         await MainActor.run {
-                            self.providers.append(contentsOf: providers)
+                            self.providers.append(provider)
                         }
                     }
                 }

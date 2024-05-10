@@ -43,7 +43,7 @@ public struct ItemScrolledContent: View {
                             dismiss.callAsFunction()
                         }
                         .padding()
-                        .background(.ultraThickMaterial)
+                        .background(RoundedRectangle(cornerRadius: 8).fill(.ultraThickMaterial))
                         .padding(.bottom, 40)
                     }
                 }

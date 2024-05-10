@@ -72,14 +72,21 @@ public struct PokemonScrollCell: View {
             }
         }
         
-        init(api: FetchPokemonApi, speciesApi: PokemonSpeciesApi, pokemon: LocalPokemon, sprite: URL?, languageName: LanguageName) {
+        init(
+            api: FetchPokemonApi,
+            speciesApi: PokemonSpeciesApi,
+            pokemon: LocalPokemon,
+            sprite: URL?,
+            types:[PokemonType.PT]?,
+            languageName: LanguageName
+        ) {
             self.api = api
             self.speciesApi = speciesApi
             self.pokemon = pokemon
             self.names = [:]
             self.sprite = sprite
             self.languageName = languageName
-            self.types = []
+            self.types = types ?? []
         }
         
         private func fetch() async {
