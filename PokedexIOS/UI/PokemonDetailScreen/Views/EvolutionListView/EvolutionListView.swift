@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DI
+import Dtos
 
 public struct EvolutionListView: View {
 

@@ -10,6 +10,7 @@ import SwiftData
 import Resources
 import Tools
 import DI
+import Dtos
 
 public struct PokemonTeamsScreen: View {
     
@@ -90,6 +91,10 @@ public struct PokemonTeamsScreen: View {
                     PokemonMoveDetailsScreen(move: route.move)
                         .networkedContentView()
                 }
+                .sheet(item: $teamRouter.sharingSheet, content: { route in
+                    StartSharingView(provider: .init(teamID: route.teamID, container: modelContext.container, teamRouter: teamRouter))
+                        .environment(teamRouter)
+                })
                 .showMutableIcon()
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -122,6 +127,7 @@ public struct PokemonTeamsScreen: View {
 @Observable
 class TeamRouter {
     var path: NavigationPath
+    var sharingSheet: ShareTeamRoute?
     
     init(path: NavigationPath = .init()) {
         self.path = path
@@ -143,6 +149,10 @@ class TeamRouter {
     
     func root<Route: Hashable>(as route: Route) {
         self.path = .init([route])
+    }
+    
+    func sharingSheet(_ shareTeamRoute: ShareTeamRoute) {
+        self.sharingSheet = shareTeamRoute
     }
 }
 

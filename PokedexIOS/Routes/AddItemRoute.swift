@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import DI
+import Dtos
 
 public struct AddItemRoute: Identifiable, Hashable {
     public let id: UUID = .init()

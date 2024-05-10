@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import Tools
 import DI
+import Dtos
 
 class GridCellPOkemonSelectionEventBound {
     enum EventBound {

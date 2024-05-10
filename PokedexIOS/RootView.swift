@@ -9,12 +9,14 @@ import SwiftUI
 import CoreData
 import Tools
 import DI
+import ShareTeam
 
 public struct RootView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @DIContainer var appLauncher: AppLaunchWorker
     @DIContainer var fetchApi: FetchPokemonApi
     @DIContainer var speciesApi: PokemonSpeciesApi
+    @DIContainer var shareSession: ShareSession
     @State var breath: Bool = false
     @State var tabRoot: TabRoot? = .pokedex
     
@@ -59,6 +61,11 @@ public struct RootView: View {
                     .ignoresSafeArea()
                     .frame(height: 25)
                 }
+                .onAppear {
+                    let displayName = UIDevice.current.name
+                    shareSession.start(as: displayName)
+                }
+                .pairingAlert()
         }
     }
     

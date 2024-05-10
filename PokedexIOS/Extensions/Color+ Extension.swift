@@ -36,7 +36,7 @@ extension Color {
         AngularGradient(colors: colors, center: center)
     }
     
-    public static func makeCircleGradient(for colors: [Color], center: UnitPoint = .center) -> some ShapeStyle {
-        RadialGradient(colors: colors, center: center, startRadius: 0, endRadius: 100)
+    public static func makeCircleGradient(for colors: [Color], center: UnitPoint = .center, startRadius: CGFloat = 0, endRadius: CGFloat =  100) -> some ShapeStyle {
+        RadialGradient(colors: colors, center: center, startRadius: startRadius, endRadius: endRadius)
     }
 }

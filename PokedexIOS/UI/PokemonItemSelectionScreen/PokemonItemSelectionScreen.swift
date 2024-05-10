@@ -11,6 +11,7 @@ import SwiftData
 import Resources
 import Tools
 import DI
+import Dtos
 
 public struct PokemonItemSelectionScreen: View {
     

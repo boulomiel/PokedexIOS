@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Dtos
 
 public protocol NameLauncherProtocol {
     associatedtype T: Decodable

@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftData
+import Dtos
+
 
 @Model
 public class SDMove: SDDataDecoder {

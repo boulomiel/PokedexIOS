@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dtos
 
 public class PokemonItemApi: SearchApiProtocol {
     public typealias Query = ItemQuery

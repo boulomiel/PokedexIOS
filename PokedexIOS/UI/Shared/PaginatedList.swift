@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 import SwiftData
 import DI
+import Dtos
 
 public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiService: SearchApiProtocol> : View where ScrollService.Requested == ScrollFetchResult {
     

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import DI
+import Dtos
 
 public struct PokemonScrollCell: View {
     
@@ -86,7 +87,6 @@ public struct PokemonScrollCell: View {
             switch result {
             case .success(let result):
                 await MainActor.run {
-                    print(result.types)
                     types = result.types.pt
                     sprite = result.sprites?.frontDefault
                 }

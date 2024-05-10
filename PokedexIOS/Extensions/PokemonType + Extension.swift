@@ -8,6 +8,7 @@
 import Foundation
 import DI
 import SwiftUI
+import Dtos
 
 extension PokemonType {
     
@@ -38,7 +39,6 @@ extension PokemonType {
         init?(typeString: String) {
             // Convert the type string to lowercase to handle case insensitivity
             let lowercaseTypeString = typeString.lowercased()
-            print(Self.self, lowercaseTypeString)
             switch lowercaseTypeString {
             case "normal": self = .normal
             case "fire": self = .fire
@@ -66,12 +66,15 @@ extension PokemonType {
         }
         
         var color: Color {
-            print(self.rawValue.capitalized)
-            return Color(self.rawValue.capitalized)
+             Color(self.rawValue.capitalized)
         }
         
         var gradient: AnyGradient {
-            return Color(self.rawValue.capitalized).gradient
+             Color(self.rawValue.capitalized).gradient
+        }
+        
+        var image: Image {
+            Image(self.rawValue)
         }
         
     }
@@ -87,14 +90,18 @@ extension Array where Element == PokemonType {
 extension Array where Element == PokemonType.PT {
     
     var horizontalLinearGradient: some ShapeStyle {
-       return Color.makeLinearGradient(for: map(\.color), startPoint: .leading, endPoint: .trailing)
+        Color.makeLinearGradient(for: map(\.color), startPoint: .leading, endPoint: .trailing)
     }
     
     var verticalLinearGradient: some ShapeStyle {
-       return Color.makeLinearGradient(for: map(\.color), startPoint: .top, endPoint: .bottom)
+        Color.makeLinearGradient(for: map(\.color), startPoint: .top, endPoint: .bottom)
     }
     
     var circleGradient: some ShapeStyle {
-        return Color.makeCircleGradient(for: map(\.color))
+        Color.makeCircleGradient(for: map(\.color))
+    }
+    
+    func circleGradient(startRadius: CGFloat, endRadius: CGFloat) -> some ShapeStyle {
+        Color.makeCircleGradient(for: map(\.color), startRadius: startRadius, endRadius: endRadius)
     }
 }

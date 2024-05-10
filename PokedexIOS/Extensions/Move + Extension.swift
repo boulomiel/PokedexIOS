@@ -8,6 +8,7 @@
 import Foundation
 import DI
 import SwiftUI
+import Dtos
 
 extension Move {
     

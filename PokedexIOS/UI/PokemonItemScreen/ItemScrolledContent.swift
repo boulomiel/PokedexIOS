@@ -11,6 +11,7 @@ import SwiftData
 import Resources
 import Tools
 import DI
+import Dtos
 
 public struct ItemScrolledContent: View {
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchItemApi, PokemonItemApi>.Provider

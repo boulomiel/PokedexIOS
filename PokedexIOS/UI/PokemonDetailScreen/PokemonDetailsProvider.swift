@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Tools
 import DI
+import Dtos
 
 @Observable
 class PokemonDetailsProvider {

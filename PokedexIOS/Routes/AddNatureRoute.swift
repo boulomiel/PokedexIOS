@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import DI
+import Dtos
 
 public struct AddNatureRoute: Hashable, Identifiable {
     public let id: UUID = .init()

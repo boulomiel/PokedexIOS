@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dtos
 
 public class FetchPokemonApi: SearchApiProtocol {
     public typealias Query = FetchPokemonQuery

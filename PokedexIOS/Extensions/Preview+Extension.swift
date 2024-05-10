@@ -11,6 +11,6 @@ import DI
 
 public extension Preview {
     static var allPreview: Preview {
-        Preview(SDTeam.self, SDPokemon.self, SDItem.self, SDMove.self, SDAbility.self, SDSpecies.self, SDLanguagePokemonName.self, SDLanguageItemName.self)
+        Preview(SDTeam.self, SDPokemon.self, SDItem.self, SDMove.self, SDAbility.self, SDSpecies.self, SDLanguagePokemonName.self, SDLanguageItemName.self, SDShareUser.self)
     }
 }

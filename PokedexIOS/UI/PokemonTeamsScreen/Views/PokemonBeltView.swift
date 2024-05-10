@@ -8,6 +8,7 @@
 import SwiftUI
 import Resources
 import DI
+import Dtos
 
 public struct PokeBallBeltView<Content: View>: View {
     

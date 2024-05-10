@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dtos
 
 public class PokemonEvolutionChainApi: FetchApiProtocol {
     public typealias Query = PokemonEvolutionChainQuery

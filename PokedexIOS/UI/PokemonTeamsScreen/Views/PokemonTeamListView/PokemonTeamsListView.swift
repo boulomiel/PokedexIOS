@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import Tools
 import DI
+import Dtos
 
 public struct PokemonTeamsListView: View {
     

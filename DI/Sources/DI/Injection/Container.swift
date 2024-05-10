@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftData
 import Tools
 import Resources
+import ShareTeam
+import Dtos
 
 public class Container {
     var factory: [String: () -> Any]
@@ -22,7 +24,18 @@ public class Container {
     
     public init() {
         print(#file, #function)
-        swiftDataController = .init(models: SDTeam.self, SDPokemon.self, SDMove.self, SDItem.self, SDAbility.self, SDSpecies.self, SDLanguagePokemonName.self, SDLanguageItemName.self, isTesting: false)
+        swiftDataController = .init(
+            models: SDTeam.self,
+            SDPokemon.self,
+            SDMove.self,
+            SDItem.self,
+            SDAbility.self,
+            SDSpecies.self,
+            SDLanguagePokemonName.self,
+            SDLanguageItemName.self,
+            SDShareUser.self,
+            isTesting: false
+        )
         self.store = [:]
         self.factory = [:]
         inject()
@@ -114,5 +127,8 @@ fileprivate extension Container {
         //Launcher
         let nameLaunchers: [any NameLauncherProtocol] = [resolve(PokemonNameLauncherImpl.self), resolve(ItemNameLauncherImpl.self)]
         register(AppLaunchWorker.self, object: .init(namedLauncherWorkers: nameLaunchers, container: modelContainer))
+        
+        //Sharing
+        register(ShareSession.self, object: .init())
     }
 }

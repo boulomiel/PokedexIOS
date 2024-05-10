@@ -21,7 +21,6 @@ public struct PokemonDetailScreen: View {
 
     public var body: some View {
         List {
-
             Section("Generation") {
                 segmentedGenView
                 HStack {
@@ -32,6 +31,26 @@ public struct PokemonDetailScreen: View {
             }
             .listRowBackground(Color.clear)
 
+            if let types = provider.pokemon?.types.pt {
+                Section("Type") {
+                    HStack {
+                        ForEach(types, id:\.rawValue) {
+                            $0.image
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 35, height: 35)
+                                .foregroundStyle($0.color)
+                                .padding(2)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color.white.opacity(0.3))
+                                }
+                        }
+                    }
+                }
+                .listRowBackground(Color.clear)
+            }
             
             if let evolutionViewProvider = provider.evolutionViewProvider {
                 Section("Evolutions") {
@@ -79,7 +98,19 @@ public struct PokemonDetailScreen: View {
         .navigationTitle(provider.localPokemon.name.capitalized)
         .preferredColorScheme(.dark)
         .toolbarBackground(.hidden, for: .navigationBar)
-        .pokemonTypeBackgroundV(types: provider.pokemon?.types.pt ?? [])
+       // .pokemonTypeBackgroundV(types: provider.pokemon?.types.pt ?? [])
+        .background {
+            GeometryReader(content: { geometry in
+                Color.black.opacity(0.001)
+                    .frame(width: geometry.size.height, height: geometry.size.height, alignment: .center)
+                    .pokemonTypeBackgroundCircle(types: provider.pokemon?.types.pt ?? [], with: 0, endRadius: geometry.size.width * 0.6)
+                    .clipShape(Circle())
+                    .position(x: geometry.size.width / 2 ,y: geometry.size.height / 2)
+                    .blur(radius: geometry.size.width / 5)
+
+            })
+            .shadow(color: provider.pokemon?.types.pt.last?.color.opacity(0.5) ?? .black,radius: 60)
+        }
         .scrollContentBackground(.hidden)
         .environment(provider)
     }

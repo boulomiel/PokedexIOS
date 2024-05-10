@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dtos
 
 public class PokemonMachineApi: FetchApiProtocol {
     public typealias Requested = Machine

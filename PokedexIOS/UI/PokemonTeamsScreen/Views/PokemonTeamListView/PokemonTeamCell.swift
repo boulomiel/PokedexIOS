@@ -12,7 +12,7 @@ import DI
 
 public struct PokemonTeamCell: View {
     
-    var team: SDTeam
+    let team: SDTeam
     @Environment(TeamRouter.self) var teamRouter
     
     private var pokemons: [SDPokemon] {
@@ -56,6 +56,13 @@ public struct PokemonTeamCell: View {
                     ProgressView()
                 }
             }
+            .contextMenu(ContextMenu(menuItems: {
+                Button(action: {
+                    teamRouter.sharingSheet(ShareTeamRoute(teamID: team.persistentModelID))
+                }, label: {
+                    Label("Share team", image: "square.and.arrow.up")
+                })
+            }))
         })
     }
 }

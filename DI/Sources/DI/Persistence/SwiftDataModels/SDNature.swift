@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Dtos
 
 @Model
 public class SDNature: SDDataDecoder {

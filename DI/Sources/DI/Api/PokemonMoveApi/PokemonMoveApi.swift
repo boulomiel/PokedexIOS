@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dtos
 
 public class PokemonMoveApi: FetchApiProtocol {
     public typealias Requested = Move

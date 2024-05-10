@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dtos
 
 public struct ScrollFetchResult: Codable {
     public var count: Int

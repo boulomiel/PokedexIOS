@@ -9,6 +9,7 @@ import Foundation
 import SwiftData
 import Resources
 import Tools
+import Dtos
 
 public class ItemNameLauncherImpl: NameLauncherProtocol {
     
@@ -58,7 +59,7 @@ public class ItemNameLauncherImpl: NameLauncherProtocol {
         case .success(let success):
             return success
         case .failure(let failure):
-            print(#file, #function, failure, name)
+           //print(#file, #function, failure, name)
             return nil
         }
     }

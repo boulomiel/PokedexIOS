@@ -9,6 +9,7 @@ import SwiftUI
 import Resources
 import Tools
 import DI
+import Dtos
 
 public struct PokemonTeamPreviewScreen: View {
     
@@ -36,10 +37,13 @@ public struct PokemonTeamPreviewScreen: View {
     public var body: some View {
         Form {
             VStack {
-                Text(pokemon.decoded?.name.capitalized ?? "")
-                    .font(.largeTitle)
-                    .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack {
+                    Text(pokemon.decoded?.name.capitalized ?? "")
+                        .font(.largeTitle)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    typeView
+                }
                 
                 ScaleAsyncImage(url: pokemon.decoded?.sprites?.frontDefault, width: 200, height: 200)
                     .background(Circle().fill(Color.gray.opacity(0.3)))
@@ -158,6 +162,26 @@ public struct PokemonTeamPreviewScreen: View {
         }
     }
     
+    @ViewBuilder
+    var typeView: some View {
+        if let types = pokemon.decoded?.types.pt {
+            HStack {
+                ForEach(types, id:\.rawValue) {
+                    $0.image
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .foregroundStyle($0.color)
+                        .padding(2)
+                        .background {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.white.opacity(0.3))
+                        }
+                }
+            }
+        }
+    }
     
     var getMoveRoute: AddAttackRoute {
         let urls: [URL] =  pokemon.decoded?.moves.compactMap { $0.move.url } ?? []

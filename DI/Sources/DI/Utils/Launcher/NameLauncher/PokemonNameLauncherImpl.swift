@@ -9,6 +9,7 @@ import Foundation
 import SwiftData
 import Resources
 import Tools
+import Dtos
 
 public class PokemonNameLauncherImpl: NameLauncherProtocol {
     
