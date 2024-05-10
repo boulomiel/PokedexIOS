@@ -1,6 +1,6 @@
 # Mobile Pokédex
 
-Mobile Pokédex is an iOS app designed to provide comprehensive information about Pokémon, allowing users to explore the Pokémon world in multiple languages and strategize for battles.
+Mobile Pokédex is an iOS app designed to provide comprehensive information about Pokémon, allowing users to explore the Pokémon world in multiple languages and strategize for battles. Build and share your teams !
 
 ## Features
 
@@ -36,7 +36,7 @@ Mobile Pokédex is an iOS app designed to provide comprehensive information abou
 - Api: Each Api endpoints encapsulated within and ApiProtocol and an ApiQueryProtocol
 - Cache: NSCache<NSUrl,UIImage>
 - Persistence: SwiftData for Team building
-- Modules: DI ( PersitentModels, Api, Manager ), Tools, Resources
+- Modules: DI ( PersitentModels, Api, Manager ), Tools, Resources, ShareTeam (MultipeerConnection in order to send a built team)
   
 <img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/df4c2ac4-3a7f-4633-bfd5-0eb376cf5ba7" width="300">
 <img src="https://github.com/boulomiel/PokedexIOS/assets/55102143/c8ad1944-89d9-4bf1-a4ed-3f7fe06ef2e2" width="300">
