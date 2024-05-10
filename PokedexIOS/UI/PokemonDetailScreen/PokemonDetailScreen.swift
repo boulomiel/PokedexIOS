@@ -33,21 +33,7 @@ public struct PokemonDetailScreen: View {
 
             if let types = provider.pokemon?.types.pt {
                 Section("Type") {
-                    HStack {
-                        ForEach(types, id:\.rawValue) {
-                            $0.image
-                                .renderingMode(.template)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 35, height: 35)
-                                .foregroundStyle($0.color)
-                                .padding(2)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(Color.white.opacity(0.3))
-                                }
-                        }
-                    }
+                    PokemonTypeListView(types: types, imageSize: 35)
                 }
                 .listRowBackground(Color.clear)
             }
