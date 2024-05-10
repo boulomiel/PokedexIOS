@@ -94,6 +94,7 @@ public struct PokemonTeamsScreen: View {
                 .sheet(item: $teamRouter.sharingSheet, content: { route in
                     StartSharingView(provider: .init(teamID: route.teamID, container: modelContext.container, teamRouter: teamRouter))
                         .environment(teamRouter)
+                        .presentationDetents([.medium])
                 })
                 .showMutableIcon()
                 .toolbar {

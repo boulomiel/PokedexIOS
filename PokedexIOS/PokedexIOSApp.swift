@@ -32,7 +32,9 @@ public struct PokedexIOSApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        #if !targetEnvironment(simulator)
         FirebaseApp.configure()
+        #endif
         return true
     }
 }
