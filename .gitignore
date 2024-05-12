@@ -1,6 +1,8 @@
 PokedexIOS/GoogleService-Info.plist
 
-xcuserdata/*
+xcuserdata/
+.build/
+
 *.hmap
 *.ipa
 *.xcworkspace
