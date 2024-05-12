@@ -19,5 +19,14 @@ public extension SDDataDecoder {
         let decoder = JSONDecoder()
         return try? decoder.decode(Decoded.self, from: data)
     }
+    
+    func decodedAsync() async -> Decoded? {
+        guard let data = data else { return nil }
+        let decoded = Task {
+            let decoder = JSONDecoder()
+            return try? decoder.decode(Decoded.self, from: data)
+        }
+        return await decoded.value
+    }
 }
 

@@ -41,7 +41,7 @@ public struct PokemonTeamsListView: View {
     var teamList: some View {
         ForEach(teams) { team  in
             Section {
-                PokemonTeamCell(team: team)
+                PokemonTeamCell(provider: .init(team: team))
             } header: {
                 HStack{
                     Text(team.name.capitalized)

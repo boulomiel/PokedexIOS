@@ -83,6 +83,16 @@ public struct PokemonTeamPreviewScreen: View {
 
         }
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    teamRouter.back()
+                } label: {
+                    Label("Teams", systemImage: "chevron.left")
+                }
+            }
+        }
         .pokemonTypeBackgroundV(types: types)
         .scrollContentBackground(.hidden)
         .task {
