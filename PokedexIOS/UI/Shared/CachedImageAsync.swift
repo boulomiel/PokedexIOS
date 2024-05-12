@@ -32,7 +32,7 @@ public struct CachedAsyncImage: View {
                     .scaledToFill()
                     .frame(width: width, height: height)
             } else {
-                PokebalView(radius: width * 0.3)
+                PokebalView(radius: width * 0.2)
             }
         }
         .frame(width: width, height: height)
@@ -44,7 +44,9 @@ public struct CachedAsyncImage: View {
     func getImage() async {
         let image = await imageCache.get(url: url)
         await MainActor.run {
-            self.image = image
+            withAnimation(.smooth) {
+                self.image = image
+            }
         }
     }
 }

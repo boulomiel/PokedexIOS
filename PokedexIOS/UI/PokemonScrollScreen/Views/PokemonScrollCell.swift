@@ -46,7 +46,6 @@ public struct PokemonScrollCell: View {
         let speciesApi: PokemonSpeciesApi
         var pokemon: LocalPokemon
         
-        
         var names: [String: String]
         var sprite: URL?
         var types: [PokemonType.PT]
@@ -94,8 +93,10 @@ public struct PokemonScrollCell: View {
             switch result {
             case .success(let result):
                 await MainActor.run {
-                    types = result.types.pt
-                    sprite = result.sprites?.frontDefault
+                    withAnimation(.smooth) {
+                        types = result.types.pt
+                        sprite = result.sprites?.frontDefault
+                    }
                 }
             case .failure(let error):
                 print(#file, #function, error)

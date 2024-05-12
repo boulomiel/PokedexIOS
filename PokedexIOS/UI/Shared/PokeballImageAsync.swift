@@ -16,27 +16,9 @@ public struct PokeballImageAsync: View {
     
     @State private var isShown: Bool = false
     @State private var id: UUID = .init()
-
+    
     public var body: some View {
-        ZStack {
-            if isShown {
-                ScaleAsyncImage(url: url)
-                    .onTapGesture {
-                        isShown = false
-                        id = .init()
-                    }
-            } else {
-                PokebalView(radius: width / 7)
-                    .onAppear(perform: {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation(.snappy) {
-                                isShown = true
-                            }
-                        }
-                    })
-            }
-        }
-        .id(id)
+        ScaleAsyncImage(url: url)
     }
 }
 

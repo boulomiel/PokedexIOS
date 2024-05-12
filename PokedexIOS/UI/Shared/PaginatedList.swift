@@ -77,7 +77,7 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
             switch result {
             case .success(let success):
                 await MainActor.run {
-                    withAnimation {
+                    withAnimation(.smooth) {
                         self.config.scrollFetch.append(contentsOf: success.results)
                     }
                 }
@@ -97,10 +97,14 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
                 switch result {
                 case .success(let result):
                     await MainActor.run {
-                        searched = [.init(element: result, language: .en(englishName: name))]
+                        withAnimation(.smooth) {
+                            searched = [.init(element: result, language: .en(englishName: name))]
+                        }
                     }
                 case .failure(let error):
-                    searched = nil
+                    withAnimation(.smooth) {
+                        searched = nil
+                    }
                     print(#file, #function, error, name)
                 }
             } else {
@@ -124,7 +128,9 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
                     }
                 }
                 await MainActor.run {
-                    self.searched = searched
+                    withAnimation(.smooth) {
+                        self.searched = searched
+                    }
                 }
             }
         }
@@ -138,7 +144,7 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
         public struct Config {
             var searchText: String = ""
             var scrollFetch: [NamedAPIResource] = []
-            var currentOffset: Int = 0
+            @ObservationIgnored var currentOffset: Int = 0
             
             var list: [EnumeratedSequence<[NamedAPIResource]>.Element] {
                 Array(scrollFetch.enumerated())

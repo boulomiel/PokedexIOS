@@ -26,7 +26,7 @@ public struct ScaleAsyncImage: View {
                 .clipped()
                 .id(id)
                 .onChange(of: url) { oldValue, newValue in
-                    withAnimation {
+                    withAnimation(.smooth) {
                         id = .init()
                     }
                 }
