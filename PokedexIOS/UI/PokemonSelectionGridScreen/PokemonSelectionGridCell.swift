@@ -220,7 +220,9 @@ public struct PokemonSelectionGridCell: View {
             case .success(let result):
                 await getSpecies(for: result)
                 await MainActor.run {
-                    fetchedPokemon = result
+                    withAnimation(.smooth) {
+                        fetchedPokemon = result
+                    }
                 }
             case .failure(let error):
                 print(#file, #function, error)
