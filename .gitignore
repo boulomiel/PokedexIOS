@@ -5,3 +5,4 @@ xcuserdata/*
 *.ipa
 *.xcworkspace
 *.xcuserstate
+*.resolved

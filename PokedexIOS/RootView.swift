@@ -94,9 +94,12 @@ public struct RootView: View {
                     }
                 }
         }, description: {
-            Text("Loading Pr.Oak's database")
-                .bold()
-                .foregroundStyle(Color.white.opacity(0.3))
+            VStack {
+                Text("Loading Pr.Oak's database")
+                    .bold()
+                    .foregroundStyle(Color.white.opacity(0.3))
+                ProgressView()
+            }
         })
         .background(Color.black)
         .ignoresSafeArea()

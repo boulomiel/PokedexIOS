@@ -10,7 +10,6 @@
 		870BE8AF2BE0EEFB00D6B1BF /* AddItemRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BE8AE2BE0EEFB00D6B1BF /* AddItemRoute.swift */; };
 		870BE8B12BE210F000D6B1BF /* CachedImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BE8B02BE210F000D6B1BF /* CachedImageAsync.swift */; };
 		870BE8B32BE2111100D6B1BF /* PokeballImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BE8B22BE2111100D6B1BF /* PokeballImageAsync.swift */; };
-		870BE8B82BE21D5100D6B1BF /* OggDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = 870BE8B72BE21D5100D6B1BF /* OggDecoder */; };
 		870BE8BB2BE2247300D6B1BF /* MutableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BE8BA2BE2247300D6B1BF /* MutableModifier.swift */; };
 		870BE8BD2BE250F900D6B1BF /* SelectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BE8BC2BE250F900D6B1BF /* SelectionIndicatorView.swift */; };
 		870BE8BF2BE2522000D6B1BF /* SelectableCellModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BE8BE2BE2522000D6B1BF /* SelectableCellModifier.swift */; };
@@ -238,7 +237,6 @@
 				87313BD12BEB65240081DD85 /* Tools in Frameworks */,
 				871ADCB02BE8E2B30017C9D3 /* FirebaseCrashlytics in Frameworks */,
 				871ADCAE2BE8E2B30017C9D3 /* FirebaseAnalytics in Frameworks */,
-				870BE8B82BE21D5100D6B1BF /* OggDecoder in Frameworks */,
 				87313BD92BEB71010081DD85 /* DI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,7 +711,6 @@
 			);
 			name = PokedexIOS;
 			packageProductDependencies = (
-				870BE8B72BE21D5100D6B1BF /* OggDecoder */,
 				871ADCAD2BE8E2B30017C9D3 /* FirebaseAnalytics */,
 				871ADCAF2BE8E2B30017C9D3 /* FirebaseCrashlytics */,
 				87313BCD2BEB5D3E0081DD85 /* Resources */,
@@ -749,7 +746,6 @@
 			);
 			mainGroup = 876A79882BCFEB3800E8E210;
 			packageReferences = (
-				870BE8B62BE21D5100D6B1BF /* XCRemoteSwiftPackageReference "OggDecoder" */,
 				871ADCAC2BE8E2B30017C9D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				87313BCC2BEB5D3E0081DD85 /* XCLocalSwiftPackageReference "Resources" */,
 				87313BCF2BEB65240081DD85 /* XCLocalSwiftPackageReference "Tools" */,
@@ -1058,7 +1054,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -1099,7 +1095,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -1154,14 +1150,6 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		870BE8B62BE21D5100D6B1BF /* XCRemoteSwiftPackageReference "OggDecoder" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/arkasas/OggDecoder.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		871ADCAC2BE8E2B30017C9D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1173,11 +1161,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		870BE8B72BE21D5100D6B1BF /* OggDecoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 870BE8B62BE21D5100D6B1BF /* XCRemoteSwiftPackageReference "OggDecoder" */;
-			productName = OggDecoder;
-		};
 		871ADCAD2BE8E2B30017C9D3 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 871ADCAC2BE8E2B30017C9D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
