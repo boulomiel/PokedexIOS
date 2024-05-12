@@ -13,9 +13,11 @@ import Tools
 
 struct SearchingUserView: View {
     
-    @Environment(\.dismiss) var dismiss
     @DIContainer private var shareSession: ShareSession
-    @Environment(StartSharingView.Provider.self) private var provider
+    @Environment(StartSharingView.Provider.self)
+    private var provider
+    @Environment(TeamRouter.self)
+    private var teamRouter
     @State private var shouldOpenSettings: Bool = false
     
     let displayName: String
@@ -50,10 +52,7 @@ struct SearchingUserView: View {
                 }
             }
             Button("Don't share", role: .destructive) {
-                let item = DispatchWorkItem {
-                    dismiss.callAsFunction()
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: item)
+                teamRouter.closeSharingSheet()
             }
         }
     }

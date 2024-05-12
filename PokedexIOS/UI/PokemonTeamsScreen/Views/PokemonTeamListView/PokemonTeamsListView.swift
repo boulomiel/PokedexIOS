@@ -32,9 +32,8 @@ public struct PokemonTeamsListView: View {
                 }
                 .foregroundStyle(.white)
 
-            } else {
-                teamList
             }
+              teamList
         }
     }
     

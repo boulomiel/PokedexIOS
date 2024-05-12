@@ -57,10 +57,13 @@ public struct PokemonTeamCell: View {
         let provider: Provider
         
         var body: some View {
-            if let decoded = provider.pokemon {
+            ZStack {
+                ProgressView()
+                    .opacity(provider.pokemon == nil ? 1 : 0)
+                
                 VStack {
-                    ScaleAsyncImage(url: decoded.sprites?.frontDefault, width: 80, height: 80)
-                    Text(decoded.name.capitalized)
+                    ScaleAsyncImage(url: provider.pokemon?.sprites?.frontDefault, width: 80, height: 80)
+                    Text(provider.pokemon?.name.capitalized ?? "")
                         .bold()
                         .foregroundStyle(.white)
                 }
@@ -79,14 +82,12 @@ public struct PokemonTeamCell: View {
                         Spacer()
                     }
                     .frame(width: 80, height: 80, alignment: .leading)
-                    .pokemonTypeBackgroundCircle(types: decoded.types.pt)
+                    .pokemonTypeBackgroundCircle(types: provider.pokemon?.types.pt ?? [])
                     .clipShape(Circle())
                 }
                 .onTapGesture {
                     teamRouter.root(as: PreviewRoute(pokemonID: provider.pokemonID))
                 }
-            } else {
-                ProgressView()
             }
         }
         
@@ -111,12 +112,17 @@ public struct PokemonTeamCell: View {
             
             @MainActor
             func decode(sdPokemon: SDPokemon) async {
-                self.pokemon = await sdPokemon.decodedAsync()
+                let decoded = await sdPokemon.decodedAsync()
+                withAnimation(.smooth) {
+                    self.pokemon = decoded
+                }
             }
             
-            @MainActor
             func decode(sdItem: SDItem?) async {
-                self.item = await sdItem?.decodedAsync()
+                let decoded = await sdItem?.decodedAsync()
+                withAnimation(.snappy) {
+                    self.item = decoded
+                }
             }
         }
     }

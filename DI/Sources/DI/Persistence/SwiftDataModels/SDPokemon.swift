@@ -25,9 +25,8 @@ public class SDPokemon: SDDataDecoder {
     public var team: [SDTeam]?
     public var nature: SDNature?
     
-    public init(pokemonID: Int, data: Data?, moves: [SDMove]? = nil) {
+    public init(pokemonID: Int, data: Data?) {
         self.pokemonID = pokemonID
         self.data = data
-        self.moves = moves
     }
 }

@@ -155,6 +155,10 @@ public final class TeamRouter {
     func sharingSheet(_ shareTeamRoute: ShareTeamRoute) {
         self.sharingSheet = shareTeamRoute
     }
+    
+    func closeSharingSheet() {
+        self.sharingSheet = nil
+    }
 }
 
 #Preview {

@@ -10,9 +10,10 @@ import CoreData
 import Tools
 import DI
 import ShareTeam
+import SwiftData
 
 public struct RootView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.modelContext) private var modelContext
     @DIContainer var appLauncher: AppLaunchWorker
     @DIContainer var fetchApi: FetchPokemonApi
     @DIContainer var speciesApi: PokemonSpeciesApi
@@ -62,7 +63,10 @@ public struct RootView: View {
                     .frame(height: 25)
                 }
                 .onAppear {
-                    let displayName = UIDevice.current.name
+                    var descriptor = FetchDescriptor<SDShareUser>()
+                    descriptor.fetchLimit = 1
+                    let user = try? modelContext.fetch(descriptor)
+                    let displayName = user?.first?.name ?? UIDevice.current.name
                     shareSession.start(as: displayName)
                 }
                 .pairingAlert()

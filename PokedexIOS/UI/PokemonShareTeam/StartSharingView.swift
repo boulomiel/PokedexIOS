@@ -15,6 +15,8 @@ public struct StartSharingView: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
+    @Environment(TeamRouter.self)
+    private var teamRouter
     @DIContainer var sharingSession: ShareSession
     @Query var shareUser: [SDShareUser]
     @State private var username: String = ""
@@ -38,9 +40,7 @@ public struct StartSharingView: View {
                         switch event {
                         case .sent:
                             Vibrator.notify(of: .success)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                dismiss.callAsFunction()
-                            }
+                            teamRouter.closeSharingSheet()
                         default: break
                         }
                     })
