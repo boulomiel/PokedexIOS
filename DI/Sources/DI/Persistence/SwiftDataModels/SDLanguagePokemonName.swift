@@ -9,21 +9,21 @@ import Foundation
 import SwiftData
 
 
-protocol LanguageModel: PersistentModel { }
+public protocol LanguageModel: PersistentModel { }
 
 @Model
-public class SDLanguageModel {
-    let japHrkt: String
-    let roomaji: String
-    let ko: String
-    let zhHant: String
-    let fr: String
-    let de: String
-    let es: String
-    let it: String
-    @Attribute(.unique) public let en: String
-    let ja: String
-    let zhHans: String
+public final class SDLanguageModel: LanguageModel, @unchecked Sendable {
+    public var japHrkt: String
+    public var roomaji: String
+    public var ko: String
+    public var zhHant: String
+    public var fr: String
+    public var de: String
+    public var es: String
+    public var it: String
+    @Attribute(.unique) public var en: String
+    public var ja: String
+    public var zhHans: String
     
     public init(_ names: [String: String]) {
         japHrkt = names["jap-Hrkt"] ?? ""
@@ -41,19 +41,19 @@ public class SDLanguageModel {
 }
 
 @Model
-public class SDLanguagePokemonName: LanguageModel {
+public final class SDLanguagePokemonName: LanguageModel, @unchecked Sendable {
     
-    var japHrkt: String
-    let roomaji: String
-    let ko: String
-    let zhHant: String
-    let fr: String
-    let de: String
-    let es: String
-    let it: String
-    @Attribute(.unique) public let en: String
-    let ja: String
-    let zhHans: String
+    public var japHrkt: String
+    public var roomaji: String
+    public var ko: String
+    public var zhHant: String
+    public var fr: String
+    public var de: String
+    public var es: String
+    public var it: String
+    @Attribute(.unique) public var en: String
+    public var ja: String
+    public var zhHans: String
 
     public init(_ names: [String: String]) {
         japHrkt = names["jap-Hrkt"] ?? ""
@@ -72,19 +72,19 @@ public class SDLanguagePokemonName: LanguageModel {
 
 
 @Model
-public class SDLanguageItemName: LanguageModel {
+public final class SDLanguageItemName: LanguageModel, @unchecked Sendable {
     
-    let japHrkt: String
-    let roomaji: String
-    let ko: String
-    let zhHant: String
-    let fr: String
-    let de: String
-    let es: String
-    let it: String
-    @Attribute(.unique) public let en: String
-    let ja: String
-    let zhHans: String
+    public var japHrkt: String
+    public var roomaji: String
+    public var ko: String
+    public var zhHant: String
+    public var fr: String
+    public var de: String
+    public var es: String
+    public var it: String
+    @Attribute(.unique) public var en: String
+    public var ja: String
+    public var zhHans: String
 
     public init(_ names: [String: String]) {
         japHrkt = names["jap-Hrkt"] ?? ""
@@ -100,3 +100,5 @@ public class SDLanguageItemName: LanguageModel {
         zhHans = names["zhHans"] ?? ""
     }
 }
+
+extension Optional: Sendable where Wrapped: Sendable {}

@@ -12,11 +12,11 @@ import Dtos
 
 public extension JsonReader {
     
-    static func readPokemons() -> [Pokemon] {
+    nonisolated static func readPokemons() -> [Pokemon] {
         return JsonReader.JsonFiles.pokemonFiles.map { self.read(for: $0) }
     }
     
-    static func readMoves() -> [Move] {
+    nonisolated static func readMoves() -> [Move] {
         return JsonReader.JsonFiles.pokemonMoves.map { self.read(for: $0) }
     }
 }

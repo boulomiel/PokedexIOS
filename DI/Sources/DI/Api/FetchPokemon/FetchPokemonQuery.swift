@@ -8,8 +8,8 @@
 import Foundation
 import Resources
 
-public struct FetchPokemonQuery: ApiQuery {
-    var pokemonID: String
+public struct FetchPokemonQuery: ApiQuery, Sendable {
+    let pokemonID: String
     
     public init(pokemonID: String) {
         self.pokemonID = pokemonID

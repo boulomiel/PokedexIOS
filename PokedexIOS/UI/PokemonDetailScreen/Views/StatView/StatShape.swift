@@ -10,7 +10,8 @@ import SwiftUI
 import Accelerate
 
 public struct AnimatableVector: VectorArithmetic, Sendable {
-    public static var zero = AnimatableVector(values: [0.0])
+    
+    nonisolated(unsafe) public static var zero = AnimatableVector(values: [0.0])
     
     public static func + (lhs: AnimatableVector, rhs: AnimatableVector) -> AnimatableVector {
         let count = min(lhs.values.count, rhs.values.count)
@@ -91,10 +92,12 @@ public struct StatShape: Shape {
 }
 
 
+@MainActor
 var randomDouble: Double {
     Double.random(in: 0...1)
 }
 
+@MainActor
 var pokemonStats: [PokemonDisplayStat] = [
     .init(name: "Hello", value: randomDouble),
     .init(name: "Hello", value: randomDouble),

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ScrollFetchPokemonApi: ScrollFetchApiProtocol {
+public final class ScrollFetchPokemonApi: ScrollFetchApiProtocol {
     public  typealias Query = ScrollFetchPokemonQuery
     public typealias Requested = ScrollFetchResult
     public typealias Failed = ApiPokemonError

@@ -39,7 +39,7 @@ public struct PokemonScrollCell: View {
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
     
-    @Observable
+    @Observable @MainActor
     public final class Provider {
         
         let api: FetchPokemonApi
@@ -92,11 +92,9 @@ public struct PokemonScrollCell: View {
             let result = await api.fetch(id: pokemon.name)
             switch result {
             case .success(let result):
-                await MainActor.run {
-                    withAnimation(.smooth) {
-                        types = result.types.pt
-                        sprite = result.sprites?.frontDefault
-                    }
+                withAnimation(.smooth) {
+                    types = result.types.pt
+                    sprite = result.sprites?.frontDefault
                 }
             case .failure(let error):
                 print(#file, #function, error)
@@ -110,10 +108,8 @@ public struct PokemonScrollCell: View {
                 let names = result.names.map {
                     ($0.language.name, $0.name)
                 }
-                await MainActor.run {
-                    self.names = Dictionary.init(names) { first, second in
-                        first
-                    }
+                self.names = Dictionary.init(names) { first, second in
+                    first
                 }
             case .failure(let error):
                 print(#file, #function, error)
@@ -129,7 +125,7 @@ public struct PokemonScrollCell: View {
 
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return PokemonScrollCell(provider: .init(api: .init(), speciesApi: .init(), pokemon: .init(index: 25, name: "pikachu")))
         .inject(container: container)

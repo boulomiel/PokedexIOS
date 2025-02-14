@@ -8,9 +8,9 @@
 import Foundation
 import Dtos
 
-public struct ScrollFetchResult: Codable {
+public struct ScrollFetchResult: Codable, Sendable {
     public var count: Int
-    var next, previous: URL?
+    let next, previous: URL?
     public var results: [NamedAPIResource]
 }
 

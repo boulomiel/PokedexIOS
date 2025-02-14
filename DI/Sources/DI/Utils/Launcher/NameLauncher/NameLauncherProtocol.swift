@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import Dtos
 
-public protocol NameLauncherProtocol {
+public protocol NameLauncherProtocol: Sendable {
     associatedtype T: Decodable
     associatedtype Model: PersistentModel
     func getCount() async -> Int

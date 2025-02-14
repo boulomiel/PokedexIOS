@@ -10,7 +10,7 @@ import DI
 import Dtos
 
 public struct EvolutionListView: View {
-
+    
     typealias EvolutionModelLinked = [Int: [EvolutionModel]]
     
     @Bindable var provider: Provider
@@ -36,8 +36,8 @@ public struct EvolutionListView: View {
         .frame(height: 120)
     }
     
-    @Observable
-   public class Provider {
+    @Observable @MainActor
+    public class Provider {
         typealias CellProvider = EvolutionListViewCell.Provider
         var species: SpeciesModel?
         let evolutionChainAPI: PokemonEvolutionChainApi
@@ -47,13 +47,13 @@ public struct EvolutionListView: View {
         var evolutionModelsLinked: EvolutionModelLinked
         var listReady: Bool
         var cellProviders: [CellProvider]
-
+        
         
         init(species: SpeciesModel?, evolutionChainAPI: PokemonEvolutionChainApi, fetchPokemonApi: FetchPokemonApi) {
             self.species = species
             self.evolutionChainAPI = evolutionChainAPI
             self.fetchPokemonApi = fetchPokemonApi
-
+            
             self.evolutionModelsLinked = .init()
             self.listReady = false
             self.cellProviders = []
@@ -81,7 +81,7 @@ public struct EvolutionListView: View {
             var evolvesTo: [ChainLink] = evolutionChain.chain.evolvesTo
             count += 1
             while !evolvesTo.isEmpty {
-
+                
                 var optionnalsEvolveTo = evolvesTo
                 // find optionnal evolutions
                 if optionnalsEvolveTo.count > 1 {
@@ -117,17 +117,15 @@ public struct EvolutionListView: View {
                 }
             }
             let providers = _providers
-            await MainActor.run {
-                withAnimation {
-                    self.cellProviders = providers
-                    self.listReady = true
-                }
+            withAnimation {
+                self.cellProviders = providers
+                self.listReady = true
             }
         }
     }
     
     @Observable
-   public class ChainModelBuilder {
+    public class ChainModelBuilder {
         var current: EvolutionModel
         var options: [ChainModelBuilder]
         var next: ChainModelBuilder?
@@ -163,7 +161,7 @@ public struct EvolutionModel {
 }
 
 #Preview {
-    @Environment(
+    @Previewable @Environment(
         \.diContainer
     ) var container
     

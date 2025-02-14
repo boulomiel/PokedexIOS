@@ -7,12 +7,12 @@
 
 import Foundation
 
-public struct PalParkArea: Codable {
+public struct PalParkArea: Codable, Sendable {
     
-    var id: Int
-    var name: String
-    var names: [Name]
-    var pokemonEncounters: [PalParkEncounterSpecies]
+    let id: Int
+    let name: String
+    let names: [Name]
+    let pokemonEncounters: [PalParkEncounterSpecies]
     
     enum CodingKeys: String, CodingKey {
         case id, name, names
@@ -21,11 +21,11 @@ public struct PalParkArea: Codable {
     
 }
 
-public struct PalParkEncounterSpecies: Codable {
+public struct PalParkEncounterSpecies: Codable, Sendable {
     
-    var baseScore: Int
-    var rate: Int
-    var pokemonSpecies: NamedAPIResource
+    let baseScore: Int
+    let rate: Int
+    let pokemonSpecies: NamedAPIResource
     
     enum CodingKeys: String, CodingKey {
         case baseScore = "base_score"

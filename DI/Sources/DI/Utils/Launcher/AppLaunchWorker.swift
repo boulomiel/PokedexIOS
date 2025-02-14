@@ -9,9 +9,9 @@ import Foundation
 import SwiftData
 
 @Observable
-public class AppLaunchWorker {
+public final class AppLaunchWorker: Sendable {
     
-    private (set) var hasBeenLaunched: Bool {
+    private(set) var hasBeenLaunched: Bool {
         get {
             UserDefaults.standard.bool(forKey: "AppLaunchWorker_firstLaunch")
         }
@@ -20,7 +20,7 @@ public class AppLaunchWorker {
         }
     }
     
-    private (set) var lastLaunched: Date {
+    private(set) var lastLaunched: Date {
         get {
             let timeInterval = UserDefaults.standard.double(forKey: "AppLaunchWorker_lastDate")
             return Date(timeIntervalSince1970: TimeInterval(timeInterval))
@@ -34,7 +34,7 @@ public class AppLaunchWorker {
         !isFinished
     }
     
-    private var isFinished: Bool
+    nonisolated(unsafe) private var isFinished: Bool
     private let namedLauncherWorkers: [any NameLauncherProtocol]
     private let container: ModelContainer
     

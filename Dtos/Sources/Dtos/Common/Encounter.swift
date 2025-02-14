@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct Encounter: Codable {
+public struct Encounter: Codable, Sendable {
     
-    var minLevel: Int
-    var maxLevel: Int
-    var conditionValues: EncounterConditionsValues
-    var chance: Int
-    var method: EncounterMethod
+    let minLevel: Int
+    let maxLevel: Int
+    let conditionValues: EncounterConditionsValues
+    let chance: Int
+    let method: EncounterMethod
     
     enum CodingKeys: String, CodingKey {
         case minLevel = "min_level"

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Move: Codable, Identifiable, Hashable {
+public struct Move: Codable, Identifiable, Hashable, Sendable {
     
     public let id: Int
     public let name: String
@@ -57,7 +57,7 @@ public struct Move: Codable, Identifiable, Hashable {
 }
 
 
-public struct ContestComboSet: Codable, Hashable {
+public struct ContestComboSet: Codable, Hashable, Sendable {
     
     public let normal: ContestComboDetail?
     public let _super: ContestComboDetail?
@@ -68,7 +68,7 @@ public struct ContestComboSet: Codable, Hashable {
     }
 }
 
-public struct ContestComboDetail: Codable, Hashable {
+public struct ContestComboDetail: Codable, Hashable, Sendable {
     
     public let useBefore: NamedAPIResource?
     public let useAfter: NamedAPIResource?
@@ -80,7 +80,7 @@ public struct ContestComboDetail: Codable, Hashable {
 }
 
 
-public struct MoveFlavorText: Codable, Hashable {
+public struct MoveFlavorText: Codable, Hashable, Sendable {
     
     public let flavorText: String
     public let language: NamedAPIResource

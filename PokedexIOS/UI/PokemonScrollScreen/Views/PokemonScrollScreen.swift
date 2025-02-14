@@ -28,7 +28,7 @@ public struct PokemonScrollScreen: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return NavigationStack {
         PokemonScrollScreen()

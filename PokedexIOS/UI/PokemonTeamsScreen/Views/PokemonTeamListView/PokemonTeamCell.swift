@@ -35,7 +35,7 @@ public struct PokemonTeamCell: View {
         .frame(height: 280)
     }
     
-    @Observable
+    @Observable @MainActor
     class Provider {
 
         let team: SDTeam
@@ -91,7 +91,7 @@ public struct PokemonTeamCell: View {
             }
         }
         
-        @Observable
+        @Observable @MainActor
         class Provider: Identifiable {
             let id: UUID = .init()
             
@@ -110,15 +110,14 @@ public struct PokemonTeamCell: View {
                 }
             }
             
-            @MainActor
-            func decode(sdPokemon: SDPokemon) async {
+            func decode(sdPokemon: sending SDPokemon) async {
                 let decoded = await sdPokemon.decodedAsync()
                 withAnimation(.smooth) {
                     self.pokemon = decoded
                 }
             }
             
-            func decode(sdItem: SDItem?) async {
+            func decode(sdItem: sending SDItem?) async {
                 let decoded = await sdItem?.decodedAsync()
                 withAnimation(.snappy) {
                     self.item = decoded
@@ -129,7 +128,7 @@ public struct PokemonTeamCell: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview(SDMove.self, SDPokemon.self, SDItem.self, SDTeam.self)
     
     let pokemons = JsonReader.readPokemons().map { SDPokemon(pokemonID: $0.id, data: try! JSONEncoder().encode($0)) }

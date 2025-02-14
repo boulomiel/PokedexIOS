@@ -18,8 +18,8 @@ public struct PokemonListAbilityView: View {
         }
     }
     
-    @Observable
-   public class Provider {
+    @Observable @MainActor
+    public class Provider {
         typealias CellProvider = PokemonAbilityView.Provider
         let abilityApi: PokemonAbilityApi
         let abilities: [PokemonAbilityDetails]
@@ -36,7 +36,7 @@ public struct PokemonListAbilityView: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let abilities: [PokemonAbilityDetails] = [
         testpokemonability,
         testpokemonability2,

@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct EncounterConditions: Codable {
-    var id: Int
-    var name: String
-    var values: [NamedAPIResource]
-    var names: [Name]
+public struct EncounterConditions: Codable, Sendable {
+    let id: Int
+    let name: String
+    let values: [NamedAPIResource]
+    let names: [Name]
 }

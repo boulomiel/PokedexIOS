@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+@MainActor
 public struct Preview {
     public let container: ModelContainer
     public init(_ models: any PersistentModel.Type...) {

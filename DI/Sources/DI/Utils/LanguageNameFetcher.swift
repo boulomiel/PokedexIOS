@@ -8,7 +8,7 @@ import Foundation
 import SwiftData
 import Tools
 
-public struct LanguageNameFetcher {
+public struct LanguageNameFetcher: Sendable {
     
     private let container: ModelContainer
     
@@ -19,43 +19,71 @@ public struct LanguageNameFetcher {
     public func fetchItemNames(for name: String) -> [LanguageName] {
         let name = name.capitalized
         let backgroundHandler = BackgroundDataHander(with: container)
-        let result = backgroundHandler.fetch(type: SDLanguageItemName.self, predicate: #Predicate {
-            $0.japHrkt.contains(name) ||
-            $0.roomaji.contains(name) ||
-            $0.ko.contains(name) ||
-            $0.zhHant.contains(name) ||
-            $0.fr.contains(name) ||
-            $0.de.contains(name) ||
-            $0.es.contains(name) ||
-            $0.it.contains(name) ||
-            $0.en.contains(name) ||
-            $0.ja.contains(name) ||
-            $0.zhHans.contains(name)
-        })
+        
+        let predicate1 = #Predicate<SDLanguageItemName> { input in
+            input.japHrkt.contains(name) ||
+            input.roomaji.contains(name) ||
+            input.ko.contains(name) ||
+            input.fr.contains(name)
+        }
+        
+        let predicate2 = #Predicate<SDLanguageItemName> { input in
+            input.zhHant.contains(name) ||
+            input.de.contains(name) ||
+            input.es.contains(name) ||
+            input.it.contains(name)
+        }
+        
+        let predicate3 = #Predicate<SDLanguageItemName> { input in
+            input.en.contains(name) ||
+            input.ja.contains(name) ||
+            input.zhHans.contains(name)
+        }
+        
+        let predicate = #Predicate<SDLanguageItemName> { input in
+            predicate1.evaluate(input) ||
+            predicate2.evaluate(input) ||
+            predicate3.evaluate(input)
+        }
+        
+        let result = backgroundHandler.fetch(type: SDLanguageItemName.self, predicate: predicate)
         return result.compactMap { LanguageName($0, searchedBy: name) }
     }
     
     public func fetchPokemonNames(for name: String) -> [LanguageName] {
         let name = name.capitalized
         let backgroundHandler = BackgroundDataHander(with: container)
-        let result = backgroundHandler.fetch(type: SDLanguagePokemonName.self, predicate: #Predicate {
-            $0.japHrkt.contains(name) ||
-            $0.roomaji.contains(name) ||
-            $0.ko.contains(name) ||
-            $0.zhHant.contains(name) ||
-            $0.fr.contains(name) ||
-            $0.de.contains(name) ||
-            $0.es.contains(name) ||
-            $0.it.contains(name) ||
-            $0.en.contains(name) ||
-            $0.ja.contains(name) ||
-            $0.zhHans.contains(name)
-        })
+        let predicate1 = #Predicate<SDLanguagePokemonName> { input in
+            input.japHrkt.contains(name) ||
+            input.roomaji.contains(name) ||
+            input.ko.contains(name) ||
+            input.fr.contains(name)
+        }
+        
+        let predicate2 = #Predicate<SDLanguagePokemonName> { input in
+            input.zhHant.contains(name) ||
+            input.de.contains(name) ||
+            input.es.contains(name) ||
+            input.it.contains(name)
+        }
+        
+        let predicate3 = #Predicate<SDLanguagePokemonName> { input in
+            input.en.contains(name) ||
+            input.ja.contains(name) ||
+            input.zhHans.contains(name)
+        }
+        
+        let predicate = #Predicate<SDLanguagePokemonName> { input in
+            predicate1.evaluate(input) ||
+            predicate2.evaluate(input) ||
+            predicate3.evaluate(input)
+        }
+        let result = backgroundHandler.fetch(type: SDLanguagePokemonName.self, predicate: predicate)
         return result.compactMap { LanguageName($0, searchedBy: name) }
     }
 }
 
-public enum LanguageName {
+public enum LanguageName: Sendable {
     case japHrkt(englishName: String, name: String)
     case roomaji(englishName: String, name: String)
     case ko(englishName: String, name: String)

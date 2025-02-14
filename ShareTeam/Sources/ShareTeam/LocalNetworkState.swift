@@ -8,12 +8,13 @@
 import Foundation
 import Network
 
-public class LocalNetworkAuthorization: NSObject {
+public final class LocalNetworkAuthorization: NSObject, Sendable {
     private let bonjour = "_bonjour._tcp"
     private let local = "_lnp._tcp."
-    private var browser: NWBrowser?
-    private var netService: NetService?
-    private var completion: ((Bool) -> Void)?
+    
+    nonisolated(unsafe) private var browser: NWBrowser?
+    nonisolated(unsafe) private var netService: NetService?
+    nonisolated(unsafe) private var completion: ((Bool) -> Void)?
     
     public func requestAuthorization(completion: @escaping (Bool) -> Void) {
         self.completion = completion

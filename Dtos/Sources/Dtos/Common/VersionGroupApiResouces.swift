@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct VersionGroupApiResources: Codable {
+public struct VersionGroupApiResources: Codable, Sendable {
     let name: VersionGroupType
     let url: URL
 }

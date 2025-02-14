@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BerryFlavorMap: Codable {
+public struct BerryFlavorMap: Codable, Sendable {
     var potency: Int
     var berry: NamedAPIResource
 }

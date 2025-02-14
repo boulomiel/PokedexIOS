@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct ContestEffects: Codable {
+public struct ContestEffects: Codable, Sendable {
     
-    var id: Int
-    var appeal: Int
-    var jam: Int
-    var effectEntries: [VerboseEffect]
-    var flavorTextEntries: [FlavorText]
+    let id: Int
+    let appeal: Int
+    let jam: Int
+    let effectEntries: [VerboseEffect]
+    let flavorTextEntries: [FlavorText]
     
     enum CodingKeys: String, CodingKey {
         case id, appeal, jam

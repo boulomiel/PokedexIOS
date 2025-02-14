@@ -69,7 +69,7 @@ public class Container {
 }
 
 public struct ContainerKey: EnvironmentKey {
-    public static var defaultValue: Container = .init()
+    nonisolated(unsafe) public static var defaultValue: Container = .init()
 }
 
 public extension EnvironmentValues {

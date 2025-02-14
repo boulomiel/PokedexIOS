@@ -15,7 +15,7 @@ public struct ItemCell: View {
     @State var provider: Provider
     var onSelect: ((Item?) -> Void)? = nil
     var onDeselect: ((Item?) -> Void)? = nil
-
+    
     public var body: some View {
         GroupBox {
             Group {
@@ -74,8 +74,8 @@ public struct ItemCell: View {
         }
     }
     
-    @Observable
-   public class Provider: Identifiable {
+    @Observable @MainActor
+    public class Provider: Identifiable {
         
         public let id: UUID = .init()
         let api: PokemonItemApi
@@ -103,7 +103,7 @@ public struct ItemCell: View {
             item?.flavorTextEntries.first(where: { $0.language.name == languageName.language })?.text ?? item?.flavorTextEntries.first(where: { $0.language.name == "en" })?.text
                 .trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: " ")
         }
-    
+        
         init(api: PokemonItemApi, scrolledFetchedItem: NamedAPIResource, isSelectable: Bool = false, onItemSet: ((Item, Provider) -> Void)? = nil) {
             self.api = api
             self.scrolledFetchedItem = scrolledFetchedItem
@@ -131,24 +131,22 @@ public struct ItemCell: View {
             let result = await api.fetch(id: scrolledFetchedItem.name)
             switch result {
             case .success(let success):
-                await MainActor.run {
-                    self.item = success
-                    onItemSet?(success, self)
-                }
+                self.item = success
+                onItemSet?(success, self)
             case .failure(let failure):
                 print(#file,"\n", #function, failure)
             }
         }
         
-//        func shouldRemove() -> Bool {
-//            guard let item else { return false }
-//            switch item.categoryType.name {
-//            case .heldItems, .badHeldItems, .zCrystals, .teraShard, .typeEnhancement, .megaStones, .dynamaxCrystals:
-//                return false
-//            default:
-//                return true
-//            }
-//        }
+        //        func shouldRemove() -> Bool {
+        //            guard let item else { return false }
+        //            switch item.categoryType.name {
+        //            case .heldItems, .badHeldItems, .zCrystals, .teraShard, .typeEnhancement, .megaStones, .dynamaxCrystals:
+        //                return false
+        //            default:
+        //                return true
+        //            }
+        //        }
     }
 }
 

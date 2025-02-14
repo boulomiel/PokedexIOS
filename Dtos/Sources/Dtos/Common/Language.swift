@@ -7,11 +7,11 @@
 
 import Foundation
 
-public struct Language: Codable {
-    var id: Int
-    var name: String
-    var official: Bool
-    var iso639: String
-    var iso3166: String
-    var names: [Name]
+public struct Language: Codable, Sendable {
+    let id: Int
+    let name: String
+    let official: Bool
+    let iso639: String
+    let iso3166: String
+    let names: [Name]
 }

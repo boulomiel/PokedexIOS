@@ -14,7 +14,7 @@ import Dtos
 
 public struct PokemonAbilitySelectionScreen: View {
     
-    @Environment(\.isIphone) 
+    @Environment(\.isIphone)
     private var isIphone
     @Environment(\.isLandscape)
     private var isLandscape
@@ -71,8 +71,8 @@ public struct PokemonAbilitySelectionScreen: View {
         }
     }
     
-    @Observable
-   public final class Provider {
+    @Observable @MainActor
+    public final class Provider {
         
         let pokemonID: PersistentIdentifier
         let abilities: [PokemonAbility]
@@ -81,7 +81,7 @@ public struct PokemonAbilitySelectionScreen: View {
         let modelContext: ModelContext
         
         var pokemonAbilities: [PokemonAbilitySelectionModel]
-
+        
         
         init(pokemonID: PersistentIdentifier,
              api: PokemonAbilityApi,
@@ -104,27 +104,27 @@ public struct PokemonAbilitySelectionScreen: View {
         }
         
         private func fetch(abilities: [PokemonAbility]) async {
-           let abilities = await withTaskGroup(of: Ability?.self) { group in
+            let result = await withTaskGroup(of: Ability?.self) { group in
                 abilities.forEach { ability in
                     group.addTask { [weak self] in
                         await self?.fetch(abilityName: ability.ability.name)
                     }
                 }
-               return await group.reduce(into: [Ability]()) { partialResult, ability in
-                   if let ability {
-                       partialResult.append(ability)
-                   }
-               }
+                var result = [Ability]()
+                for await ability in group {
+                    if let ability {
+                        result.append(ability)
+                    }
+                }
+                return result
             }
             
-            let mapped = abilities
+            let mapped = result
                 .map(makeModel(from:))
                 .sorted(using: SortDescriptor(\.name, order: .forward))
-            await MainActor.run {
-                self.pokemonAbilities = mapped
-                if let first = pokemonAbilities.first {
-                    self.selected = first
-                }
+            self.pokemonAbilities = mapped
+            if let first = pokemonAbilities.first {
+                self.selected = first
             }
         }
         
@@ -149,7 +149,7 @@ public struct PokemonAbilitySelectionScreen: View {
             
             let flavorText = success.flavorTextEntries
                 .first(where: { $0.language.name == "en"})?.flavorText
-                                        
+            
             return .init(
                 abilityID: success.id,
                 name: success.name,
@@ -188,7 +188,7 @@ fileprivate extension View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview =  Preview.allPreview
     let dragonite: Pokemon = JsonReader.read(for: .pikachu)
     let sdDragonite = SDPokemon(pokemonID: dragonite.id, data: try? JSONEncoder().encode(dragonite))

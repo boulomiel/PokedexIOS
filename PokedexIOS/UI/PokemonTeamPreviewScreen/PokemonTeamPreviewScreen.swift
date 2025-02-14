@@ -220,7 +220,7 @@ public struct PokemonTeamPreviewScreen: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     
     let dragonite: Pokemon = JsonReader.read(for: .dragonite)

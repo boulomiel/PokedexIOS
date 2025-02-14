@@ -15,5 +15,4 @@ public struct SharedTeam: Codable {
         self.name = name
         self.pokemons = pokemons
     }
-    
 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct ContestName: Codable {
-    var name: String
-    var color: String
-    var language: NamedAPIResource
+public struct ContestName: Codable, Sendable {
+    let name: String
+    let color: String
+    let language: NamedAPIResource
 }

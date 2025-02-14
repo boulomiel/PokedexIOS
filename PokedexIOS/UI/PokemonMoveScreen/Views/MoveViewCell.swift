@@ -80,7 +80,7 @@ public struct MoveViewCell: View {
     }
     
     private struct CellKey: PreferenceKey {
-        static var defaultValue: CGRect = .zero
+        nonisolated(unsafe) static var defaultValue: CGRect = .zero
         
         static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
             value = nextValue()
@@ -113,7 +113,7 @@ public struct MoveViewCell: View {
         }
     }
     
-    @Observable
+    @Observable @MainActor
     public class Provider: Identifiable {
         
         public let id: UUID = .init()
@@ -160,14 +160,13 @@ public struct MoveViewCell: View {
             let result = await moveApi.fetch(query: .init(moveId: moveVersionData.moveName))
             switch result {
             case .success(let success):
-                await makeItem(for: success)
+                makeItem(for: success)
                 await getMachine(for: success)
             case .failure(let failure):
                 print(#file, "\n", failure)
             }
         }
         
-        @MainActor
         private func makeItem(for move: Move) {
             self.moveItemHolder = move.dataHolder
         }
@@ -179,9 +178,7 @@ public struct MoveViewCell: View {
             let result = await generalApi.fetch(query: .init(url: machine.machine.url))
             switch result {
             case .success(let success):
-                await MainActor.run {
-                    machineModel = .init(machineItem: success.item.name.uppercased(), moveName: success.item.name)
-                }
+                machineModel = .init(machineItem: success.item.name.uppercased(), moveName: success.item.name)
             case .failure(let failure):
                 print(#file,"\n",#function, failure)
             }
@@ -191,7 +188,7 @@ public struct MoveViewCell: View {
 
 #Preview {
     
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return MoveViewCell(provider: .init(moveApi: .init(), generalApi: .init(), moveVersionData: .init(moveName: "double-edge", version: .yellow, levelLearntAt: 8, learningMethod: .levelUp)), width: UIScreen.main.nativeBounds.width)
         .preferredColorScheme(.dark)

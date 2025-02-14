@@ -12,8 +12,8 @@ import Dtos
 @Model
 public class SDSpecies: SDDataDecoder {
     public typealias Decoded = PokemonSpecies
-    @Attribute(.unique) let speciesID: Int
-    public let data: Data?
+    @Attribute(.unique) var speciesID: Int
+    public var data: Data?
 
     public var pokemon: [SDPokemon]?
     

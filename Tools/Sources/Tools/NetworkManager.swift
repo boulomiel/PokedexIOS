@@ -9,7 +9,7 @@ import Foundation
 import Network
 
 @Observable
-public class NetworkManager {
+public final class NetworkManager: Sendable {
     
     enum Status {
         case idle, connected, deconnected
@@ -28,8 +28,8 @@ public class NetworkManager {
     
     let monitor: NWPathMonitor
     let queue: DispatchQueue
-    private (set) var status: Status
-    private (set) var isConnected: Bool
+    nonisolated(unsafe) private(set) var status: Status
+    nonisolated(unsafe) private(set) var isConnected: Bool
     
     public var showContent: Bool {
         status.showContent
@@ -45,12 +45,13 @@ public class NetworkManager {
     
     private func startMonitoring() {
         self.monitor.start(queue: queue)
-        self.monitor.pathUpdateHandler = {[weak self] path in
-            DispatchQueue.main.async {
+        self.monitor.pathUpdateHandler = { path in
+            DispatchQueue.main.async {[weak self] in
+                guard let self else { return }
                 if path.status == .satisfied {
-                    self?.status = .connected
+                    status = .connected
                 } else {
-                    self?.status = .deconnected
+                    status = .deconnected
                 }
             }
         }

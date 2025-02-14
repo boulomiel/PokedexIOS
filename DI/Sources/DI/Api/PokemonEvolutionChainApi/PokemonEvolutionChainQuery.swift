@@ -9,7 +9,7 @@ import Foundation
 import Resources
 
 
-public struct PokemonEvolutionChainQuery: ApiQuery {
+public struct PokemonEvolutionChainQuery: ApiQuery, Sendable {
     let chainNumber: String
     
     public init(chainNumber: String) {

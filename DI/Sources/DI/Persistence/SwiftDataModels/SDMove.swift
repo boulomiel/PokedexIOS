@@ -13,8 +13,8 @@ import Dtos
 @Model
 public class SDMove: SDDataDecoder {
     public typealias Decoded = Move
-    @Attribute(.unique) let moveID: Int
-    public let data: Data?
+    @Attribute(.unique) var moveID: Int
+    public var data: Data?
     
     //@Relationship(deleteRule: .nullify, inverse: \SDPokemon.moves)
     public var pokemon: [SDPokemon]?

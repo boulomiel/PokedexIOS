@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct ItemAttribute: Codable {
-    var id: Int
-    var name: String
-    var items: [NamedAPIResource]
-    var names: [Name]
-    var descriptions: [Description]
+public struct ItemAttribute: Codable, Sendable {
+    let id: Int
+    let name: String
+    let items: [NamedAPIResource]
+    let names: [Name]
+    let descriptions: [Description]
 }

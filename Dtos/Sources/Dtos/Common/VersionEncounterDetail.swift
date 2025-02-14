@@ -7,11 +7,11 @@
 
 import Foundation
 
-public struct VersionEncounterDetail: Codable {
+public struct VersionEncounterDetail: Codable, Sendable {
     
-    var version: NamedAPIResource
-    var maxChance: Int
-    var encounterDetails: [Encounter]
+    let version: NamedAPIResource
+    let maxChance: Int
+    let encounterDetails: [Encounter]
     
     enum CodingKeys: String, CodingKey {
         case version

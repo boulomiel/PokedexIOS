@@ -24,8 +24,8 @@ public struct PokemonGridListView: View {
         .loadable(isLoading: provider.providers.isEmpty)
     }
     
-    @Observable
-   public class Provider {
+    @Observable @MainActor
+    public class Provider {
         typealias CellProvider = PokemonGridCell.Provider
         let pokemons: [String]
         let gridItems: [GridItem]
@@ -54,26 +54,23 @@ public struct PokemonGridListView: View {
                 await withTaskGroup(of: CellProvider.self) { group in
                     pokemons.forEach { name in
                         group.addTask {
-                            PokemonGridCell.Provider(
+                            await PokemonGridCell.Provider(
                                 pokemon: name,
                                 fechPokemonApi: fetchApi
                             )
                         }
                     }
                     for await provider in group {
-                        await MainActor.run {
-                            self.providers.append(provider)
-                        }
+                        self.providers.append(provider)
                     }
                 }
-
             }
         }
     }
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return PokemonGridListView(provider: .init(fetchApi: .init(), pokemons: ["gengar", "pikachu", "raichu", "mew", "lugia","charmander","gastly", "mewtwo", "venusaur", "charizard"]))
         .preferredColorScheme(.dark)

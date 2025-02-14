@@ -7,14 +7,14 @@
 
 import Foundation
 
-public final class JsonReader {
+public final class JsonReader: Sendable {
     
-    public enum JsonFiles: String, CaseIterable {
+    public enum JsonFiles: String, CaseIterable, Sendable {
         case pikachu = "Pikachu", mew = "Mew", mewtwo = "Mewtwo", bulbasaur = "Bulbasaur", dragonite = "Dragonite", hypno = "Hypno"
         case slam = "Slam", confusion = "Confusion", focusEnergy = "FocusEnergy", swordDance = "SwordDance"
         
-        public static var pokemonFiles: [JsonFiles] = [.pikachu, .mew, .mewtwo, .bulbasaur, .dragonite, .hypno]
-        public static var pokemonMoves: [JsonFiles] = [.slam, .confusion, .focusEnergy, .swordDance]
+        nonisolated(unsafe) public static var pokemonFiles: [JsonFiles] = [.pikachu, .mew, .mewtwo, .bulbasaur, .dragonite, .hypno]
+        nonisolated(unsafe) public static var pokemonMoves: [JsonFiles] = [.slam, .confusion, .focusEnergy, .swordDance]
     }
     
     public static func read<T: Decodable>(for file: JsonFiles) -> T {

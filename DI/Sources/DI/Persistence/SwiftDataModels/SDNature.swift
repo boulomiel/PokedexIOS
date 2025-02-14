@@ -12,8 +12,8 @@ import Dtos
 @Model
 public class SDNature: SDDataDecoder {
     public typealias Decoded = Nature
-    @Attribute(.unique) let natureID: Int
-    public let data: Data?
+    @Attribute(.unique) var natureID: Int
+    public var data: Data?
     
     //@Relationship(deleteRule: .nullify, inverse: \SDPokemon.moves)
     public var pokemon: [SDPokemon]?

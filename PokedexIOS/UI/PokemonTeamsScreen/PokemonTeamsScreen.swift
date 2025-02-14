@@ -162,7 +162,7 @@ public final class TeamRouter {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     let pokemons = JsonReader.readPokemons().map { SDPokemon(pokemonID: $0.id, data: try! JSONEncoder().encode($0)) }
     preview.addExamples(pokemons)

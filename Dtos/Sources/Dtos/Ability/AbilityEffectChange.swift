@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - EffectChange
-public struct AbilityEffectChange: Codable, Hashable {
+public struct AbilityEffectChange: Codable, Hashable, Sendable {
     public let effectEntries: [Effect]
     public let versionGroup: NamedAPIResource
 

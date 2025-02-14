@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct Characteristics: Codable {
-    var id: Int
-    var gene_modulo: Int
-    var possible_values: [Int]
-    var highest_stat: NamedAPIResource
-    var descriptions: [Description]
+public struct Characteristics: Codable, Sendable {
+    let id: Int
+    let gene_modulo: Int
+    let possible_values: [Int]
+    let highest_stat: NamedAPIResource
+    let descriptions: [Description]
 }

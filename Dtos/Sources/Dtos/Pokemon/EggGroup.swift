@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct EggGroup: Codable {
-    var id: Int
-    var name: String
-    var names: [Name]
-    var pokemon_species: [NamedAPIResource]
+public struct EggGroup: Codable, Sendable {
+    let id: Int
+    let name: String
+    let names: [Name]
+    let pokemon_species: [NamedAPIResource]
 }

@@ -11,7 +11,7 @@ import Resources
 import Tools
 import Dtos
 
-public class ItemNameLauncherImpl: NameLauncherProtocol {
+public final class ItemNameLauncherImpl: NameLauncherProtocol, Sendable {
     
     let apiEnv: PokemonEnvApi
     let api: GeneralApi<ScrollFetchResult>
@@ -79,7 +79,7 @@ public class ItemNameLauncherImpl: NameLauncherProtocol {
     
     public func setup(container: ModelContainer) async {
         let items = await getAll()
-        await withTaskGroup(of: SDLanguageItemName?.self) {group in
+        await withTaskGroup(of: SDLanguageItemName?.self) { group in
             let dataHandler = BackgroundDataHander(with: container)
             items.forEach { item in
                 group.addTask { [weak self] in

@@ -7,11 +7,11 @@
 
 import Foundation
 
-public struct Version: Codable {
-    var id: Int
-    var name: String
-    var names: [Name]
-    var versionGroup: NamedAPIResource
+public struct Version: Codable, Sendable {
+    let id: Int
+    let name: String
+    let names: [Name]
+    let versionGroup: NamedAPIResource
     
     enum CodingKeys: String, CodingKey {
         case id, name , names

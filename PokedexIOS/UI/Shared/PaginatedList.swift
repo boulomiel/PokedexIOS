@@ -15,22 +15,22 @@ import Dtos
 public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtocol, ApiService: SearchApiProtocol> : View where ScrollService.Requested == ScrollFetchResult {
     
     typealias Provider = ScrollProvider<ScrollService, ApiService>
-
+    
     @State var provider: Provider
     @ViewBuilder var scroller: (Provider) -> Scroller
     
     public var body: some View {
         scroller(provider)
             .searchable(text: $provider.config.searchText)
-            .autocorrectionDisabled(true) 
+            .autocorrectionDisabled(true)
             .onChange(of: provider.config.searchText, { oldValue, newValue in
                 provider.onSearch(newValue: newValue)
             })
             .animation(.bouncy, value: provider.config.searchText)
     }
     
-    @Observable
-   public class ScrollProvider<ScrollApi: ScrollFetchApiProtocol, Api: SearchApiProtocol> where ScrollApi.Requested == ScrollFetchResult {
+    @Observable @MainActor
+    public class ScrollProvider<ScrollApi: ScrollFetchApiProtocol, Api: SearchApiProtocol> where ScrollApi.Requested == ScrollFetchResult, Api.Requested: Sendable {
         var subscriptions: Set<AnyCancellable> = .init()
         let scrollFetchApi: ScrollApi
         let fetchApi: Api
@@ -108,7 +108,7 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
                     print(#file, #function, error, name)
                 }
             } else {
-               let searched = await withTaskGroup(of: SearchedElement?.self) { group in
+                let searched = await withTaskGroup(of: SearchedElement?.self) { group in
                     englishNames.forEach { name in
                         group.addTask {
                             let result = await self.fetchApi.fetch(id: name.english.lowercased().replacingOccurrences(of: " ", with: "-"))
@@ -121,11 +121,13 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
                             }
                         }
                     }
-                    return await group.reduce(into: [SearchedElement]()) { partialResult, element in
+                    var result = [SearchedElement<Api.Requested>]()
+                    for await element in group {
                         if let element {
-                            partialResult.append(element)
+                            result.append(element)
                         }
                     }
+                    return result
                 }
                 await MainActor.run {
                     withAnimation(.smooth) {
@@ -155,7 +157,7 @@ public struct PaginatedList<Scroller: View, ScrollService: ScrollFetchApiProtoco
             }
         }
         
-        public struct SearchedElement<Content: Decodable> {
+        public struct SearchedElement<Content: Codable & Sendable>: Sendable {
             let element: Content
             let language: LanguageName
         }

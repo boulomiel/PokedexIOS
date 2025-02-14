@@ -7,17 +7,17 @@
 
 import Foundation
 
-public struct Generation: Codable {
+public struct Generation: Codable, Sendable {
     
-    var id: Int
-    var name: String
-    var abilities:  [NamedAPIResource]
-    var names: [Name]
-    var mainRegion:  NamedAPIResource
-    var moves: [NamedAPIResource]
-    var pokemonSpecies: [NamedAPIResource]
-    var pokemonType: [NamedAPIResource]
-    var versionGroups: [NamedAPIResource]
+    let id: Int
+    let name: String
+    let abilities:  [NamedAPIResource]
+    let names: [Name]
+    let mainRegion:  NamedAPIResource
+    let moves: [NamedAPIResource]
+    let pokemonSpecies: [NamedAPIResource]
+    let pokemonType: [NamedAPIResource]
+    let versionGroups: [NamedAPIResource]
     
     enum CodingKeys: String, CodingKey {
         case id, name, abilities, names

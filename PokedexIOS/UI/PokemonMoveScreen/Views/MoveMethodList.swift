@@ -23,14 +23,14 @@ public struct MethodMoveList: View {
                 .padding(4)
                 .background(RoundedRectangle(cornerRadius: 4).fill(Color.gray.opacity(0.3)))
             ForEach(provider.providers, id: \.id) { provider in
-               MoveViewCell(provider: provider, width: width)
+                MoveViewCell(provider: provider, width: width)
             }
         }
         .padding(.bottom)
     }
     
-    @Observable
-   public class Provider {
+    @Observable @MainActor
+    public class Provider {
         let method: MoveLearnMethodType
         let moveApi: PokemonMoveApi
         let generalApi: GeneralApi<Machine>

@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import AVFoundation
-import OggDecoder
+@preconcurrency import AVFoundation
+@preconcurrency import OggDecoder
 
 @Observable
-public class CriePlayer {
+final public class CriePlayer: Sendable {
     
     let decoder: OGGDecoder
     let session: AVAudioSession
-    var player: AVAudioPlayer?
-    public var isMuted: Bool
+    nonisolated(unsafe) private var player: AVAudioPlayer?
+    nonisolated(unsafe) public var isMuted: Bool
     
     public init(session: AVAudioSession = .sharedInstance(), player: AVAudioPlayer? = nil) {
         self.decoder = .init()

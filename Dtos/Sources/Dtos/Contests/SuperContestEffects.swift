@@ -7,11 +7,11 @@
 
 import Foundation
 
-public struct SuperContestEffects: Codable {
-    var id: Int
-    var appeal: Int
-    var moves: [NamedAPIResource]
-    var flavorTextEntries: [FlavorText]
+public struct SuperContestEffects: Codable, Sendable {
+    let id: Int
+    let appeal: Int
+    let moves: [NamedAPIResource]
+    let flavorTextEntries: [FlavorText]
     
     enum CodingKeys: String, CodingKey {
         case id, appeal

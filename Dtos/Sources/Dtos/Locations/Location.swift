@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct Location: Codable {
-    var id: Int
-    var name: String
-    var region: NamedAPIResource
-    var names: [Name]
-    var gameIndices: GenerationGameIndex
-    var areas: [NamedAPIResource]
+public struct Location: Codable, Sendable {
+    let id: Int
+    let name: String
+    let region: NamedAPIResource
+    let names: [Name]
+    let gameIndices: GenerationGameIndex
+    let areas: [NamedAPIResource]
     
     enum CodingKeys: String, CodingKey {
         case id, name, region, names

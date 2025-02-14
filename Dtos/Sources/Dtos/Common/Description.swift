@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Description: Codable {
-    var description: String
-    var language: NamedAPIResource
+public struct Description: Codable, Sendable {
+    let description: String
+    let language: NamedAPIResource
 }

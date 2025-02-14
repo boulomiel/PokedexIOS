@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 public class SDTeam {
-    @Attribute(.unique) public let teamID: UUID
+    @Attribute(.unique) public var teamID: UUID
     public var name: String
     @Relationship(deleteRule: .nullify, inverse: \SDPokemon.team) public var pokemons: [SDPokemon]?
     

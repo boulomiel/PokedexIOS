@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PokemonEnvApi: Codable {
+public struct PokemonEnvApi: Codable, Sendable {
     public let scheme: String
     public let host: String
     public let pokemonEndpoint: String

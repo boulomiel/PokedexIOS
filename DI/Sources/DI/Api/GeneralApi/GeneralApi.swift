@@ -7,14 +7,14 @@
 
 import Foundation
 
-public class GeneralApi<Requested: Decodable>: FetchApiProtocol {
+public final class GeneralApi<Requested: Codable & Sendable>: FetchApiProtocol {
     public typealias Query = GeneralQuery
     public typealias Requested = Requested
     public typealias Failed = ApiPokemonError
     
     public init() {}
     
-    public struct GeneralQuery: ApiQuery {
+    public struct GeneralQuery: ApiQuery, Sendable {
         let url: URL
         
         public init(url: URL) {

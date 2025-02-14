@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct APIResource: Codable, Hashable {
-    public var url: URL
+public struct APIResource: Codable, Hashable, Sendable {
+    public let url: URL
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum VersionGroupType: String, Codable, CaseIterable, Hashable {
+public enum VersionGroupType: String, Codable, CaseIterable, Hashable, Sendable {
     case redBlue = "red-blue"
     case yellow = "yellow"
     case goldSilver = "gold-silver"
@@ -29,8 +29,8 @@ public enum VersionGroupType: String, Codable, CaseIterable, Hashable {
     case xd = "xd"
     case unknown
     
-    static var sortedCases: [VersionGroupType] = allCases.sorted(by: { $0.id < $1.id })
-    static var relevantCases: [VersionGroupType] = Array(sortedCases[0...sortedCases.count-2])
+    nonisolated static let sortedCases: [VersionGroupType] = allCases.sorted(by: { $0.id < $1.id })
+    nonisolated static let relevantCases: [VersionGroupType] = Array(sortedCases[0...sortedCases.count-2])
     
     public var id: Int {
         switch self {

@@ -8,7 +8,7 @@
 import Foundation
 import Resources
 
-public struct PokemonMachineQuery: ApiQuery, Hashable {
+public struct PokemonMachineQuery: ApiQuery, Hashable, Sendable {
     
     let id: String
     

@@ -8,7 +8,7 @@
 import Foundation
 import Resources
 
-public struct PokemonSpeciesQuery: ApiQuery {
+public struct PokemonSpeciesQuery: ApiQuery, Sendable {
     let speciesNumber: String
     
     public init(speciesNumber: String) {

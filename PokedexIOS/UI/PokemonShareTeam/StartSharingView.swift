@@ -139,7 +139,7 @@ public struct StartSharingView: View {
         .transition(.slide)
     }
     
-    @Observable
+    @Observable @MainActor
     final class Provider {
         
         let teamID: PersistentIdentifier
@@ -180,7 +180,7 @@ public struct StartSharingView: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     let team = SDShareUser(name: "Jhon")
     preview.addExamples([team])

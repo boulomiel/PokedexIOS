@@ -52,7 +52,7 @@ public struct PokemonGridScreen: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return PokemonGridScreen(provider: .init(pokemons: ["gengar", "pikachu", "raichu", "mew", "lugia"]))
         .inject(container: container)

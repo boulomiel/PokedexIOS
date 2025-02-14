@@ -64,9 +64,10 @@ public struct PokemonItemSelectionScreen: View {
             }
             .listRowSeparator(.hidden)
     }
-
+    
     @Observable
-   public final class Provider {
+    @MainActor
+    public final class Provider {
         
         typealias CellProvider = ItemCell.Provider
         
@@ -78,7 +79,7 @@ public struct PokemonItemSelectionScreen: View {
         
         @ObservationIgnored
         private let current: Item?
-
+        
         var selected: SelectedModel?
         
         var selectionActive: Bool
@@ -134,7 +135,7 @@ public struct PokemonItemSelectionScreen: View {
                 await fetchBy(categories: categories)
             case .failure(let failure):
                 print(#file, "\n", #function, failure)
-
+                
             }
         }
         
@@ -163,32 +164,29 @@ public struct PokemonItemSelectionScreen: View {
                 return categories
             }
             
-            Task {
-                let items = categories.map(\.items)
-                let result = items.reduce(into: [ItemDataModel]()) { partialResult, resources in
-                    let r = resources.map { ItemDataModel(name: $0.name) }
-                    let result = Set(partialResult + r )
-                    partialResult = Array(result)
-                }
-                
-                let sortedResult = result.sorted(by: { $0.name < $1.name })
-                let providers = sortedResult.map {
-                    CellProvider(api: pokemonItemApi,
-                                 scrolledFetchedItem: .init(name: $0.name, url: .temporaryDirectory),
-                                 isSelectable: selectionActive) {[weak self] item, provider in
+            
+            let items = categories.map(\.items)
+            let result = items.reduce(into: [ItemDataModel]()) { partialResult, resources in
+                let r = resources.map { ItemDataModel(name: $0.name) }
+                let result = Set(partialResult + r )
+                partialResult = Array(result)
+            }
+            
+            let sortedResult = result.sorted(by: { $0.name < $1.name })
+            let providers = sortedResult.map {
+                CellProvider(api: pokemonItemApi,
+                             scrolledFetchedItem: .init(name: $0.name, url: .temporaryDirectory),
+                             isSelectable: selectionActive) {[weak self] item, provider in
                     if item.name == self?.current?.name {
                         provider.isSelected = true
                     }
                 }}
-                await MainActor.run {
-                    withAnimation {
-                        self.providers = providers
-                        paginatedProviders = Array(providers[0..<min(20, providers.count)])
-                    }
-                    if let current {
-                        selected = .init(item: current)
-                    }
-                }
+            withAnimation {
+                self.providers = providers
+                paginatedProviders = Array(providers[0..<min(20, providers.count)])
+            }
+            if let current {
+                selected = .init(item: current)
             }
         }
         
@@ -267,19 +265,14 @@ public struct PokemonItemSelectionScreen: View {
         private func fetch(for name: String) async {
             guard !name.isEmpty else {
                 cleanSearchTask()
-                await MainActor.run {
-                    displayedProviders = Array(paginatedProviders.enumerated())
-                }
+                displayedProviders = Array(paginatedProviders.enumerated())
                 return
             }
             let filtered = providers.filter { $0.scrolledFetchedItem?.name.contains(name) ?? false }
             if !filtered.isEmpty {
-                await MainActor.run {
-                    handleSelection(current)
-                    searched = nil
-                    displayedProviders = Array(filtered.enumerated())
-                }
-                return
+                handleSelection(current)
+                searched = nil
+                displayedProviders = Array(filtered.enumerated())
             }
         }
         
@@ -301,7 +294,6 @@ public struct PokemonItemSelectionScreen: View {
                 pokemon?.item = item
                 backgroundHandler.save()
                 Vibrator.notify(of: .success)
-
             }
         }
     }
@@ -316,7 +308,7 @@ public struct PokemonItemSelectionScreen: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     let preview =  Preview.allPreview
     let pokemon = JsonReader.readPokemons().randomElement()!

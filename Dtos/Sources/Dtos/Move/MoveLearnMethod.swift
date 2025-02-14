@@ -7,11 +7,11 @@
 
 import Foundation
 
-public struct MoveLearnMethod: Codable {
-    var id: Int
-    var name: MoveLearnMethodType
-    var descriptions: [Description]
-    var names: [Name]
-    var version_groups: [NamedAPIResource]
+public struct MoveLearnMethod: Codable, Sendable {
+    let id: Int
+    let name: MoveLearnMethodType
+    let descriptions: [Description]
+    let names: [Name]
+    let version_groups: [NamedAPIResource]
 }
 

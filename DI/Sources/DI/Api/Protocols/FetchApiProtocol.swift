@@ -7,10 +7,10 @@
 
 import Foundation
 
-public protocol FetchApiProtocol {
-   associatedtype Query: ApiQuery
-   associatedtype Requested: Decodable
-   associatedtype Failed: Error   
+public protocol FetchApiProtocol: Sendable {
+    associatedtype Query: ApiQuery
+    associatedtype Requested: Codable & Sendable
+    associatedtype Failed: Error   
 }
 
 extension FetchApiProtocol {

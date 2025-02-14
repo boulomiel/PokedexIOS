@@ -10,17 +10,18 @@ import Tools
 import DI
 import Dtos
 
-let testpokemonability = PokemonAbilityDetails(
+
+@MainActor let testpokemonability = PokemonAbilityDetails (
     name: "overgrow",
     isHidden: false
 )
 
-let testpokemonability2 = PokemonAbilityDetails(
+@MainActor let testpokemonability2 = PokemonAbilityDetails (
     name: "stench",
     isHidden: false
 )
 
-let testpokemonability3 = PokemonAbilityDetails(
+@MainActor let testpokemonability3 = PokemonAbilityDetails (
     name: "2",
     isHidden: false
 )
@@ -48,7 +49,7 @@ public struct PokemonAbilityView: View {
             PokemonGridScreen(provider: .init(pokemons: item.pokemons, title: item.title))
         }
     }
-
+    
     @ViewBuilder
     var disclosedContent: some View {
         if let abilityModel = provider.pokemonAbilityListModel {
@@ -129,13 +130,13 @@ public struct PokemonAbilityView: View {
                 .font(.body)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
-
+            
         }
         .padding(.top, 8)
     }
     
-    @Observable
-   public class Provider: Identifiable {
+    @Observable @MainActor
+    public class Provider: Identifiable {
         
         public let id: UUID = .init()
         let ability: PokemonAbilityDetails
@@ -154,9 +155,7 @@ public struct PokemonAbilityView: View {
             let result = await api.fetch(query: .init(number: abilityName))
             switch result {
             case .success(let success):
-                await MainActor.run {
-                    makeModel(from: success)
-                }
+                makeModel(from: success)
             case .failure(let failure):
                 print(#file, #function, failure)
             }
@@ -203,7 +202,7 @@ fileprivate struct HiddenAbilityTextSyle: LabelStyle {
 
 #Preview {
     PokemonAbilityView(provider: .init(ability: testpokemonability, api: .init()))
-    .preferredColorScheme(.dark)
+        .preferredColorScheme(.dark)
 }
 
 

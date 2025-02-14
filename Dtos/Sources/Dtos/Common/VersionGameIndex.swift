@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct VersionGameIndex: Codable, Hashable {
+public struct VersionGameIndex: Codable, Hashable, Sendable {
     
-    var gameIndex: Int
-    var version: NamedAPIResource
+    let gameIndex: Int
+    let version: NamedAPIResource
     
     enum CodingKeys: String, CodingKey {
         case gameIndex = "game_index"

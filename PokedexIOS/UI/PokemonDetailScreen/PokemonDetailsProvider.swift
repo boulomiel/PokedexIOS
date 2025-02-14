@@ -11,7 +11,7 @@ import Tools
 import DI
 import Dtos
 
-@Observable
+@Observable @MainActor
 public final class PokemonDetailsProvider {
     
     let fetchPokemonApi: FetchPokemonApi
@@ -59,12 +59,10 @@ public final class PokemonDetailsProvider {
             Task {
                 await player.play(success.cries.latest ?? success.cries.legacy)
             }
-            await MainActor.run {
-                buildStat(for: success)
-                pokemonAbilities(for: success)
-                availableVersions(for: success)
-                moves(for: success)
-            }
+            buildStat(for: success)
+            pokemonAbilities(for: success)
+            availableVersions(for: success)
+            moves(for: success)
             await getEvolutions(for: success)
         case .failure(let failure):
             print(#file,"\n",#function, failure)
@@ -75,17 +73,15 @@ public final class PokemonDetailsProvider {
         let result = await speciesApi.fetch(query: .init(speciesNumber: pokemonDTO.name))
         switch result {
         case .success(let success):
-            await MainActor.run {
-                let pathId = success.evolution_chain.url.lastPathComponent
-                self.descriptionsByVersions = success.flavor_text_entries.map { text in
-                    DescriptionByVersionModel(version: text.version.name, description: text.flavorText, language: text.language.name)
+            let pathId = success.evolution_chain.url.lastPathComponent
+            self.descriptionsByVersions = success.flavor_text_entries.map { text in
+                DescriptionByVersionModel(version: text.version.name, description: text.flavorText, language: text.language.name)
+            }
+            withAnimation(.bouncy) {
+                if success.varieties.count > 1 {
+                    self.speciesProvider = .init(species: .init(id: localPokemon.name), fetchApi: fetchPokemonApi, speciesApi: speciesApi, isGrid: false)
                 }
-                withAnimation(.bouncy) {
-                    if success.varieties.count > 1 {
-                        self.speciesProvider = .init(species: .init(id: localPokemon.name), fetchApi: fetchPokemonApi, speciesApi: speciesApi, isGrid: false)
-                    }
-                    self.evolutionViewProvider = .init(species: .init(id: pathId), evolutionChainAPI: evolutionChainApi, fetchPokemonApi: fetchPokemonApi)
-                }
+                self.evolutionViewProvider = .init(species: .init(id: pathId), evolutionChainAPI: evolutionChainApi, fetchPokemonApi: fetchPokemonApi)
             }
         case .failure(let failure):
             print(#file,"\n",#function, failure, pokemonDTO.name)

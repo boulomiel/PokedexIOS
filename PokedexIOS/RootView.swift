@@ -127,8 +127,8 @@ public struct RootView: View {
 
 }
 #Preview {
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
-    @Environment(\.diContainer) var container
     
     return RootView()
         .inject(container: container)

@@ -729,7 +729,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					876A79902BCFEB3800E8E210 = {
 						CreatedOnToolsVersion = 15.3;
@@ -748,8 +748,8 @@
 			packageReferences = (
 				871ADCAC2BE8E2B30017C9D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				87313BCC2BEB5D3E0081DD85 /* XCLocalSwiftPackageReference "Resources" */,
-				87313BCF2BEB65240081DD85 /* XCLocalSwiftPackageReference "Tools" */,
 				87313BD72BEB71010081DD85 /* XCLocalSwiftPackageReference "DI" */,
+				87DFBD1A2D5F4BBB0059EDDD /* XCLocalSwiftPackageReference "Tools" */,
 			);
 			productRefGroup = 876A79922BCFEB3800E8E210 /* Products */;
 			projectDirPath = "";
@@ -945,6 +945,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1008,6 +1009,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1037,6 +1039,7 @@
 				CODE_SIGN_ENTITLEMENTS = PokedexIOS/PokedexIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PokedexIOS/Preview Content\"";
 				DEVELOPMENT_TEAM = STFH26U9BW;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1054,7 +1057,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -1065,7 +1068,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1078,6 +1081,7 @@
 				CODE_SIGN_ENTITLEMENTS = PokedexIOS/PokedexIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PokedexIOS/Preview Content\"";
 				DEVELOPMENT_TEAM = STFH26U9BW;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1095,7 +1099,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -1106,7 +1110,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1139,13 +1143,13 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Resources;
 		};
-		87313BCF2BEB65240081DD85 /* XCLocalSwiftPackageReference "Tools" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Tools;
-		};
 		87313BD72BEB71010081DD85 /* XCLocalSwiftPackageReference "DI" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = DI;
+		};
+		87DFBD1A2D5F4BBB0059EDDD /* XCLocalSwiftPackageReference "Tools" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Tools;
 		};
 /* End XCLocalSwiftPackageReference section */
 

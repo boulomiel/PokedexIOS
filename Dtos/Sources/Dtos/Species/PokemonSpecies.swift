@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PokemonSpecies: Codable {
+public struct PokemonSpecies: Codable, Sendable {
     public let id: Int
     public let name: String
     public let order: Int
@@ -37,23 +37,23 @@ public struct PokemonSpecies: Codable {
     public let varieties: [PokemonSpeciesVariety]
 }
 
-public struct Genus: Codable {
+public struct Genus: Codable, Sendable {
     public let genus: String
     public let language: NamedAPIResource
 }
 
-public struct PokemonSpeciesDexEntry: Codable {
+public struct PokemonSpeciesDexEntry: Codable, Sendable {
     public let entry_number: Int
     public let pokedex: NamedAPIResource
 }
 
-public struct PalParkEncounterArea: Codable {
+public struct PalParkEncounterArea: Codable, Sendable {
     public let base_score: Int
     public let rate: Int
     public let area: NamedAPIResource
 }
 
-public struct PokemonSpeciesVariety: Codable  {
+public struct PokemonSpeciesVariety: Codable, Sendable {
     public let is_default: Bool
     public let pokemon: NamedAPIResource
 }

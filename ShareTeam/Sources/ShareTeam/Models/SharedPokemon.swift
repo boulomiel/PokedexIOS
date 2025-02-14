@@ -8,7 +8,7 @@
 import Foundation
 import Dtos
 
-public struct SharedPokemon: Codable {
+public struct SharedPokemon: Codable, Sendable {
     public let pokemon: Pokemon?
     public let move: [Move]?
     public let item: Item?

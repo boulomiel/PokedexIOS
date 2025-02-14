@@ -7,22 +7,22 @@
 
 import Foundation
 
-public struct Item: Codable, Hashable {
-    public var id: Int
-    public var name: String
-    public var cost: Int
-    public var flingPower: Int?
-    public var flingEffect: NamedAPIResource?
-    public var attributes: [NamedAPIResource]
-    public var category: NamedAPIResource
-    public var effectEntries: [VerboseEffect]
-    public var flavorTextEntries: [VersionGroupFlavorText]
-    public var gameIndices: [GenerationGameIndex]
-    public var names: [Name]
-    public var sprites: ItemSprites
-    public var heldByPokemon: [ItemHolderPokemon]
-    public var babyTriggerFor: APIResource?
-    public var machines: [MachineVersionDetail]
+public struct Item: Codable, Hashable, Sendable {
+    public let id: Int
+    public let name: String
+    public let cost: Int
+    public let flingPower: Int?
+    public let flingEffect: NamedAPIResource?
+    public let attributes: [NamedAPIResource]
+    public let category: NamedAPIResource
+    public let effectEntries: [VerboseEffect]
+    public let flavorTextEntries: [VersionGroupFlavorText]
+    public let gameIndices: [GenerationGameIndex]
+    public let names: [Name]
+    public let sprites: ItemSprites
+    public let heldByPokemon: [ItemHolderPokemon]
+    public let babyTriggerFor: APIResource?
+    public let machines: [MachineVersionDetail]
     
     enum CodingKeys: String, CodingKey {
         case id, name, cost
@@ -47,7 +47,7 @@ extension Item {
     }
 }
 
-public struct ItemSprites: Codable, Hashable {
+public struct ItemSprites: Codable, Hashable, Sendable {
     
     public let defaultSprite: URL?
     
@@ -56,10 +56,10 @@ public struct ItemSprites: Codable, Hashable {
     }
 }
 
-public struct ItemHolderPokemon: Codable, Hashable {
+public struct ItemHolderPokemon: Codable, Hashable, Sendable {
     
-    var pokemon: NamedAPIResource
-    var versionDetails: [ItemHolderVersionDetail]
+    let pokemon: NamedAPIResource
+    let versionDetails: [ItemHolderVersionDetail]
     
     enum CodingKeys: String, CodingKey {
         case pokemon
@@ -68,25 +68,25 @@ public struct ItemHolderPokemon: Codable, Hashable {
 }
 
 
-public struct ItemHolderVersionDetail: Codable, Hashable {
-    var rarity: Int
-    var version: NamedAPIResource
+public struct ItemHolderVersionDetail: Codable, Hashable, Sendable {
+    let rarity: Int
+    let version: NamedAPIResource
 }
 
 
-public struct ItemAttributes: Codable, Hashable {
-    var id: Int
-    var name: String
-    var descriptions: ItemAttributesDescription
-    var items: [NamedAPIResource]
-    var names: [Name]
+public struct ItemAttributes: Codable, Hashable, Sendable {
+    let id: Int
+    let name: String
+    let descriptions: ItemAttributesDescription
+    let items: [NamedAPIResource]
+    let names: [Name]
     
     enum CodingKeys: String, CodingKey {
         case id, name, descriptions, items, names
     }
 }
 
-public struct ItemAttributesDescription: Codable, Hashable {
-    var description: String
-    var language: NamedAPIResource
+public struct ItemAttributesDescription: Codable, Hashable, Sendable {
+    let description: String
+    let language: NamedAPIResource
 }

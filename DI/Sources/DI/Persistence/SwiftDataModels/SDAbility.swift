@@ -12,8 +12,9 @@ import Dtos
 @Model
 public class SDAbility: SDDataDecoder {
     public typealias Decoded = Ability
-    @Attribute(.unique) let abilityID: Int
-    public let data: Data?
+    @Attribute(.unique)
+    var abilityID: Int
+    public var data: Data?
 
     public var pokemon: [SDPokemon]?
     

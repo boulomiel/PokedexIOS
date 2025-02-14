@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Berries: Codable {
+public struct Berries: Codable, Sendable {
     var id: Int
     var name: String
     var growthTime: Int

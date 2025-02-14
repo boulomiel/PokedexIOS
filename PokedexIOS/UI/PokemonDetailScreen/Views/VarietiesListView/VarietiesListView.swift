@@ -48,10 +48,10 @@ public struct VarietiesListView<Cell: View>: View {
     func addCell(@ViewBuilder content: @escaping () -> AnyView) -> Self {
         return .init(provider: provider, cell: cell, additionnalCell: content)
     }
-
     
-    @Observable
-   public class Provider {
+    
+    @Observable @MainActor
+    public class Provider {
         let species: SpeciesModel?
         let fetchApi: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi
@@ -76,9 +76,7 @@ public struct VarietiesListView<Cell: View>: View {
             let result = await speciesApi.fetch(query: .init(speciesNumber: species.id))
             switch result {
             case .success(let success):
-                await MainActor.run {
-                    varieties = success.varieties.map(\.pokemon.name)
-                }
+                varieties = success.varieties.map(\.pokemon.name)
             case .failure(let failure):
                 print(#file,"\n", failure)
             }
@@ -87,7 +85,8 @@ public struct VarietiesListView<Cell: View>: View {
 }
 
 struct VarietyKey: PreferenceKey {
-    static var defaultValue: Int = 0
+    
+    nonisolated(unsafe) static var defaultValue: Int = 0
     
     static func reduce(value: inout Int, nextValue: () -> Int) {
         value += nextValue()
@@ -97,7 +96,7 @@ struct VarietyKey: PreferenceKey {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return VarietiesListView(provider: .init(species: .init(id: "3"), fetchApi: .init(), speciesApi: .init(), isGrid: true)) { pokemon in
         EvolutionListViewCell(provider: .init(api: .init(), pokemon: pokemon))

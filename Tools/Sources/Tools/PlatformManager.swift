@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 
 @Observable
+@MainActor
 public class PlatformManager {
     public var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
@@ -28,22 +29,29 @@ public class PlatformManager {
 }
 
 public struct PlatformManagerKey: EnvironmentKey {
-    public static var defaultValue: PlatformManager = .init()
+    nonisolated(unsafe) public static var defaultValue: PlatformManager = .init()
 }
 
 public extension EnvironmentValues {
+    
+    @MainActor
     var isIpad: Bool {
         self[PlatformManagerKey.self].isIpad
     }
     
+    
+    @MainActor
     var isIphone: Bool {
         self[PlatformManagerKey.self].isIphone
     }
     
+    
+    @MainActor
     var isLandscape: Bool {
         self[PlatformManagerKey.self].isLandscape
     }
     
+    @MainActor
     var isPortrait: Bool {
         self[PlatformManagerKey.self].isPortrait
     }

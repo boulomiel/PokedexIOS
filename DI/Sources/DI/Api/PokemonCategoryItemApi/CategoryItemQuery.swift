@@ -8,7 +8,7 @@
 import Foundation
 import Resources
 
-public struct CategoryItemQuery: ApiQuery {
+public struct CategoryItemQuery: ApiQuery, Sendable {
     let categoryID: String
     
     public init(categoryID: String) {

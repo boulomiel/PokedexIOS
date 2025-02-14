@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ApiPokemonError: ApiError, LocalizedError {
+public enum ApiPokemonError: ApiError, LocalizedError, Sendable {
     case http(description: Error)
     case status(description: Int)
     case decoding(description: Error)

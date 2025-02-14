@@ -9,6 +9,7 @@ import Foundation
 import CoreHaptics
 import UIKit
 
+@MainActor
 public struct Vibrator {
     public static func selection() {
         let generator = UISelectionFeedbackGenerator()

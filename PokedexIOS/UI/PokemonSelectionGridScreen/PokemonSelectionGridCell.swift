@@ -157,7 +157,7 @@ public struct PokemonSelectionGridCell: View {
         var scale: Double = 1.0
     }
     
-    @Observable
+    @Observable @MainActor
     public class Provider {
         
         let api: FetchPokemonApi
@@ -219,10 +219,8 @@ public struct PokemonSelectionGridCell: View {
             switch result {
             case .success(let result):
                 await getSpecies(for: result)
-                await MainActor.run {
-                    withAnimation(.smooth) {
-                        fetchedPokemon = result
-                    }
+                withAnimation(.smooth) {
+                    fetchedPokemon = result
                 }
             case .failure(let error):
                 print(#file, #function, error)
@@ -233,9 +231,7 @@ public struct PokemonSelectionGridCell: View {
             let result = await speciesApi.fetch(query: .init(speciesNumber: result.species.name))
             switch result {
             case .success(let result):
-                await MainActor.run {
-                    self.showVarietyButton = result.varieties.count > 1
-                }
+                self.showVarietyButton = result.varieties.count > 1
             case .failure(let error):
                 print(#file, #function, error)
             }
@@ -244,7 +240,7 @@ public struct PokemonSelectionGridCell: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return PokemonSelectionGridCell(
         selectedPokemon:

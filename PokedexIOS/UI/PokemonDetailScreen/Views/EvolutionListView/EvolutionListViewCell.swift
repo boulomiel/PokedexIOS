@@ -39,7 +39,7 @@ public struct EvolutionListViewCell: View {
         RoundedRectangle(cornerRadius: 8)
     }
     
-    @Observable
+    @Observable @MainActor
    public class Provider: Identifiable {
         
         public let id: UUID = .init()
@@ -61,10 +61,8 @@ public struct EvolutionListViewCell: View {
             let result = await api.fetch(query:.init(pokemonID: pokemon.name))
             switch result {
             case .success(let result):
-                await MainActor.run {
-                    sprite = result.sprites?.frontDefault
-                    genModels = GenModel.generate(from: result)
-                }
+                sprite = result.sprites?.frontDefault
+                genModels = GenModel.generate(from: result)
             case .failure(let error):
                 print(#file, #function, error)
             }
@@ -74,7 +72,7 @@ public struct EvolutionListViewCell: View {
 }
 
 #Preview {
-    @Environment(
+    @Previewable @Environment(
         \.diContainer
     ) var container
     return EvolutionListViewCell(

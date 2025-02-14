@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct EvolutionChain: Codable {
+public struct EvolutionChain: Codable, Sendable {
     public let babyTriggerItem: NamedAPIResource?
     public let chain: ChainLink
     public let id: Int
@@ -19,7 +19,7 @@ public struct EvolutionChain: Codable {
 }
 
 // MARK: - Chain
-public struct ChainLink: Codable {
+public struct ChainLink: Codable, Sendable {
     public let evolutionDetails: [EvolutionDetail]?
     public let evolvesTo: [ChainLink]
     public let isBaby: Bool
@@ -34,7 +34,7 @@ public struct ChainLink: Codable {
 }
 
 // MARK: - EvolutionDetail // Evolution Chain
-public struct EvolutionDetail: Codable {
+public struct EvolutionDetail: Codable, Sendable {
     public let item : NamedAPIResource?
     public let trigger: NamedAPIResource
     public let gender: Int?
@@ -76,7 +76,7 @@ public struct EvolutionDetail: Codable {
     }
 }
 
-public struct EvolutionTrigger: Codable {
+public struct EvolutionTrigger: Codable, Sendable {
     public let id: Int
     public let name: String
     public let names: [Name]

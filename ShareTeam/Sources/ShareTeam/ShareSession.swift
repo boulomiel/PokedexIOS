@@ -5,26 +5,26 @@
 //  Created by Ruben Mimoun on 09/05/2024.
 //
 
-import MultipeerConnectivity
+@preconcurrency import MultipeerConnectivity
 import os
-import Combine
+@preconcurrency import Combine
 
 @Observable
-public class ShareSession: NSObject {
+public final class ShareSession: NSObject, Sendable {
     private let serviceType = "rps-service"
-    private var myPeerID: Peer?
+    nonisolated(unsafe) private var myPeerID: Peer?
     
-    private var serviceAdvertiser: MCNearbyServiceAdvertiser?
-    private var serviceBrowser: MCNearbyServiceBrowser?
-    private var session: MCSession?
+    nonisolated(unsafe) private var serviceAdvertiser: MCNearbyServiceAdvertiser?
+    nonisolated(unsafe) private var serviceBrowser: MCNearbyServiceBrowser?
+    nonisolated(unsafe) private var session: MCSession?
     
-    private var availablePeers: Set<Peer> = .init()
-    public var peers: [Peer] {
+    nonisolated(unsafe) private var availablePeers: Set<Peer> = .init()
+    nonisolated(unsafe) public var peers: [Peer] {
         availablePeers.sorted(by: { $0.id < $1.id })
     }
     public let event: PassthroughSubject<ShareSessionEvent, Never>
-    private var invitationHandler: ((Bool, MCSession?) -> Void)?
-    private var onInviteAccepted: (() -> Void)?
+    nonisolated(unsafe) private var invitationHandler: ((Bool, MCSession?) -> Void)?
+    nonisolated(unsafe) private var onInviteAccepted: (() -> Void)?
     
     public override init() {
         event = .init()
@@ -35,6 +35,7 @@ public class ShareSession: NSObject {
         finish()
     }
     
+    @MainActor
     public func start(as username: String, shouldOpenSetting: (()->Void)? = nil) {
         let peerID = MCPeerID(displayName: username)
         let state = LocalNetworkAuthorization()
@@ -104,11 +105,10 @@ extension ShareSession: MCNearbyServiceAdvertiserDelegate {
     
     public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         print(#file, #function, peerID)
-        
+        self.invitationHandler = invitationHandler
         DispatchQueue.main.async {
             self.event.send(.receivedInvite(from: peerID))
             // Give PairView the `invitationHandler` so it can accept/deny the invitation
-            self.invitationHandler = invitationHandler
         }
     }
 }

@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct ItemPocket: Codable {
-    var id: Int
-    var name : String
-    var categories: [NamedAPIResource]
-    var names: [Name]
+public struct ItemPocket: Codable, Sendable {
+    let id: Int
+    let name : String
+    let categories: [NamedAPIResource]
+    let names: [Name]
 }

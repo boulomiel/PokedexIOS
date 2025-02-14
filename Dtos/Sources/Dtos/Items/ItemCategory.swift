@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ItemCategory: Codable {
+public struct ItemCategory: Codable, Sendable {
     public let id: Int
     public let name: String
     public let items: [NamedAPIResource]

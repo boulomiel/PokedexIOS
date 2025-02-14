@@ -17,7 +17,7 @@ public struct PokemonGridCell: View {
         NavigationLink(value: LocalPokemon(index: provider.number ?? -1, name: provider.pokemon)) {
             VStack {
                 ScaleAsyncImage(url: provider.sprite, width: 100, height: 100)
-
+                
                 ShrinkText(text: pokemonName, alignment: .center, font: .body.bold())
                     .foregroundStyle(.white)
             }
@@ -47,15 +47,15 @@ public struct PokemonGridCell: View {
         }
     }
     
-    @Observable
-   public class Provider: Identifiable {
+    @Observable @MainActor
+    public class Provider: Identifiable {
         public let id: UUID = .init()
         let pokemon: String
         let fechPokemonApi: FetchPokemonApi
-       
-       var sprite: URL?
-       var number: Int?
-       var types: [PokemonType.PT]
+        
+        var sprite: URL?
+        var number: Int?
+        var types: [PokemonType.PT]
         
         init(pokemon: String, fechPokemonApi: FetchPokemonApi) {
             self.pokemon = pokemon
@@ -70,11 +70,9 @@ public struct PokemonGridCell: View {
             let result = await fechPokemonApi.fetch(query: .init(pokemonID: pokemon))
             switch result {
             case .success(let success):
-                await MainActor.run {
-                    self.types = success.types.pt
-                    self.sprite = success.sprites?.frontDefault
-                    self.number = success.id
-                }
+                self.types = success.types.pt
+                self.sprite = success.sprites?.frontDefault
+                self.number = success.id
             case .failure(let failure):
                 print(#file, #function, failure)
             }
@@ -83,7 +81,7 @@ public struct PokemonGridCell: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return PokemonGridCell(provider: .init(pokemon: "gengar", fechPokemonApi: .init()))
         .inject(container: container)

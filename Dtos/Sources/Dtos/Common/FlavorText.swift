@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FlavorText: Codable {
+public struct FlavorText: Codable, Sendable {
     public let flavorText: String
     public let language, version: NamedAPIResource
 

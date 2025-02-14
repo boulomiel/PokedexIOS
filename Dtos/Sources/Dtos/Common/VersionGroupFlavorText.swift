@@ -7,11 +7,11 @@
 
 import Foundation
 
-public struct VersionGroupFlavorText: Codable, Hashable {
+public struct VersionGroupFlavorText: Codable, Hashable, Sendable {
     
-    public var text: String
-    public var language: NamedAPIResource
-    public var versionGroup: NamedAPIResource
+    public let text: String
+    public let language: NamedAPIResource
+    public let versionGroup: NamedAPIResource
     
     enum CodingKeys: String, CodingKey {
         case text

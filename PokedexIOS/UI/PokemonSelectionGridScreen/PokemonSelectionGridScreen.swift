@@ -277,7 +277,7 @@ public struct PokemonSelectionGridScreen: View {
         }
     }
     
-    @Observable
+    @Observable @MainActor
    public class Provider {
         
         var selectedPokemons: [Pokemon]
@@ -396,8 +396,9 @@ public struct TeamNameSheet: View {
 
 #Preview {
     
+    @Previewable @Environment(\.diContainer) var container
+    
     let preview = Preview(SDTeam.self, SDPokemon.self, SDItem.self, SDMove.self)
-    @Environment(\.diContainer) var container
     
     return NavigationStack(root: {
         PokemonSelectionGridScreen(scrollProvider: .init(api: .init(), fetchApi: .init(), modelContainer: preview.container, languageNameFetcher: .init(container: preview.container)), provider: .init(selectedPokemons: [], modelContext: preview.container.mainContext, teamID: nil))

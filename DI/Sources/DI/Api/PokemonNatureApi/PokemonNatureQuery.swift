@@ -8,7 +8,7 @@
 import Foundation
 import Resources
 
-public struct PokemonNatureQuery: ApiQuery, Hashable {
+public struct PokemonNatureQuery: ApiQuery, Hashable, Sendable {
     
     let id: String
     
@@ -25,5 +25,5 @@ public struct PokemonNatureQuery: ApiQuery, Hashable {
         return components
     }
     
-    public static var natureRange: Int = 25
+    nonisolated public static let natureRange: Int = 25
 }

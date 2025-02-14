@@ -14,8 +14,8 @@ import Dtos
 public class SDPokemon: SDDataDecoder {
     public typealias Decoded = Pokemon
 
-    public let pokemonID: Int
-    public let data: Data?
+    public var pokemonID: Int
+    public var data: Data?
     
     @Relationship(deleteRule: .nullify, inverse: \SDMove.pokemon)
     public var moves: [SDMove]?

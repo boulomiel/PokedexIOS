@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 public protocol SDDataDecoder {
-    associatedtype Decoded: Decodable
+    associatedtype Decoded: Codable & Sendable
     var data: Data? { get }
 }
 

@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct MoveDamageClass: Codable {
-    var id: Int
-    var name: String
-    var descriptions: [Description]
-    var moves: [NamedAPIResource]
-    var names: [Name]
+public struct MoveDamageClass: Codable, Sendable {
+    let id: Int
+    let name: String
+    let descriptions: [Description]
+    let moves: [NamedAPIResource]
+    let names: [Name]
 }

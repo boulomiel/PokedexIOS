@@ -8,10 +8,10 @@
 import Foundation
 
 // MARK: - WelcomeEffectEntry
-public struct VerboseEffect: Codable, Hashable {
-    public  var effect: String
-    public var language: NamedAPIResource
-    public var shortEffect: String
+public struct VerboseEffect: Codable, Hashable, Sendable {
+    public let effect: String
+    public let language: NamedAPIResource
+    public let shortEffect: String
 
     enum CodingKeys: String, CodingKey {
         case effect, language

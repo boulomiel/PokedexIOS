@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Ability: Codable, Hashable {
+public struct Ability: Codable, Hashable, Sendable {
      public let id: Int
      public let name: String
      public let isMainSeries: Bool

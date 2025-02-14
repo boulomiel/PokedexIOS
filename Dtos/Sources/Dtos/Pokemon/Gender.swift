@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct Gender: Codable {
-    var id: Int
-    var name: String
-    var pokemon_species_details: [PokemonSpeciesGender]
-    var required_for_evolution: [NamedAPIResource]
+public struct Gender: Codable, Sendable {
+    let id: Int
+    let name: String
+    let pokemon_species_details: [PokemonSpeciesGender]
+    let required_for_evolution: [NamedAPIResource]
 }
 
-public struct PokemonSpeciesGender: Codable {
-    var rate: Int
-    var pokemon_species: NamedAPIResource
+public struct PokemonSpeciesGender: Codable, Sendable {
+    let rate: Int
+    let pokemon_species: NamedAPIResource
 }

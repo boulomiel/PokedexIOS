@@ -7,12 +7,12 @@
 
 import Foundation
 
-public struct PastMoveValues: Codable, Hashable {
-    var accuracy: Int?
-    var effect_chance: Int?
-    var power: Int?
-    var pp: Int?
-    var effect_entries: [VerboseEffect]
-    var type: NamedAPIResource?
-    var version_group: NamedAPIResource
+public struct PastMoveValues: Codable, Hashable, Sendable {
+    let accuracy: Int?
+    let effect_chance: Int?
+    let power: Int?
+    let pp: Int?
+    let effect_entries: [VerboseEffect]
+    let type: NamedAPIResource?
+    let version_group: NamedAPIResource
 }

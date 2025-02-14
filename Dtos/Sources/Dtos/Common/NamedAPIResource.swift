@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Generation
-public struct NamedAPIResource: Codable, Hashable {
+public struct NamedAPIResource: Codable, Hashable, Sendable {
     public let name: String
     public let url: URL
     

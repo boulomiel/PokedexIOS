@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MoveMetaData: Codable, Hashable {
+public struct MoveMetaData: Codable, Hashable, Sendable {
     
     public let ailment: NamedAPIResource // status
     public let category: NamedAPIResource

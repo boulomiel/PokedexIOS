@@ -7,12 +7,12 @@
 
 import Foundation
 
-public struct ContestType: Codable {
+public struct ContestType: Codable, Sendable {
     
-    var id: Int
-    var name: String
-    var berryFlavor: NamedAPIResource
-    var names: [ContestName]
+    let id: Int
+    let name: String
+    let berryFlavor: NamedAPIResource
+    let names: [ContestName]
     
     enum CodingKeys: String, CodingKey {
         case id, name

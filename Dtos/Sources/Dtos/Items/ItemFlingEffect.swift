@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct ItemFlingEffect: Codable {
-    var id: Int
-    var name: String
-    var effect_entries: [Effect]
-    var items: [NamedAPIResource]
+public struct ItemFlingEffect: Codable, Sendable {
+    let id: Int
+    let name: String
+    let effect_entries: [Effect]
+    let items: [NamedAPIResource]
 }

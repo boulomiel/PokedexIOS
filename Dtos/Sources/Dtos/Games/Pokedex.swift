@@ -7,16 +7,16 @@
 
 import Foundation
 
-public struct Pokedex: Codable {
+public struct Pokedex: Codable, Sendable {
     
-    var id: Int
-    var name: String
-    var isMainSeries: Bool
-    var descriptions: [Description]
-    var names: [Name]
-    var pokemonEntries: [PokemonEntry]
-    var region: NamedAPIResource
-    var versionGroup: [NamedAPIResource]
+    let id: Int
+    let name: String
+    let isMainSeries: Bool
+    let descriptions: [Description]
+    let names: [Name]
+    let pokemonEntries: [PokemonEntry]
+    let region: NamedAPIResource
+    let versionGroup: [NamedAPIResource]
     
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -29,10 +29,10 @@ public struct Pokedex: Codable {
 }
 
 
-public struct PokemonEntry: Codable {
+public struct PokemonEntry: Codable, Sendable {
     
-    var entryNumber: Int
-    var pokemonSpecies: NamedAPIResource
+    let entryNumber: Int
+    let pokemonSpecies: NamedAPIResource
     
     enum CodingKeys: String, CodingKey {
         case entryNumber = "entry_number"

@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import MultipeerConnectivity
+@preconcurrency import MultipeerConnectivity
 
-public enum ShareSessionEvent {
+public enum ShareSessionEvent: Sendable {
     case receivedInvite(from: MCPeerID)
     case isPaired(isPaired: Bool)
     case receivedData(data: Data)

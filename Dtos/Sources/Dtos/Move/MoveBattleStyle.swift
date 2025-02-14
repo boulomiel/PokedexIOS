@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct MoveBattleStyle: Codable {
-    var id: Int
-    var name: String
-    var names: [Name]
+public struct MoveBattleStyle: Codable, Sendable {
+    let id: Int
+    let name: String
+    let names: [Name]
 }

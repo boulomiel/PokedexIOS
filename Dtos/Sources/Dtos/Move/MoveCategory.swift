@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct MoveCategory: Codable {
-    var id: Int
-    var name: String
-    var moves: [NamedAPIResource]
-    var descriptions: [Description]
+public struct MoveCategory: Codable, Sendable {
+    let id: Int
+    let name: String
+    let moves: [NamedAPIResource]
+    let descriptions: [Description]
 }

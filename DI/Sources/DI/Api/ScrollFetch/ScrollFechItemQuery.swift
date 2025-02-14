@@ -8,7 +8,7 @@
 import Foundation
 import Resources
 
-public struct ScrollFetchItemQuery: ScrolledApiQuery {
+public struct ScrollFetchItemQuery: ScrolledApiQuery, Sendable {
     public let limit: Int
     public let offset: Int
     

@@ -107,7 +107,7 @@ public struct PokemonNatureSelectionScreen: View {
         .padding(.vertical, 15)
     }
     
-    @Observable
+    @Observable @MainActor
     public final class Provider {
         private let api: PokemonNatureApi
         private let pokemonID: PersistentIdentifier
@@ -145,23 +145,21 @@ public struct PokemonNatureSelectionScreen: View {
                         await self?.fetch(id: "\(i)")
                     }
                 }
-                
-                let reduced = await group.reduce(into: [Nature]()) { partialResult, nature in
+                var result = [Nature]()
+                for await nature in group {
                     if let nature {
-                        partialResult.append(nature)
+                        result.append(nature)
                     }
                 }
-                return reduced
+                return result
             }
             
             let languages = Array(Set(natures.flatMap(\.names).map(\.language.name)))
-            await MainActor.run {
-                self.languages = languages
-                self.selectedLanguage = languages.first
-                self.natures = natures.sorted(by: { $0.name < $1.name })
-                self.selected =  current ?? natures.first!
-                updateStat(with: selected!)
-            }
+            self.languages = languages
+            self.selectedLanguage = languages.first
+            self.natures = natures.sorted(by: { $0.name < $1.name })
+            self.selected =  current ?? natures.first!
+            updateStat(with: selected!)
         }
         
         private func fetch(id: String) async -> Nature? {
@@ -206,7 +204,7 @@ public struct NatureStatBridge {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     let pokemon = JsonReader.readPokemons().randomElement()!
     

@@ -89,7 +89,7 @@ struct SearchingUserView: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     let team = SDShareUser(name: "Jhon")
     preview.addExamples([team])

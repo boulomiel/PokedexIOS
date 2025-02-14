@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ItemCategoryType: Codable {
+public enum ItemCategoryType: Codable, Sendable {
     case statBoosts
     case effortDrop
     case medicine

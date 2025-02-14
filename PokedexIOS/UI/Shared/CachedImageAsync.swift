@@ -43,10 +43,8 @@ public struct CachedAsyncImage: View {
     
     func getImage() async {
         let image = await imageCache.get(url: url)
-        await MainActor.run {
-            withAnimation(.smooth) {
-                self.image = image
-            }
+        withAnimation(.smooth) {
+            self.image = image
         }
     }
 }

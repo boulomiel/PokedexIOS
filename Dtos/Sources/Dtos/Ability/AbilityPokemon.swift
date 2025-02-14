@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Pokemon
-public struct AbilityPokemon: Codable, Hashable {
+public struct AbilityPokemon: Codable, Hashable, Sendable {
     public let isHidden: Bool
     public let pokemon: NamedAPIResource
     public let slot: Int

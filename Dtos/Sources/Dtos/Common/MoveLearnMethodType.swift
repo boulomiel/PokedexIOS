@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MoveLearnMethodType: String, Codable , CaseIterable, Hashable{
+public enum MoveLearnMethodType: String, Codable , CaseIterable, Hashable, Sendable {
     case levelUp = "level-up", egg, tutor, machine
     case stadiumSurphingPikachu = "stadium-surfing-pikachu"
     case lightBallEgg = "light-ball-egg"

@@ -8,16 +8,16 @@
 import Foundation
 
 
-public struct VersionGroup {
+public struct VersionGroup: Sendable {
     
-    var id: Int
-    var name: String
-    var order: Int
-    var generation: NamedAPIResource
-    var moveLearnMethods: [NamedAPIResource]
-    var pokedexes: [NamedAPIResource]
-    var regions: [NamedAPIResource]
-    var versions: [NamedAPIResource]
+    let id: Int
+    let name: String
+    let order: Int
+    let generation: NamedAPIResource
+    let moveLearnMethods: [NamedAPIResource]
+    let pokedexes: [NamedAPIResource]
+    let regions: [NamedAPIResource]
+    let versions: [NamedAPIResource]
     
     enum CodingKeys: String, CodingKey {
         case id, name, order, generation

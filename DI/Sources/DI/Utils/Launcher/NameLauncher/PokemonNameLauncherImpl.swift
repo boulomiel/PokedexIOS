@@ -11,7 +11,7 @@ import Resources
 import Tools
 import Dtos
 
-public class PokemonNameLauncherImpl: NameLauncherProtocol {
+public final class PokemonNameLauncherImpl: NameLauncherProtocol, Sendable {
     
     let apiEnv: PokemonEnvApi
     let api: GeneralApi<ScrollFetchResult>

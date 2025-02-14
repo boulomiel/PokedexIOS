@@ -62,7 +62,7 @@ public struct PokemonListScrolledContent: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     return  NavigationStack {
         PokemonScrollScreen()
             .inject(container: container)

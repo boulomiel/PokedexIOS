@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ItemCategoryApiResource: Codable, Hashable {
+public struct ItemCategoryApiResource: Codable, Hashable, Sendable {
     public static func == (lhs: ItemCategoryApiResource, rhs: ItemCategoryApiResource) -> Bool {
         lhs.url == rhs.url
     }
@@ -21,7 +21,7 @@ public struct ItemCategoryApiResource: Codable, Hashable {
 }
 
 
-public struct ItemCategories: Codable {
+public struct ItemCategories: Codable, Sendable {
     public let count: Int
     public let next, previous: URL?
     public let results: [ItemCategoryApiResource]

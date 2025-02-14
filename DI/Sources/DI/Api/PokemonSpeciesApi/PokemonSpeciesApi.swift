@@ -8,7 +8,7 @@
 import Foundation
 import Dtos
 
-public class PokemonSpeciesApi: FetchApiProtocol {
+public final class PokemonSpeciesApi: FetchApiProtocol, Sendable {
     public typealias Query = PokemonSpeciesQuery
     public typealias Requested = PokemonSpecies
     public typealias Failed = ApiPokemonError

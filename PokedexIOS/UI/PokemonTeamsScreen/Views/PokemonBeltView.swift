@@ -89,7 +89,7 @@ public struct PokeBallBeltView<Content: View>: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     
     return PokeBallBeltView(selectedPokemons: JsonReader.readPokemons(), onShowPokemon: { _ in }, onRemovePokemon: {_ in }, buildTeamButton: {
         Text("Build Team")

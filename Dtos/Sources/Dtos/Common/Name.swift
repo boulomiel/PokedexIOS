@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Name
-public struct Name: Codable, Hashable {
+public struct Name: Codable, Hashable, Sendable {
     public let language: NamedAPIResource
     public let name: String
 }

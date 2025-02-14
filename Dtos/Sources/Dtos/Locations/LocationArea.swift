@@ -7,15 +7,15 @@
 
 import Foundation
 
-public struct LocationArea: Codable {
+public struct LocationArea: Codable, Sendable {
     
-    var id: Int
-    var name: String
-    var gameIndex: Int
-    var encounterMethodRates: [EncounterMethodRates]
-    var location: NamedAPIResource
-    var names: [Name]
-    var pokemonEncounters: [PokemonEncounter]
+    let id: Int
+    let name: String
+    let gameIndex: Int
+    let encounterMethodRates: [EncounterMethodRates]
+    let location: NamedAPIResource
+    let names: [Name]
+    let pokemonEncounters: [PokemonEncounter]
     
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -26,10 +26,10 @@ public struct LocationArea: Codable {
     }
 }
 
-public struct EncounterMethodRates: Codable {
+public struct EncounterMethodRates: Codable, Sendable {
     
-    var encounterMethod: NamedAPIResource
-    var versionDetails: [EncounterVersionDetails]
+    let encounterMethod: NamedAPIResource
+    let versionDetails: [EncounterVersionDetails]
     
     enum CodingKeys: String, CodingKey {
         case encounterMethod = "encounter_method"
@@ -37,15 +37,15 @@ public struct EncounterMethodRates: Codable {
     }
 }
 
-public struct EncounterVersionDetails: Codable {
-    var rate: Int
-    var version: NamedAPIResource
+public struct EncounterVersionDetails: Codable, Sendable {
+    let rate: Int
+    let version: NamedAPIResource
 }
 
 
-public struct PokemonEncounter: Codable {
-    var pokemon: NamedAPIResource
-    var versionDetails: [VersionEncounterDetail]
+public struct PokemonEncounter: Codable, Sendable {
+    let pokemon: NamedAPIResource
+    let versionDetails: [VersionEncounterDetail]
     
     enum CodingKeys: String, CodingKey {
         case pokemon

@@ -93,7 +93,7 @@ public struct ItemScrolledContent: View {
         }
     }
     
-    @Observable
+    @Observable @MainActor
     public final class Provider {
         
         typealias CellProvider = ItemCell.Provider
@@ -186,7 +186,7 @@ public struct ItemScrolledContent: View {
 }
 
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
     let pokemon = JsonReader.readPokemons().randomElement()!
     let sdPokemon = SDPokemon(pokemonID: pokemon.order, data: try? JSONEncoder().encode(pokemon))

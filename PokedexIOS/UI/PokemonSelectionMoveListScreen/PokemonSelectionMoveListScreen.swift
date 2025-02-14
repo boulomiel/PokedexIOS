@@ -23,7 +23,7 @@ public struct PokemonSelectionMoveListScreen: View {
     
     @State 
     var provider: Provider
-
+    
     public var body: some View {
         List(provider.moves) { move in
             ListMoveCellView(move: move, isSelectable: true, provider: provider)
@@ -89,8 +89,8 @@ public struct PokemonSelectionMoveListScreen: View {
         public let id: UUID = .init()
     }
     
-    @Observable
-   public class Provider {
+    @Observable @MainActor
+    public class Provider {
         let movesAPI: PokemonMoveApi
         let movesURL: [URL]
         var selectedMoves: [Move]
@@ -114,7 +114,7 @@ public struct PokemonSelectionMoveListScreen: View {
         }
         
         func fetch() async {
-
+            
             let moves = await withTaskGroup(of: Move?.self) { group in
                 self.movesURL.forEach { url in
                     group.addTask {
@@ -137,15 +137,13 @@ public struct PokemonSelectionMoveListScreen: View {
                 return result
             }
             let sorted = moves.sorted(by: { $0.power ?? 0 < $1.power ?? 0 })
-            await MainActor.run {
-                withAnimation(.snappy) {
-                    self.moves = sorted
-                }
+            withAnimation(.snappy) {
+                self.moves = sorted
             }
         }
         
         func isSelected(move: Move) -> Bool {
-           selectedMoves.contains(move)
+            selectedMoves.contains(move)
         }
         
         func selectMove(_ move: Move) -> Bool {
@@ -193,10 +191,8 @@ public struct PokemonSelectionMoveListScreen: View {
 }
 
 
-
-
 #Preview {
-    @Environment(\.diContainer) var container
+    @Previewable @Environment(\.diContainer) var container
     let pikachu: Pokemon = JsonReader.read(for: .pikachu)
     let preview = Preview(SDPokemon.self, SDMove.self, SDItem.self, SDTeam.self)
     let sdPikachu = SDPokemon(pokemonID: pikachu.id, data: try? JSONEncoder().encode(pikachu))
@@ -210,7 +206,7 @@ public struct PokemonSelectionMoveListScreen: View {
 }
 
 
-extension Array {
+extension Array where Element: Sendable {
     
     func chunked(by number: Int) -> [Self] {
         var result: [Self] = []
