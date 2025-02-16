@@ -37,7 +37,7 @@ public struct MoveViewCell: View {
             }
             .foregroundStyle(.white)
             .animation(.easeIn, value: provider.moveItemHolder)
-            
+            .transition(.slide)
         }
         
     }
@@ -116,7 +116,7 @@ public struct MoveViewCell: View {
     @Observable @MainActor
     public class Provider: Identifiable {
         
-        public let id: UUID = .init()
+        public let id : String
         let moveApi: PokemonMoveApi
         let generalApi: GeneralApi<Machine>
         let config: Config
@@ -147,6 +147,7 @@ public struct MoveViewCell: View {
         }
         
         init(moveApi: PokemonMoveApi, generalApi: GeneralApi<Machine>, moveVersionData: MoveVersionMeta) {
+            self.id = moveVersionData.moveName
             self.moveApi = moveApi
             self.generalApi = generalApi
             self.moveVersionData = moveVersionData

@@ -51,7 +51,7 @@ public struct ScrollPickerView: View {
                                             }
                                         }
                                         .onTapGesture {
-                                            withAnimation(.snappy){
+                                            withAnimation(.easeInOut){
                                                 selected = option
                                             }
                                         }
@@ -67,7 +67,9 @@ public struct ScrollPickerView: View {
                     })
                     .onChange(of: scrollPosition) { oldValue, newValue in
                         if let newValue {
-                            selected = newValue
+                            withAnimation(.easeInOut){
+                                selected = newValue
+                            }
                         }
                     }
             }

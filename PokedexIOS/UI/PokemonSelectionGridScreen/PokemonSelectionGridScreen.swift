@@ -170,7 +170,7 @@ public struct PokemonSelectionGridScreen: View {
         VStack {
             GridCell(index: showVarietiesFor.index, name: showVarietiesFor.name)
                 .padding()
-            VarietiesListView(provider: .init(species: SpeciesModel(id: showVarietiesFor.name), fetchApi: scrollProvider.fetchApi, speciesApi: speciesApi, isGrid: true)) { localPokemon in
+            VarietiesListView(provider: .init(species: SpeciesModel(id: showVarietiesFor.species), fetchApi: scrollProvider.fetchApi, speciesApi: speciesApi, isGrid: true)) { localPokemon in
                 if localPokemon.name != showVarietiesFor.name {
                     GridCell(index: localPokemon.index, name: localPokemon.name)
                 }

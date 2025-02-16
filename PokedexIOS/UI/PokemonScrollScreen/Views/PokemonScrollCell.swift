@@ -15,25 +15,29 @@ public struct PokemonScrollCell: View {
     @State var provider: Provider
     
     public var body: some View {
-        NavigationLink(value: provider.pokemon) {
-                HStack {
-                    Text(provider.pokemonName)
-                        .bold()
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                        .padding(.leading)
-                    
-                    Spacer()
-                    
-                    Circle()
-                        .fill(Color.gray.opacity(0.5))
-                        .frame(width: 100, height: 100)
-                        .overlay {
-                            PokeballImageAsync(url: provider.sprite, width: 100, height: 100)
-                        }
-                        .padding(.trailing)
+
+        HStack {
+            Text(provider.pokemonName)
+                .bold()
+                .font(.title2)
+                .foregroundStyle(.white)
+                .padding(.leading)
+            
+            Spacer()
+            
+            Circle()
+                .fill(Color.gray.opacity(0.5))
+                .frame(width: 100, height: 100)
+                .overlay {
+                    PokeballImageAsync(url: provider.sprite, width: 100, height: 100)
                 }
-                .padding(.vertical)
+                .padding(.trailing)
+        }
+        .padding(.vertical)
+        .background {
+            NavigationLink(value: provider.pokemon) {
+            }
+            .opacity(0.0)
         }
         .pokemonTypeBackgroundH(types: provider.types)
         .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -127,7 +131,11 @@ public struct PokemonScrollCell: View {
 #Preview {
     @Previewable @Environment(\.diContainer) var container
     
-    return PokemonScrollCell(provider: .init(api: .init(), speciesApi: .init(), pokemon: .init(index: 25, name: "pikachu")))
-        .inject(container: container)
-        .preferredColorScheme(.dark)
+    NavigationStack {
+        List {
+            PokemonScrollCell(provider: .init(api: .init(), speciesApi: .init(), pokemon: .init(index: 25, name: "pikachu")))
+                .inject(container: container)
+                .preferredColorScheme(.dark)
+        }
+    }
 }
