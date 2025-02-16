@@ -115,6 +115,7 @@
 		879C8FDD2D61A5510073A0DD /* SearchApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C8F892D61A5510073A0DD /* SearchApiProtocol.swift */; };
 		879C8FDE2D61A5510073A0DD /* PokemonEvolutionChainQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C8F742D61A5510073A0DD /* PokemonEvolutionChainQuery.swift */; };
 		879C8FDF2D61A5510073A0DD /* GeneralApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C8F6B2D61A5510073A0DD /* GeneralApi.swift */; };
+		879C8FE12D61B0620073A0DD /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C8FE02D61B0620073A0DD /* CustomTabView.swift */; };
 		87ACE8662BECA3C60028EC64 /* Color+ Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */; };
 		87ACE8682BECA5710028EC64 /* PokemonType + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */; };
 		87ACE86A2BECC7C30028EC64 /* Move + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACE8692BECC7C30028EC64 /* Move + Extension.swift */; };
@@ -275,6 +276,7 @@
 		879C8FA82D61A5510073A0DD /* AppLaunchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchWorker.swift; sourceTree = "<group>"; };
 		879C8FAA2D61A5510073A0DD /* LanguageNameFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageNameFetcher.swift; sourceTree = "<group>"; };
 		879C8FAC2D61A5510073A0DD /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
+		879C8FE02D61B0620073A0DD /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		87ACE8652BECA3C60028EC64 /* Color+ Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+ Extension.swift"; sourceTree = "<group>"; };
 		87ACE8672BECA5710028EC64 /* PokemonType + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonType + Extension.swift"; sourceTree = "<group>"; };
 		87ACE8692BECC7C30028EC64 /* Move + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Move + Extension.swift"; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 		876A7A212BD2A7C100E8E210 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				879C8FE02D61B0620073A0DD /* CustomTabView.swift */,
 				876A79DB2BD0154700E8E210 /* PaginatedList.swift */,
 				876A7A052BD27BF200E8E210 /* ListAbilitiyView */,
 				87DADE672BD7C62C00457062 /* DamageClassViews */,
@@ -1233,6 +1236,7 @@
 				879C8FD62D61A5510073A0DD /* PokemonSpeciesQuery.swift in Sources */,
 				879C8FD72D61A5510073A0DD /* PokemonMachineApi.swift in Sources */,
 				879C8FD82D61A5510073A0DD /* ApiPokemonError.swift in Sources */,
+				879C8FE12D61B0620073A0DD /* CustomTabView.swift in Sources */,
 				879C8FD92D61A5510073A0DD /* PokemonSpeciesApi.swift in Sources */,
 				879C8FDA2D61A5510073A0DD /* PokemonAbilityApi.swift in Sources */,
 				879C8FDB2D61A5510073A0DD /* PokemonEvolutionChainApi.swift in Sources */,

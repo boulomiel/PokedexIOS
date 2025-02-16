@@ -18,7 +18,7 @@ public struct RootView: View {
     @DIContainer var speciesApi: PokemonSpeciesApi
     @DIContainer var shareSession: ShareSession
     @State var breath: Bool = false
-    @State var tabRoot: TabRoot? = .pokedex
+    @State var tabRoot: TabRoot = .pokedex
     
     public var body: some View {
         if appLauncher.shouldWait {
@@ -28,39 +28,14 @@ public struct RootView: View {
                 .preferredColorScheme(.dark)
                 .padding(.bottom, 26)
                 .overlay(alignment: .bottom) {
-                    VStack{
-                        Spacer()
-                        HStack {
-                            Button(action: {
-                                withAnimation {
-                                    tabRoot = .pokedex
-                                }
-                            }, label: {
-                                Text("Pokedex")
-                                    .bold()
-                                    .font(.caption)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                                    .foregroundStyle(tabRoot == .pokedex ? .white : .gray.opacity(0.5))
-                            })
-                            
-                            Button(action: {
-                                withAnimation {
-                                    tabRoot = .teams
-                                }
-                            }, label: {
-                                Text("Teams")
-                                    .bold()
-                                    .font(.caption)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                                    .foregroundStyle(tabRoot == .teams ? .white : .gray.opacity(0.5))
-                            })
-                        }
+                    CustomTabView {
+                        RootView.TabRoot.pokedex
+                        RootView.TabRoot.teams
+                    } onSelected: {
+                        tabRoot = $0
                     }
-                    .foregroundStyle(.white)
-                    .background(RoundedRectangle(cornerRadius: 4).fill(.ultraThinMaterial))
-                    .ignoresSafeArea()
-                    .frame(height: 40)
                 }
+                .animation(.bouncy, value: tabRoot)
                 .onAppear {
                     var descriptor = FetchDescriptor<SDShareUser>()
                     descriptor.fetchLimit = 1
@@ -75,7 +50,7 @@ public struct RootView: View {
     @ViewBuilder
     var screen: some View {
         switch  tabRoot {
-        case .pokedex, .none:
+        case .pokedex:
             pokedexContent
                 .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .identity))
         case .teams:
@@ -116,15 +91,44 @@ public struct RootView: View {
         PokemonTeamsScreen(teamRouter: .init())
     }
     
-    enum TabRoot {
+    enum TabRoot: Sendable, CustomTabProtocol {
         case pokedex, teams
+        
+        @ViewBuilder
+        public func tab(selected: @escaping @Sendable @MainActor (TabRoot) -> Void) -> some View {
+            switch self {
+            case .pokedex:
+                Button(action: {
+                    selected(.pokedex)
+                }, label: {
+                    title("Pokedex")
+                        .foregroundStyle(self == .pokedex ? .white : .gray.opacity(0.5))
+                })
+            case .teams:
+                Button(action: {
+                    selected(.teams)
+                }, label: {
+                    title("Teams")
+                        .foregroundStyle(self == .teams ? .white : .gray.opacity(0.5))
+                })
+            }
+        }
+        
+        private func title(_ t: String) -> some View {
+            Text(t)
+                .bold()
+                .font(.caption)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        }
     }
     
     public struct Anim {
         var scaleEffect: CGFloat
     }
-
 }
+
+
+
 #Preview {
     @Previewable @Environment(\.diContainer) var container
     let preview = Preview.allPreview
