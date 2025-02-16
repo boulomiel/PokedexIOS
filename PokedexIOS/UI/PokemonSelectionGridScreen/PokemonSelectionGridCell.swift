@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 import Tools
-import DI
 import Dtos
 
 public struct PokemonSelectionGridCell: View {

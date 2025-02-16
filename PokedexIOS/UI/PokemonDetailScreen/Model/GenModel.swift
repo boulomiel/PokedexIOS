@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import DI
 import Dtos
 
 public struct GenModel: Hashable, Identifiable {

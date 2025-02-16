@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import DI
 import Dtos
 
 public struct MoveScreen: View {

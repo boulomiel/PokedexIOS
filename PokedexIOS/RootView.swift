@@ -8,7 +8,6 @@
 import SwiftUI
 import CoreData
 import Tools
-import DI
 import ShareTeam
 import SwiftData
 

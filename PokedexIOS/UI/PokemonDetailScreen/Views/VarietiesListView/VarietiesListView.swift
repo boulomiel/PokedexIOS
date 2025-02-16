@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import DI
 
 public struct VarietiesListView<Cell: View>: View {
     

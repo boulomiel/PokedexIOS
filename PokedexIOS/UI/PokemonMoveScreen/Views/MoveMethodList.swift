@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import DI
 import Dtos
 
 public struct MethodMoveList: View {

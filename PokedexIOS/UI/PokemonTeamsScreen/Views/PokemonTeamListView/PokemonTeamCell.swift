@@ -8,7 +8,6 @@
 import SwiftUI
 import Resources
 import Tools
-import DI
 import Dtos
 import SwiftData
 

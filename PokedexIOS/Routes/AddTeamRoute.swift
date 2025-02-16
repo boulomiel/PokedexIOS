@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftData
-import DI
 import Dtos
 
 public struct AddTeamRoute: Identifiable,  Hashable {

@@ -7,7 +7,6 @@
 
 import Foundation
 import Resources
-import DI
 import Dtos
 
 public extension JsonReader {

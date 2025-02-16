@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import ShareTeam
-import DI
 import Dtos
 import Tools
 

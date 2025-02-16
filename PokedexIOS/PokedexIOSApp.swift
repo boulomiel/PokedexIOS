@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 import FirebaseCore
-import DI
 
 @main
 public struct PokedexIOSApp: App {

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import DI
 
 public extension ScrollFetchItemQuery {
     func next() -> Self {

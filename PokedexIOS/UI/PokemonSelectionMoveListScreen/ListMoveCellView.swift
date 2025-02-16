@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import Resources
 import Tools
-import DI
 import Dtos
 
 public struct ListMoveCellView: View {

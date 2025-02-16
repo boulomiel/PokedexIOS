@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import DI
 
 public struct PokemonMoveDetailsScreen: View {
     

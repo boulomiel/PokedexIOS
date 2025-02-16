@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import DI
 import ShareTeam
 import MultipeerConnectivity
 import Tools

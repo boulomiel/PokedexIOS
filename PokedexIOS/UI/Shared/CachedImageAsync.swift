@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import Tools
-import DI
 
 public struct CachedAsyncImage: View {
     

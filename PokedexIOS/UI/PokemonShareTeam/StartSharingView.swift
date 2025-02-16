@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import DI
 import Tools
 import ShareTeam
 

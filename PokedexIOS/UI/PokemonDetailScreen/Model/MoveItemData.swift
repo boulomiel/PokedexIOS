@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import DI
 
 public struct MoveItemData: Hashable {
     var querys: PokemonMoveQuery
