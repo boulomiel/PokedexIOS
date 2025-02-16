@@ -14,6 +14,14 @@ public struct LocalPokemon: Identifiable, Codable, Hashable {
     let index: Int
     let name: String
     
+    public var species: String {
+        if let species = name.split(separator: "-").first {
+            String(species)
+        } else {
+            name
+        }
+    }
+    
     public init(index: Int, name: String) {
         self.index = index
         self.name = name

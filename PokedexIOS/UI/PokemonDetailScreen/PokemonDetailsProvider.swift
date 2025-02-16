@@ -70,7 +70,7 @@ public final class PokemonDetailsProvider {
     }
     
     private func getEvolutions(for pokemonDTO: Pokemon) async {
-        let result = await speciesApi.fetch(query: .init(speciesNumber: pokemonDTO.name))
+        let result = await speciesApi.fetch(query: .init(speciesNumber: pokemonDTO.species.name))
         switch result {
         case .success(let success):
             let pathId = success.evolution_chain.url.lastPathComponent
@@ -79,7 +79,7 @@ public final class PokemonDetailsProvider {
             }
             withAnimation(.bouncy) {
                 if success.varieties.count > 1 {
-                    self.speciesProvider = .init(species: .init(id: localPokemon.name), fetchApi: fetchPokemonApi, speciesApi: speciesApi, isGrid: false)
+                    self.speciesProvider = .init(species: .init(id: localPokemon.species), fetchApi: fetchPokemonApi, speciesApi: speciesApi, isGrid: false)
                 }
                 self.evolutionViewProvider = .init(species: .init(id: pathId), evolutionChainAPI: evolutionChainApi, fetchPokemonApi: fetchPokemonApi)
             }

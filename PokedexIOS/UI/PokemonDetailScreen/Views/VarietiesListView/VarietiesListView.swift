@@ -52,14 +52,14 @@ public struct VarietiesListView<Cell: View>: View {
     
     @Observable @MainActor
     public class Provider {
-        let species: SpeciesModel?
+        let species: SpeciesModel
         let fetchApi: FetchPokemonApi
         let speciesApi: PokemonSpeciesApi
         let grid: [GridItem]
         var varieties: [String]
         var isGrid: Bool
         
-        init(species: SpeciesModel?,fetchApi: FetchPokemonApi, speciesApi: PokemonSpeciesApi, isGrid: Bool) {
+        init(species: SpeciesModel, fetchApi: FetchPokemonApi, speciesApi: PokemonSpeciesApi, isGrid: Bool) {
             self.grid = .init(repeating: .init(.fixed(120)), count: 3)
             self.isGrid = isGrid
             self.species = species
@@ -72,13 +72,12 @@ public struct VarietiesListView<Cell: View>: View {
         }
         
         func fetch() async {
-            guard let species else { return }
             let result = await speciesApi.fetch(query: .init(speciesNumber: species.id))
             switch result {
             case .success(let success):
                 varieties = success.varieties.map(\.pokemon.name)
             case .failure(let failure):
-                print(#file,"\n", failure)
+                print(#file, #function, "\n", failure)
             }
         }
     }

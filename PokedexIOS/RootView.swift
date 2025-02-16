@@ -60,7 +60,7 @@ public struct RootView: View {
                     .foregroundStyle(.white)
                     .background(RoundedRectangle(cornerRadius: 4).fill(.ultraThinMaterial))
                     .ignoresSafeArea()
-                    .frame(height: 25)
+                    .frame(height: 40)
                 }
                 .onAppear {
                     var descriptor = FetchDescriptor<SDShareUser>()
