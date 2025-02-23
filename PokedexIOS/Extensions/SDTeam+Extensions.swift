@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppPersistence
 
 public extension SDTeam {
     static var examples: [SDTeam] {

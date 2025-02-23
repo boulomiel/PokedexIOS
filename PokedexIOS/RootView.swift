@@ -10,6 +10,9 @@ import CoreData
 import Tools
 import ShareTeam
 import SwiftData
+import AppDI
+import PokeApi
+import AppPersistence
 
 public struct RootView: View {
     @Environment(\.modelContext) private var modelContext

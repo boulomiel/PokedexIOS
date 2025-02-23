@@ -9,6 +9,9 @@ import SwiftUI
 import Combine
 import Tools
 import Dtos
+import PokeApi
+import AppPersistence
+import AppDI
 
 public struct PokemonSelectionGridCell: View {
     

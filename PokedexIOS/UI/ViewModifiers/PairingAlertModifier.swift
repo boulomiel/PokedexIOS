@@ -10,6 +10,9 @@ import SwiftUI
 import ShareTeam
 import Dtos
 import Tools
+import AppDI
+import AppPersistence
+
 
 struct PairingAlertModifier: ViewModifier {
     

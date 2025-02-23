@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Tools
+import AppDI
 
 public struct MutableModifier: ViewModifier {
     

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Tools
+import PokeApi
+import AppDI
 
 public struct PokemonGridScreen: View {
     

@@ -11,6 +11,9 @@ import SwiftData
 import Resources
 import Tools
 import Dtos
+import PokeApi
+import AppPersistence
+import AppDI
 
 public struct PokemonItemSelectionScreen: View {
     
@@ -179,7 +182,8 @@ public struct PokemonItemSelectionScreen: View {
                     if item.name == self?.current?.name {
                         provider.isSelected = true
                     }
-                }}
+                }
+            }
             withAnimation {
                 self.providers = providers
                 paginatedProviders = Array(providers[0..<min(20, providers.count)])

@@ -10,6 +10,9 @@ import SwiftData
 import Resources
 import Tools
 import Dtos
+import AppPersistence
+import PokeApi
+import AppPersistence
 
 public struct PokemonAbilitySelectionScreen: View {
     

@@ -7,6 +7,9 @@
 
 import SwiftUI
 import Tools
+import PokeApi
+import AppDI
+import PokeApi
 
 public struct PokemonDetailScreen: View {
     

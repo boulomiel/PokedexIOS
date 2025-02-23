@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AppDI
+import PokeApi
 
 public struct PokemonGridListView: View {
     @DIContainer var fetchApi: FetchPokemonApi

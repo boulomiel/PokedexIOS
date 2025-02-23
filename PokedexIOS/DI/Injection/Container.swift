@@ -12,6 +12,7 @@ import Tools
 import Resources
 import ShareTeam
 import Dtos
+import PokeApi
 
 public class Container {
     var factory: [String: () -> Any]

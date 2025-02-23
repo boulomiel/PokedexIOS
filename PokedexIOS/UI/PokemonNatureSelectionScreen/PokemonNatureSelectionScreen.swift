@@ -11,6 +11,9 @@ import SwiftData
 import Resources
 import Tools
 import Dtos
+import AppPersistence
+import AppDI
+import PokeApi
 
 public struct PokemonNatureSelectionScreen: View {
     

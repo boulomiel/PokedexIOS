@@ -10,6 +10,7 @@ import SwiftData
 import Resources
 import Tools
 import Dtos
+import PokeApi
 
 public final class PokemonNameLauncherImpl: NameLauncherProtocol, Sendable {
     

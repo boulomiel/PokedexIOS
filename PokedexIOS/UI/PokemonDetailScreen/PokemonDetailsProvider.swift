@@ -9,10 +9,11 @@ import Foundation
 import SwiftUI
 import Tools
 import Dtos
+import PokeApi
 
 @Observable @MainActor
 public final class PokemonDetailsProvider {
-    
+        
     let fetchPokemonApi: FetchPokemonApi
     let speciesApi: PokemonSpeciesApi
     let evolutionChainApi: PokemonEvolutionChainApi

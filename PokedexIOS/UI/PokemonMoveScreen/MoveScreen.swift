@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Dtos
+import AppDI
+import PokeApi
 
 public struct MoveScreen: View {
     

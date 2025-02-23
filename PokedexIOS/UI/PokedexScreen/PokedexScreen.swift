@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 import Tools
+import AppDI
+import PokeApi
+import AppPersistence
 
 public struct PokedexScreen: View {
     

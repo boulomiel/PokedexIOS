@@ -10,6 +10,9 @@ import SwiftData
 import Resources
 import Tools
 import Dtos
+import AppDI
+import PokeApi
+import AppPersistence
 
 public struct PokemonTeamsScreen: View {
     

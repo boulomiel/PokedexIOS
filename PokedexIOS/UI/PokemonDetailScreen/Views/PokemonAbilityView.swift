@@ -8,7 +8,7 @@
 import SwiftUI
 import Tools
 import Dtos
-
+import PokeApi
 
 @MainActor let testpokemonability = PokemonAbilityDetails (
     name: "overgrow",

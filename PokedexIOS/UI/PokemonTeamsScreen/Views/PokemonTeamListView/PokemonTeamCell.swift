@@ -10,6 +10,7 @@ import Resources
 import Tools
 import Dtos
 import SwiftData
+import AppPersistence
 
 public struct PokemonTeamCell: View {
     

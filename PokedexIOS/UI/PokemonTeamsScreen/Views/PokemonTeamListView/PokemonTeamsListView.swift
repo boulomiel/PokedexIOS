@@ -11,6 +11,9 @@ import Tools
 import Dtos
 import Combine
 import CoreData
+import AppPersistence
+import AppDI
+
 
 public struct PokemonTeamsListView: View {
     

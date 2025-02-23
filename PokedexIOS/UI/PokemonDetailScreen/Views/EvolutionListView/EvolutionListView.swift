@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Dtos
+import PokeApi
 
 public struct EvolutionListView: View {
     

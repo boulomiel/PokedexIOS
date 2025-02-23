@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftData
 import Tools
 import ShareTeam
+import AppDI
+import AppPersistence
+
 
 public struct StartSharingView: View {
     

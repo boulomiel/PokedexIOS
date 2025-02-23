@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import PokeApi
 
 public struct EvolutionListViewCell: View {
     

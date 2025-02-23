@@ -10,6 +10,7 @@ import SwiftUI
 import Resources
 import Tools
 import Dtos
+import AppPersistence
 
 public struct ListMoveCellView: View {
     

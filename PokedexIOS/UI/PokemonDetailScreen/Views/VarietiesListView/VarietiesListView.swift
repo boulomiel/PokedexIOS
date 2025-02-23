@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import PokeApi
+import AppDI
 
 public struct VarietiesListView<Cell: View>: View {
     

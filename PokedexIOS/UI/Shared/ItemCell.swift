@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import Dtos
+import PokeApi
+import AppDI
 
 public struct ItemCell: View {
     

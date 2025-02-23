@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PokeApi
 
 public extension ScrollFetchItemQuery {
     func next() -> Self {

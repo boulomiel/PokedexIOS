@@ -9,6 +9,8 @@ import SwiftUI
 import ShareTeam
 import MultipeerConnectivity
 import Tools
+import AppDI
+import AppPersistence
 
 struct SearchingUserView: View {
     

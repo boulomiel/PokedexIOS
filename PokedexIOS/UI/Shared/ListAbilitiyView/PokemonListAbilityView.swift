@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PokeApi
 
 public struct PokemonListAbilityView: View {
     

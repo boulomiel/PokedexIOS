@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import Dtos
+import AppDI
+import PokeApi
 
 public struct PokemonListScrolledContent: View {
     

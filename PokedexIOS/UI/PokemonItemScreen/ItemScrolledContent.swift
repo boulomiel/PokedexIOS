@@ -11,6 +11,9 @@ import SwiftData
 import Resources
 import Tools
 import Dtos
+import AppPersistence
+import PokeApi
+import AppDI
 
 public struct ItemScrolledContent: View {
     typealias ScrollProvider = PaginatedList<Self, ScrollFetchItemApi, PokemonItemApi>.Provider
@@ -196,7 +199,7 @@ public struct ItemScrolledContent: View {
                 api: ScrollFetchItemApi(),
                 fetchApi: PokemonItemApi(),
                 modelContainer: preview.container,
-                languageNameFetcher: .init(
+                languageNameFetcher: LanguageNameFetcher(
                     container: preview.container
                 )
             )) { provider in
