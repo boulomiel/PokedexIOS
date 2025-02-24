@@ -11,6 +11,7 @@ import Tools
 import Dtos
 import SwiftData
 import AppPersistence
+import ShareTeam
 
 public struct PokemonTeamCell: View {
     

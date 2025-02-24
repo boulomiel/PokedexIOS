@@ -1,9 +1,10 @@
 //
 //  ShareTeamRoute.swift
-//  PokedexIOS
+//  ShareTeam
 //
-//  Created by Ruben Mimoun on 09/05/2024.
+//  Created by Ruben Mimoun on 24/02/2025.
 //
+
 
 import Foundation
 import SwiftData
@@ -13,4 +14,8 @@ public struct ShareTeamRoute: Hashable, Identifiable {
         return teamID
     }
     public let teamID: PersistentIdentifier
+    
+    public init(teamID: PersistentIdentifier) {
+        self.teamID = teamID
+    }
 }

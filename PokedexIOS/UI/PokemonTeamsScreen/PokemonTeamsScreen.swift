@@ -13,11 +13,13 @@ import Dtos
 import AppDI
 import PokeApi
 import AppPersistence
+import ShareTeam
 
 public struct PokemonTeamsScreen: View {
     
     @Environment(\.modelContext)
     private var modelContext
+    @DIContainer private var shareSession: ShareSession
     @DIContainer private var scrollFetchApi : ScrollFetchPokemonApi
     @DIContainer private var scrollFetchItemApi : ScrollFetchItemApi
     @DIContainer private var fetchApi: FetchPokemonApi
@@ -93,10 +95,28 @@ public struct PokemonTeamsScreen: View {
                     PokemonMoveDetailsScreen(move: route.move)
                         .networkedContentView()
                 }
-                .sheet(item: $teamRouter.sharingSheet, content: { route in
-                    StartSharingView(provider: .init(teamID: route.teamID, container: modelContext.container, teamRouter: teamRouter))
-                        .environment(teamRouter)
-                        .presentationDetents([.medium])
+                .sheet(
+                    item: $teamRouter.sharingSheet,
+                    content: { route in
+                        StartSharingView(
+                            provider: .init(
+                                resource: SharedTeamResourceAdapter(
+                                    teamID: route.id,
+                                    container: modelContext.container
+                                ),
+                                teamRouter: ShareTeamRouterAdapter(
+                                    router: teamRouter
+                                )
+                            ),
+                            shareSession: shareSession,
+                            username: fetchShareUser()?.name
+                        )
+                        .environment(
+                            teamRouter
+                        )
+                        .presentationDetents(
+                            [.medium]
+                        )
                 })
                 .showMutableIcon()
                 .toolbar {
@@ -117,49 +137,16 @@ public struct PokemonTeamsScreen: View {
         teamCount = modelContext.getCount(SDTeam.self)
     }
     
-    private func fetchPokemon(with id: Int, and teamID: UUID) -> SDPokemon? {
-        modelContext.fetchUniqueSync(with: id, limit: 1, predicate: #Predicate { $0.pokemonID == id})
+    private func fetchPokemon(with id: Int) -> SDPokemon? {
+        modelContext.fetchUniqueSync(SDPokemon.self, predicate: #Predicate { $0.pokemonID == id })
+    }
+    
+    private func fetchShareUser() -> SDShareUser? {
+        modelContext.fetchUniqueSync(SDShareUser.self)
     }
     
     private func fetchPokemon(with id: PersistentIdentifier) -> SDPokemon? {
         modelContext.fetchUniqueSync(SDPokemon.self, with: id)
-    }
-    
-}
-
-@Observable
-public final class TeamRouter {
-    var path: NavigationPath
-    var sharingSheet: ShareTeamRoute?
-    
-    init(path: NavigationPath = .init()) {
-        self.path = path
-    }
-    
-    func navigate<Route: Hashable>(to route: Route) {
-        path.append(route)
-    }
-    
-    func back() {
-        if !path.isEmpty {
-            path.removeLast()
-        }
-    }
-    
-    func backToRoot() {
-        path = .init()
-    }
-    
-    func root<Route: Hashable>(as route: Route) {
-        self.path = .init([route])
-    }
-    
-    func sharingSheet(_ shareTeamRoute: ShareTeamRoute) {
-        self.sharingSheet = shareTeamRoute
-    }
-    
-    func closeSharingSheet() {
-        self.sharingSheet = nil
     }
 }
 

@@ -13,7 +13,7 @@ public extension ModelContext {
         (try? fetchCount(FetchDescriptor<Model>())) ?? 0
     }
     
-    func fetchUniqueSync<Model: PersistentModel>(with id: Int, limit: Int, predicate: Predicate<Model>? = nil, descriptors: [SortDescriptor<Model>] = []) -> Model? {
+    func fetchUniqueSync<Model: PersistentModel>(_ type: Model.Type, predicate: Predicate<Model>? = nil, descriptors: [SortDescriptor<Model>] = []) -> Model? {
         var descriptor = FetchDescriptor<Model>(predicate: predicate, sortBy: descriptors)
         descriptor.fetchLimit = 1
         do {

@@ -13,14 +13,16 @@ let package = Package(
             targets: ["ShareTeam"]),
     ],
     dependencies: [
-        .package(name: "Dtos", path: "../Dtos")
+        .package(name: "Dtos", path: "../Dtos"),
+        .package(name: "Resources", path: "../Resources"),
+        .package(name: "Tools", path: "../Tools")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "ShareTeam",
-            dependencies: ["Dtos"]
+            dependencies: ["Dtos", "Resources", "Tools"]
         ),
         .testTarget(
             name: "ShareTeamTests",

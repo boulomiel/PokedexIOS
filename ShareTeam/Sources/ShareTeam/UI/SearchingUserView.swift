@@ -6,31 +6,35 @@
 //
 
 import SwiftUI
-import ShareTeam
-import MultipeerConnectivity
-import Tools
-import AppDI
-import AppPersistence
+import Resources
 
-struct SearchingUserView: View {
+public struct SearchingUserView: View {
     
-    @DIContainer private var shareSession: ShareSession
-    @Environment(StartSharingView.Provider.self)
-    private var provider
-    @Environment(TeamRouter.self)
-    private var teamRouter
+    private var shareSession: ShareSession
+    private let displayName: String
+    private let team: SharedTeam
+    private let closeSheet: () -> Void
+    
     @State private var shouldOpenSettings: Bool = false
     
-    let displayName: String
+    public init(displayName: String,
+                team: SharedTeam,
+                shareSession: ShareSession,
+                closeSheet: @escaping () -> Void) {
+        self.displayName = displayName
+        self.team = team
+        self.closeSheet = closeSheet
+        self.shareSession = shareSession
+    }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             if shareSession.peers.isEmpty {
                 searchingPlaceHolder
             } else {
                 List(shareSession.peers, id:\.self) { peer in
                     Button(peer.id) {
-                        shareSession.invite(peer, sharedTeam: provider.buildData())
+                        shareSession.invite(peer, sharedTeam: team)
                     }
                 }
                 .padding(.top, 16)
@@ -53,7 +57,7 @@ struct SearchingUserView: View {
                 }
             }
             Button("Don't share", role: .destructive) {
-                teamRouter.closeSharingSheet()
+                closeSheet()
             }
         }
     }
@@ -90,13 +94,12 @@ struct SearchingUserView: View {
 }
 
 #Preview {
-    @Previewable @Environment(\.diContainer) var container
-    let preview = Preview.allPreview
-    let team = SDShareUser(name: "Jhon")
-    preview.addExamples([team])
-    let provider = StartSharingView.Provider(teamID: team.persistentModelID, container: preview.container, teamRouter: .init())
-   return SearchingUserView(displayName: "Pikaman")
-        .environment(provider)
-        .modelContainer(preview.container)
-        .preferredColorScheme(.dark)
+    let mock = SharedTeamResourceAdapterMock(teamID: "", container: [])
+    SearchingUserView(displayName: "Pikaman",
+                      team: mock.getSharedTeam(),
+                      shareSession: ShareSession()
+    ) {
+        
+    }
+    .preferredColorScheme(.dark)
 }
